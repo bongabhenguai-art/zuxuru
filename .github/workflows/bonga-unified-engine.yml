@@ -1,0 +1,32 @@
+name: Bonga Unified Engine
+on:
+  push:
+    branches: [main]
+    paths: ['bonga-platform/**', '.github/workflows/bonga-unified-engine.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: bonga-platform
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - name: Verify shared engine and Studio workflow on SQLite
+        run: node tests/system-engine.mjs
+      - name: Verify five camera signaling and company storage
+        run: node tests/digital-studio.mjs
+      - name: Verify fashion task proposals
+        run: node tests/designer-engine.mjs
+      - name: Build complete hosted application
+        run: node scripts/build-ai.mjs
+      - name: Verify Worker entrypoint
+        run: node --check dist/server/index.js

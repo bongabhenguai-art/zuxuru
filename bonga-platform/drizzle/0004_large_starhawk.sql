@@ -1,0 +1,1 @@
+ALTER TABLE `designer_storefronts` ADD `is_home` integer DEFAULT 0 NOT NULL;
