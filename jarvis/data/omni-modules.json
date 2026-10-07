@@ -1,0 +1,201 @@
+{
+  "version": 1,
+  "name": "Bonga Bhengu Omni Route",
+  "assistant": "Jarvis",
+  "repository": "bongabhenguai-art/zuxuru",
+  "repository_status": "installed",
+  "modules": [
+    {
+      "id": "sales",
+      "name": "Sales & customers",
+      "code": "01",
+      "purpose": "Turn skills into a clear offer and a useful customer conversation.",
+      "capabilities": [
+        "Offer brief",
+        "Reviewed introduction draft",
+        "Pipeline review"
+      ],
+      "task": "Write one clear offer for a customer you can help",
+      "deliverable": "One paragraph naming the customer, problem, service, outcome and enquiry method. Prepare a draft for one existing contact.",
+      "minutes": 25,
+      "priority": "high",
+      "signals": [
+        "customer",
+        "sale",
+        "client",
+        "offer",
+        "quote",
+        "pipeline"
+      ],
+      "instruction_path": "jarvis/modules/sales.md"
+    },
+    {
+      "id": "marketing",
+      "name": "Marketing & social",
+      "code": "02",
+      "purpose": "Show useful work consistently and invite the next conversation.",
+      "capabilities": [
+        "Caption drafts",
+        "Content rhythm",
+        "Campaign brief"
+      ],
+      "task": "Prepare one useful process post",
+      "deliverable": "A real garment detail or clearly labelled AI concept, a short lesson, and one invitation to visit the website.",
+      "minutes": 20,
+      "priority": "high",
+      "signals": [
+        "marketing",
+        "social",
+        "caption",
+        "post",
+        "campaign",
+        "content"
+      ],
+      "instruction_path": "jarvis/modules/marketing.md"
+    },
+    {
+      "id": "branding",
+      "name": "Brand identity",
+      "code": "03",
+      "purpose": "Keep Bonga, DONLEGEND and Innovative AI Design recognisable and connected.",
+      "capabilities": [
+        "Profile consistency review",
+        "Identity checklist",
+        "Visual direction"
+      ],
+      "task": "Align the bio and central link on one account you control",
+      "deliverable": "Correct display name, relevant bio, consistent contact and the new website link. Confirm ownership before changing a profile.",
+      "minutes": 20,
+      "priority": "medium",
+      "signals": [
+        "brand",
+        "identity",
+        "logo",
+        "bio",
+        "profile",
+        "cover"
+      ],
+      "instruction_path": "jarvis/modules/branding.md"
+    },
+    {
+      "id": "visibility_seo",
+      "name": "Visibility & SEO",
+      "code": "04",
+      "purpose": "Help the right people find and understand your fashion and AI work.",
+      "capabilities": [
+        "Page clarity review",
+        "Source link checks",
+        "Search content brief"
+      ],
+      "task": "Check the search and sharing message for the website",
+      "deliverable": "Review the page title, description, share image, contact path and matched social links. Record any concrete gap.",
+      "minutes": 15,
+      "priority": "high",
+      "signals": [
+        "seo",
+        "search",
+        "visibility",
+        "google",
+        "website",
+        "internet"
+      ],
+      "instruction_path": "jarvis/modules/visibility_seo.md"
+    },
+    {
+      "id": "products",
+      "name": "Product discovery",
+      "code": "05",
+      "purpose": "Turn a customer problem into a small concept worth testing.",
+      "capabilities": [
+        "Problem hypothesis",
+        "Concept brief",
+        "Validation questions"
+      ],
+      "task": "Sketch one offer or product to test",
+      "deliverable": "A named customer problem, a small solution, three validation questions and the smallest prototype. Label demand and pricing assumptions as hypotheses.",
+      "minutes": 30,
+      "priority": "medium",
+      "signals": [
+        "product",
+        "new",
+        "prototype",
+        "collection",
+        "design",
+        "idea"
+      ],
+      "instruction_path": "jarvis/modules/products.md"
+    },
+    {
+      "id": "opportunities",
+      "name": "Opportunities & gaps",
+      "code": "06",
+      "purpose": "Find credible routes to learning, collaboration and commercial growth.",
+      "capabilities": [
+        "Opportunity evidence review",
+        "Eligibility checklist",
+        "Gap-to-action map"
+      ],
+      "task": "Review one fashion or creative opportunity",
+      "deliverable": "An official source, current deadline, eligibility, relevance and one next step. Leave uncertain fields unknown.",
+      "minutes": 20,
+      "priority": "medium",
+      "signals": [
+        "opportunity",
+        "gap",
+        "grant",
+        "event",
+        "competition",
+        "partner"
+      ],
+      "instruction_path": "jarvis/modules/opportunities.md"
+    },
+    {
+      "id": "ai_skills",
+      "name": "AI skills",
+      "code": "07",
+      "purpose": "Learn tools through practical design work and keep a useful record.",
+      "capabilities": [
+        "Learning exercise",
+        "Prompt improvement",
+        "Workflow journal"
+      ],
+      "task": "Practise one AI workflow on a real design challenge",
+      "deliverable": "One prompt, the result you reviewed, one improvement and a brief lesson. Record the tool and label AI-generated work.",
+      "minutes": 20,
+      "priority": "medium",
+      "signals": [
+        "ai",
+        "prompt",
+        "skill",
+        "learn",
+        "tool",
+        "workflow"
+      ],
+      "instruction_path": "jarvis/modules/ai_skills.md"
+    },
+    {
+      "id": "career",
+      "name": "Career & rebuilding",
+      "code": "08",
+      "purpose": "Reconnect your experience with visible proof and a purposeful next step.",
+      "capabilities": [
+        "Portfolio case study",
+        "Professional profile review",
+        "Weekly reflection"
+      ],
+      "task": "Turn one achievement into a short portfolio story",
+      "deliverable": "The actual brief, your role, what you made and supporting evidence. Connect the lesson to Healing • Learn • Rebuild.",
+      "minutes": 25,
+      "priority": "medium",
+      "signals": [
+        "career",
+        "rebuild",
+        "portfolio",
+        "experience",
+        "fashion designer",
+        "cv"
+      ],
+      "instruction_path": "jarvis/modules/career.md"
+    }
+  ]
+}

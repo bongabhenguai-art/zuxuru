@@ -1,0 +1,115 @@
+name: Jarvis Omni Route
+
+on:
+  push:
+    branches: [main]
+    paths: ["jarvis/**", ".github/workflows/jarvis-ai.yml"]
+  schedule:
+    - cron: '0 6 * * *' # Around 08:00 Africa/Johannesburg after installation
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Daily business route or creative starting plan
+        type: choice
+        default: daily
+        options: [daily, creative]
+      brand:
+        description: Brand to develop
+        type: choice
+        default: bonga
+        options: [bonga, ai, fashion]
+      goal:
+        description: Creative goal
+        type: choice
+        default: visibility
+        options: [visibility, identity, fashion]
+      use_ai:
+        description: Add Copilot AI drafts (requires COPILOT_PAT secret and Copilot access)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Read repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - name: Check evidence handling
+        run: python3 -m unittest discover -s jarvis -p 'test_*.py'
+
+      - name: Route daily work to the modules
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.mode == 'daily' }}
+        run: python3 jarvis/omni_router.py
+
+      - name: Build a creative starting plan
+        if: ${{ github.event_name != 'schedule' && inputs.mode == 'creative' }}
+        env:
+          JARVIS_BRAND: ${{ inputs.brand }}
+          JARVIS_GOAL: ${{ inputs.goal }}
+        run: python3 jarvis/planner.py
+
+      - name: Check optional Copilot configuration
+        if: ${{ inputs.use_ai || (github.event_name == 'schedule' && vars.JARVIS_ENABLE_AI == 'true') }}
+        env:
+          JARVIS_COPILOT_TOKEN: ${{ secrets.COPILOT_PAT }}
+        run: |
+          python3 - <<'PY'
+          import os
+          if not os.getenv('JARVIS_COPILOT_TOKEN'):
+              raise SystemExit('AI drafting requires the COPILOT_PAT repository secret and a Copilot-enabled account.')
+          PY
+
+      - name: Set up Node for optional AI drafting
+        if: ${{ inputs.use_ai || (github.event_name == 'schedule' && vars.JARVIS_ENABLE_AI == 'true') }}
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+
+      - name: Install official Copilot CLI
+        if: ${{ inputs.use_ai || (github.event_name == 'schedule' && vars.JARVIS_ENABLE_AI == 'true') }}
+        run: npm install --global @github/copilot
+
+      - name: Draft with Copilot
+        if: ${{ inputs.use_ai || (github.event_name == 'schedule' && vars.JARVIS_ENABLE_AI == 'true') }}
+        id: ai
+        # Current Copilot implementation reviewed 2026-10-07. The v1 tag still
+        # points to the retired GitHub Models implementation; use this SHA.
+        uses: actions/ai-inference@41caef41a74eb26f6d0c6b1e9941d691588e0b2b
+        with:
+          provider: copilot
+          model: ''
+          prompt-file: output/jarvis/ai-prompt.txt
+          system-prompt: You draft creative content from supplied evidence. Preserve exact names, uncertainty and dates. Do not invent facts or perform actions. Output only a labelled draft for owner review.
+          token: ${{ secrets.COPILOT_PAT }}
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_PAT }}
+
+      - name: Save the optional AI draft
+        if: ${{ inputs.use_ai || (github.event_name == 'schedule' && vars.JARVIS_ENABLE_AI == 'true') }}
+        env:
+          JARVIS_RESPONSE_FILE: ${{ steps.ai.outputs.response-file }}
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          source = Path(os.environ['JARVIS_RESPONSE_FILE'])
+          if not source.is_file():
+              raise SystemExit('The AI action did not produce a response file.')
+          Path('output/jarvis/ai-draft.txt').write_text(source.read_text(encoding='utf-8'), encoding='utf-8')
+          PY
+
+      - name: Downloadable plan and drafts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: jarvis-creative-plan
+          path: output/jarvis/
+          if-no-files-found: error
+          retention-days: 14
