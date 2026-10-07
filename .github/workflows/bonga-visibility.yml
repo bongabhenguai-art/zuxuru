@@ -1,0 +1,80 @@
+name: Bonga Visibility Kit
+on:
+  push:
+    branches: [main]
+    paths: ['visibility/**', '.github/workflows/bonga-visibility.yml']
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Tool to run
+        type: choice
+        default: maps
+        options: [maps, backlinks]
+      query:
+        description: Focused public business search
+        type: string
+        default: fashion boutiques Durban South Africa
+      target:
+        description: Your backlink target URL
+        type: string
+        default: https://bonga-bhengu.donlegendwear.chatgpt.site/
+      sources:
+        description: Known source page URLs, one per line, up to ten
+        type: string
+        default: ''
+permissions:
+  contents: read
+jobs:
+  visibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Test evidence adapters
+        run: python3 -m unittest discover -s visibility -p 'test_*.py'
+      - name: Prepare bounded inputs
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          MAP_QUERY: ${{ inputs.query }}
+          LINK_SOURCES: ${{ inputs.sources }}
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          Path('visibility-output').mkdir(exist_ok=True)
+          query=os.environ['MAP_QUERY'].replace('\n',' ').strip()[:250]
+          Path('visibility-output/queries.txt').write_text(query+'\n')
+          Path('visibility-output/sources.txt').write_text(os.environ['LINK_SOURCES'][:4000])
+          PY
+      - name: Read pinned Maps scraper
+        if: github.event_name == 'workflow_dispatch' && inputs.mode == 'maps'
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          repository: gosom/google-maps-scraper
+          ref: d0b51bcf3cd56d9a3f71e049cb6e226554e24162
+          path: .vendor/maps
+          persist-credentials: false
+      - name: Build Maps runner
+        if: github.event_name == 'workflow_dispatch' && inputs.mode == 'maps'
+        run: docker build -t bonga-maps-kit .vendor/maps
+      - name: Collect focused public business results
+        if: github.event_name == 'workflow_dispatch' && inputs.mode == 'maps'
+        run: |
+          chmod 777 visibility-output
+          timeout 5m docker run --rm -v "$PWD/visibility-output/queries.txt:/queries.txt:ro" -v "$PWD/visibility-output:/out" bonga-maps-kit -input /queries.txt -results /out/results.csv -depth 1 -c 1 -exit-on-inactivity 3m
+          python3 visibility/normalize_maps.py --input visibility-output/results.csv --out visibility-output/prospects.json
+      - name: Verify known backlink pages
+        if: github.event_name == 'workflow_dispatch' && inputs.mode == 'backlinks'
+        env:
+          LINK_TARGET: ${{ inputs.target }}
+        run: python3 visibility/backlinks.py --target "$LINK_TARGET" --sources visibility-output/sources.txt --out visibility-output/backlinks.json
+      - name: Preserve evidence outputs
+        if: always() && github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: bonga-visibility-kit
+          path: visibility-output/
+          retention-days: 7
+          if-no-files-found: warn

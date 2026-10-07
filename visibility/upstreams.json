@@ -1,0 +1,17 @@
+{
+  "checked_at": "2026-10-07",
+  "maps": {
+    "repository": "gosom/google-maps-scraper",
+    "url": "https://github.com/gosom/google-maps-scraper",
+    "commit": "d0b51bcf3cd56d9a3f71e049cb6e226554e24162",
+    "license": "MIT",
+    "integration": "Pinned source checkout and Docker runner"
+  },
+  "backlink_reference": {
+    "repository": "rvalitov/backlink-checker",
+    "url": "https://github.com/rvalitov/backlink-checker",
+    "commit": "02c7abb43b293a4d924587a280b78fc89beed930",
+    "license": "GPL-3.0",
+    "integration": "Reference only; original evidence adapter does not copy upstream code"
+  }
+}
