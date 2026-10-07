@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-10-07",
+  "upstreams": [
+    {
+      "repo": "Lightricks/LTX-Video",
+      "license": "Apache-2.0",
+      "reviewed_commit": "4b2d053057623ddd4d0a1d3e9cd28890e9ef487f",
+      "status": "render_launcher_prepared_GPU_not_configured"
+    },
+    {
+      "repo": "666ghj/MiroFish",
+      "license": "AGPL-3.0",
+      "reviewed_commit": "7657031ac01184afe2cb220f5ee3545573b5e843",
+      "status": "scenario_seed_export_only"
+    },
+    {
+      "repo": "circlemind-ai/fast-graphrag",
+      "license": "MIT",
+      "reviewed_commit": "23b3a1bef64338faf9f35c521a20465dbd09419f",
+      "status": "optional_adapter_not_executed"
+    }
+  ]
+}

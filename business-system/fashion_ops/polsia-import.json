@@ -1,0 +1,31 @@
+{
+  "business": "Bonga Bhengu",
+  "brand": "Innovative AI Design",
+  "website": "https://bonga-bhengu.donlegendwear.chatgpt.site",
+  "delivery_status": "prepared_for_manual_import_not_sent",
+  "repository_path": "business-system/fashion_ops",
+  "pipeline": [
+    "FBI",
+    "CIA",
+    "BSDA",
+    "BRI",
+    "BDCD",
+    "BBMDS",
+    "DVD",
+    "BRE",
+    "AUTOPILOT"
+  ],
+  "implemented": [
+    "Source-backed request evaluation",
+    "Personalised quote preparation",
+    "Private HTML evidence report",
+    "Jarvis task export"
+  ],
+  "pending": [
+    "Search provider configuration",
+    "GPU rendering",
+    "MiroFish simulation",
+    "FastGraphRAG model access",
+    "Polsia import"
+  ]
+}

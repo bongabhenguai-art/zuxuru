@@ -1,0 +1,22 @@
+name: Bonga Fashion Operations
+on:
+  push:
+    branches: [main]
+    paths: ['business-system/fashion_ops/**', '.github/workflows/bonga-fashion-ops.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Verify customer evidence qualification
+        run: python3 -m unittest discover -s business-system/fashion_ops -p 'test_*.py'
+      - name: Verify empty evidence creates no invented customers
+        run: python3 business-system/fashion_ops/closer.py --input business-system/fashion_ops/input.example.json --out /tmp/bonga-ops-check
+      - name: Check optional adapter syntax
+        run: python3 -m py_compile business-system/fashion_ops/ltx_render.py business-system/fashion_ops/graph_research.py
