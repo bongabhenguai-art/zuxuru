@@ -1,0 +1,973 @@
+[
+  {
+    "file": "Fukul isane Studio Broadcast Dashboard.png",
+    "sha256": "16209bada65083e9441661538bcc0b3445f92c7be64649118dc9ceade80624de",
+    "bytes": 1718853
+  },
+  {
+    "file": "FukulIsane Studio Broadcast Dashboard.png",
+    "sha256": "c916e35dfcd0707133cc4cd9b33a68bd74005b6cf28e1b2c547adbe8fa1a74ba",
+    "bytes": 1726569
+  },
+  {
+    "file": "Fukulisa Studio Brand Build Dashboard.png",
+    "sha256": "8a276a9951a0931d2b6a2c6e7db7066df1354865e5def3aa54c5b0f0b2de404f",
+    "bytes": 1608211
+  },
+  {
+    "file": "Fukulisa Studio Brand Builder Dashboard(1).png",
+    "sha256": "013690163bfcaddd368d369dc31bde837f7d137c965e0b53e5dbb06e00ee9281",
+    "bytes": 1633887
+  },
+  {
+    "file": "Fukulisa Studio Brand Builder Dashboard(2).png",
+    "sha256": "db650acf325a017db53e42280ef79b29d08d44c71b5ec6614cad0de5243656e4",
+    "bytes": 1646935
+  },
+  {
+    "file": "Fukulisa Studio Brand Builder Dashboard.png",
+    "sha256": "048b67b8ccd94723f67aa6d407cd2517a781817b2462b558f15cd58f7f4328be",
+    "bytes": 1647370
+  },
+  {
+    "file": "Fukulisane Construction Dashboard UI.png",
+    "sha256": "2a05a009f32acc74bddf8e41cd38f85d6a883069333b251bde6b92f2077e14cf",
+    "bytes": 2197843
+  },
+  {
+    "file": "Fukulisane Construction Homebuilding Flyer.png",
+    "sha256": "e87f5747a3ec428eb488bb11b22fbb071c45dad631c283e9104219afd4c76cc0",
+    "bytes": 2284099
+  },
+  {
+    "file": "Fukulisane Construction Intelligence Dashboard.png",
+    "sha256": "f7e019883d2446ce2c34dca8db1b1c4d135486982c07fec5754b2c2b9ee02165",
+    "bytes": 1966874
+  },
+  {
+    "file": "Fukulisane Construction Services Flyer.png",
+    "sha256": "2308d646e3fd0ec288c54027ccab5c207a058d4716e24dcaae1fd00eb604b287",
+    "bytes": 2283011
+  },
+  {
+    "file": "Fukulisane Mall store builder dashboard.png",
+    "sha256": "1cf1f2aece6a8eb5e35cf178638d234aeb09dd5dc22737cd132ffeef1c4c5a8e",
+    "bytes": 1424177
+  },
+  {
+    "file": "Fukulisane Studio Broadcast Control Dashboard.png",
+    "sha256": "c2a7e6cc54c986418b9b36fc87ae82c90f43af9c4980090761d76c844976f149",
+    "bytes": 1751239
+  },
+  {
+    "file": "Fukulisane Studio Control Dashboard.png",
+    "sha256": "150b320cf82c43eaee9301c7558a6f3b3b383f6bfceece119672999d6fc42c79",
+    "bytes": 1928372
+  },
+  {
+    "file": "Fukulisane_Business_Identity_and_Growth_Builder_Spec(1).md",
+    "sha256": "9827f1808fa866b1a3d2ae35a1ed86692e6e92f61701faa0229752f208e323d6",
+    "bytes": 8446
+  },
+  {
+    "file": "Fukulisane_Business_Identity_and_Growth_Builder_Spec.md",
+    "sha256": "9827f1808fa866b1a3d2ae35a1ed86692e6e92f61701faa0229752f208e323d6",
+    "bytes": 8446
+  },
+  {
+    "file": "Fukulisane_One_Master_Concept_Architecture.md",
+    "sha256": "c9e31e3668cce819c52c0e95d832b703d7a71dfd756433c608ad05976b0d4358",
+    "bytes": 12919
+  },
+  {
+    "file": "Fukulisani Business Growth Dashboard.png",
+    "sha256": "1abd82b325e8c5c4022cd83643b475d0e7f7a020fe3c3373b9d9f02fc500bdad",
+    "bytes": 1760032
+  },
+  {
+    "file": "Fukulisani Digital Investigation Dashboard.png",
+    "sha256": "6198c7028775d22700df03cb45e1cbc91ebd696d39200e3d0b177e32c56b6a54",
+    "bytes": 1889626
+  },
+  {
+    "file": "Fukulisani Digital Visibility Dashboard.png",
+    "sha256": "2a01abdae164e776de9bbf758e0de7277c3175f735a6e6a393bdeb56583e6e0b",
+    "bytes": 1624956
+  },
+  {
+    "file": "Fukulisan\u00e9 Mall store setup guide.png",
+    "sha256": "1d78d997f692fb891c41bf5aa41a49a7c388a30b7571aaf4d28012e980bd7f56",
+    "bytes": 1501384
+  },
+  {
+    "file": "ZUXURU Platform Architecture Ecosystem.png",
+    "sha256": "98702e207990997a11b73ab03e0c2c97da6cefbbae99a364d1c5bdb8ff62379a",
+    "bytes": 1819644
+  },
+  {
+    "file": "ZUXURU_ALIGNED_PUBLIC_APP.tar.gz",
+    "sha256": "acf81cf06e027d881fa768579a4f8b9dd98c18b4c2f4fca318fd1bf567994609",
+    "bytes": 6825,
+    "members": [
+      {
+        "path": "zuxuru-app/app.js",
+        "bytes": 1954
+      },
+      {
+        "path": "zuxuru-app/index.html",
+        "bytes": 6024
+      },
+      {
+        "path": "zuxuru-app/styles.css",
+        "bytes": 10080
+      },
+      {
+        "path": "zuxuru-app/README.md",
+        "bytes": 969
+      }
+    ]
+  },
+  {
+    "file": "ZUXURU_APP_MVP.zip",
+    "sha256": "fdbceefc6a2badcf3e42b0ee81425804d0309f1e2563007e965d37fa06e1136f",
+    "bytes": 15609,
+    "members": [
+      {
+        "path": "zuxuru-app/docs/ZUXURU_IMPLEMENTATION_BLUEPRINT.md",
+        "bytes": 3205
+      },
+      {
+        "path": "zuxuru-app/docs/ZUXURU_INTEGRATION_MATRIX.md",
+        "bytes": 1739
+      },
+      {
+        "path": "zuxuru-app/docs/ZUXURU_FINAL_MASTER_BUILD_SPEC.md",
+        "bytes": 12201
+      },
+      {
+        "path": "zuxuru-app/app.js",
+        "bytes": 2288
+      },
+      {
+        "path": "zuxuru-app/modules/content-studio/README.md",
+        "bytes": 279
+      },
+      {
+        "path": "zuxuru-app/index.html",
+        "bytes": 8269
+      },
+      {
+        "path": "zuxuru-app/README.md",
+        "bytes": 861
+      },
+      {
+        "path": "zuxuru-app/styles.css",
+        "bytes": 5191
+      }
+    ]
+  },
+  {
+    "file": "ZUXURU_FINAL_BUILD_README.md",
+    "sha256": "776201477b4ea36b64ac590fbcac949bc9b6d72e45055388fbd915b5afc73413",
+    "bytes": 1094
+  },
+  {
+    "file": "ZUXURU_FINAL_MASTER_BUILD_FILES.zip",
+    "sha256": "e3a6ebb59cd2d305269593a6a0301b3ec46b13fac3ceabef52e25d1fafe20961",
+    "bytes": 8598,
+    "members": [
+      {
+        "path": "ZUXURU_FINAL_MASTER_BUILD_SPEC.md",
+        "bytes": 12201
+      },
+      {
+        "path": "ZUXURU_IMPLEMENTATION_BLUEPRINT.md",
+        "bytes": 3205
+      },
+      {
+        "path": "ZUXURU_INTEGRATION_MATRIX.md",
+        "bytes": 1739
+      },
+      {
+        "path": "ZUXURU_FINAL_BUILD_README.md",
+        "bytes": 1094
+      }
+    ]
+  },
+  {
+    "file": "ZUXURU_FINAL_MASTER_BUILD_SPEC.md",
+    "sha256": "2acfe9b486ffb8254bc7b79927df92bf3e115499ade33891439547d191eed151",
+    "bytes": 12201
+  },
+  {
+    "file": "ZUXURU_IMPLEMENTATION_BLUEPRINT.md",
+    "sha256": "d12539b0bde2124a9ff4337e1e49acfe756ec1fecc57a77f3f069f3c57c0857a",
+    "bytes": 3205
+  },
+  {
+    "file": "ZUXURU_INTEGRATION_MATRIX.md",
+    "sha256": "765969457314b33d123b7a12e61646f74766560503c6d078b9b3b398863ac002",
+    "bytes": 1739
+  },
+  {
+    "file": "ZUXURU_Master_App_Build_Alignment_Specification.md",
+    "sha256": "f0c142b4c8c37c9575af4e362cc150c9184aea0cfba1f3e4b472d703505f7649",
+    "bytes": 27748
+  },
+  {
+    "file": "ZUXURU_USABLE_MVP.zip",
+    "sha256": "4e5d83be4a8bfe0d189a859188164ccd02a454e5faed62fa5ebc059af971d415",
+    "bytes": 17255,
+    "members": [
+      {
+        "path": "zuxuru-app/docs/ZUXURU_IMPLEMENTATION_BLUEPRINT.md",
+        "bytes": 3205
+      },
+      {
+        "path": "zuxuru-app/docs/ZUXURU_INTEGRATION_MATRIX.md",
+        "bytes": 1739
+      },
+      {
+        "path": "zuxuru-app/docs/ZUXURU_FINAL_MASTER_BUILD_SPEC.md",
+        "bytes": 12201
+      },
+      {
+        "path": "zuxuru-app/app.js",
+        "bytes": 6049
+      },
+      {
+        "path": "zuxuru-app/modules/content-studio/README.md",
+        "bytes": 279
+      },
+      {
+        "path": "zuxuru-app/index.html",
+        "bytes": 10225
+      },
+      {
+        "path": "zuxuru-app/README.md",
+        "bytes": 611
+      },
+      {
+        "path": "zuxuru-app/styles.css",
+        "bytes": 5191
+      }
+    ]
+  },
+  {
+    "file": "Zuxuru AI Visibility Platform Homepage.png",
+    "sha256": "84591ccb36ca4272decf19bb2403079cf0b71d515becb725927fb9cb711b2e03",
+    "bytes": 1644558
+  },
+  {
+    "file": "Zuxuru AI-Powered Growth Architecture.png",
+    "sha256": "9324ab3410773d1fa23b472b2b2ae4828d7ff89dbca8cd715d8698e3389e7510",
+    "bytes": 1599015
+  },
+  {
+    "file": "Zuxuru Business Visibility Dashboard.png",
+    "sha256": "21be79a3789dd78728c422d513f26d20a3b459a8c02863f0a33446069f4fbdac",
+    "bytes": 1882320
+  },
+  {
+    "file": "Zuxuru Ecosystem Architecture Infographic.png",
+    "sha256": "8b20181b4e42e32e5e2269ef2d6102c97bd2e22d1e6f1bc9deee8c05ebb9da5b",
+    "bytes": 1996872
+  },
+  {
+    "file": "Zuxuru-Phase1-Foundation.zip",
+    "sha256": "533d87a6511f06ac22e1bfec3de8ee5d7c471946c216a665472d013dfec857bf",
+    "bytes": 10099,
+    "members": [
+      {
+        "path": "index.html",
+        "bytes": 12025
+      },
+      {
+        "path": "README.md",
+        "bytes": 522
+      },
+      {
+        "path": "app/page.tsx",
+        "bytes": 6311
+      },
+      {
+        "path": "app/layout.tsx",
+        "bytes": 321
+      },
+      {
+        "path": "app/globals.css",
+        "bytes": 6054
+      },
+      {
+        "path": "package.json",
+        "bytes": 193
+      }
+    ]
+  },
+  {
+    "file": "Zuxuru1_real-execution-build.zip",
+    "sha256": "9e8ac1c5e77a3790fb74877a7a4e0ee21b91cbb138e779c795eb012d869e7387",
+    "bytes": 9068,
+    "members": [
+      {
+        "path": "index.html",
+        "bytes": 30122
+      }
+    ]
+  },
+  {
+    "file": "Zuxuru_Build_Spec_Files.zip",
+    "sha256": "6d6508fd806ebbe60d0e65c89831a41b8ef25e10d472af62ffe14767a912515a",
+    "bytes": 18177,
+    "members": [
+      {
+        "path": "Zuxuru_Build_Spec_Files/00_MASTER_SYSTEM.md",
+        "bytes": 3846
+      },
+      {
+        "path": "Zuxuru_Build_Spec_Files/01_APP_RUNTIME.md",
+        "bytes": 1731
+      },
+      {
+        "path": "Zuxuru_Build_Spec_Files/02_JARVIS_ADAPTATION.md",
+        "bytes": 4049
+      },
+      {
+        "path": "Zuxuru_Build_Spec_Files/03_MALL_SYSTEM.md",
+        "bytes": 2014
+      },
+      {
+        "path": "Zuxuru_Build_Spec_Files/04_COMPANY_SYSTEM.md",
+        "bytes": 1612
+      },
+      {
+        "path": "Zuxuru_Build_Spec_Files/05_FASHION_DESIGN_SYSTEM.md",
+        "bytes": 1814
+      },
+      {
+        "path": "Zuxuru_Build_Spec_Files/06_CIA_CONNECT_INTELLIGENCE_ARCHITECTURE.md",
+        "bytes": 1358
+      },
+      {
+        "path": "Zuxuru_Build_Spec_Files/07_STUDIO.md",
+        "bytes": 1010
+      },
+      {
+        "path": "Zuxuru_Build_Spec_Files/08_BUILDER_WEBSITE.md",
+        "bytes": 1117
+      },
+      {
+        "path": "Zuxuru_Build_Spec_Files/09_GROWTH_ENGINES.md",
+        "bytes": 1273
+      },
+      {
+        "path": "Zuxuru_Build_Spec_Files/10_PACKAGES.md",
+        "bytes": 2230
+      },
+      {
+        "path": "Zuxuru_Build_Spec_Files/11_DATA_MODEL.md",
+        "bytes": 1125
+      },
+      {
+        "path": "Zuxuru_Build_Spec_Files/12_API_AND_WORKFLOWS.md",
+        "bytes": 1558
+      },
+      {
+        "path": "Zuxuru_Build_Spec_Files/13_SECURITY_APPROVALS.md",
+        "bytes": 972
+      },
+      {
+        "path": "Zuxuru_Build_Spec_Files/14_BUILD_PHASES.md",
+        "bytes": 1467
+      },
+      {
+        "path": "Zuxuru_Build_Spec_Files/15_JARVIS_TO_ZUXURU_FILE_MAP.md",
+        "bytes": 2313
+      },
+      {
+        "path": "Zuxuru_Build_Spec_Files/16_VERTICAL_PACKAGE_MATRIX.md",
+        "bytes": 1444
+      },
+      {
+        "path": "Zuxuru_Build_Spec_Files/INDEX.md",
+        "bytes": 1138
+      }
+    ]
+  },
+  {
+    "file": "Zuxuru_Business_Visibility_Station_Builder(1).html",
+    "sha256": "215a302ac4b4666d8cd812b86cd4857f23a2a2534fbcd787abbe9ac47d43461e",
+    "bytes": 23739
+  },
+  {
+    "file": "Zuxuru_Business_Visibility_Station_Builder.html",
+    "sha256": "215a302ac4b4666d8cd812b86cd4857f23a2a2534fbcd787abbe9ac47d43461e",
+    "bytes": 23739
+  },
+  {
+    "file": "Zuxuru_Business_Visibility_Station_Builder_Spec.md",
+    "sha256": "fab3ce97d18c1ddba922fb9936f70defe33f9dc3d7cc49c435ef27544ed86179",
+    "bytes": 2224
+  },
+  {
+    "file": "Zuxuru_Fukulisane_Alignment_Master_File.md",
+    "sha256": "11041cc7df1e2f0985d3f2fd77d9cd829b0be4c0b188d86ef91a86b3c6aa1822",
+    "bytes": 18214
+  },
+  {
+    "file": "Zuxuru_Mall_BusinessTree_Fashion_Builder_Packages_Master.docx",
+    "sha256": "30d859585a8a2c3c592a3465d5b4e035360cf9245e524ec2118632cca47069a1",
+    "bytes": 44139
+  },
+  {
+    "file": "Zuxuru_Master_Builder.txt",
+    "sha256": "b366848de2a29defb5e4d416221c9602b685c098fdf85b346df07f07aea8c535",
+    "bytes": 19196
+  },
+  {
+    "file": "Zuxuru_Shogo_Master_Build_Instructions.md",
+    "sha256": "fcf7aeaa7e939e7c019875708b8adeae0b3650101343cd733c54c94901c42ea5",
+    "bytes": 30880
+  },
+  {
+    "file": "Zuxuru_Storefront.zip",
+    "sha256": "46ab0f2a825e770a0393d144385a1ab390c3a4c4528c749a4ed06db2d0abc4cc",
+    "bytes": 4462,
+    "members": [
+      {
+        "path": "zuxuru_storefront/README.md",
+        "bytes": 281
+      },
+      {
+        "path": "zuxuru_storefront/index.html",
+        "bytes": 11425
+      }
+    ]
+  },
+  {
+    "file": "fukulisane-app.zip",
+    "sha256": "fdb4a681d40ae98d831927e81301bab370176229f74d317db9b1c0661e945ca0",
+    "bytes": 3217,
+    "members": [
+      {
+        "path": "fukulisane-app/index.html",
+        "bytes": 8229
+      }
+    ]
+  },
+  {
+    "file": "fukulisane-construction-platform-history.zip",
+    "sha256": "feea0c1a7c2caaae58eca06de6d65cee67454e695d1b10ea0fd10279aa08861b",
+    "bytes": 2882,
+    "members": [
+      {
+        "path": "fukulisane-history-package/HISTORY.md",
+        "bytes": 4349
+      },
+      {
+        "path": "fukulisane-history-package/RELEASE_NOTES.md",
+        "bytes": 438
+      }
+    ]
+  },
+  {
+    "file": "fukulisane-live-netlify.zip",
+    "sha256": "092c63af67ba53793222d693d6e9e306905566828a4b4ba51de52153649bdc06",
+    "bytes": 7494,
+    "members": [
+      {
+        "path": "fukulisane-live/netlify/functions/scan.mjs",
+        "bytes": 2076
+      },
+      {
+        "path": "fukulisane-live/README.md",
+        "bytes": 955
+      },
+      {
+        "path": "fukulisane-live/index.html",
+        "bytes": 11771
+      },
+      {
+        "path": "fukulisane-live/netlify.toml",
+        "bytes": 208
+      }
+    ]
+  },
+  {
+    "file": "fukulisane-mvp.zip",
+    "sha256": "62d9ac763b00c6dd321cef34a8447da3b76a15c21d5d5005b04d4eceb9665bbf",
+    "bytes": 5896,
+    "members": [
+      {
+        "path": "package.json",
+        "bytes": 359
+      },
+      {
+        "path": "src/app/page.tsx",
+        "bytes": 6261
+      },
+      {
+        "path": "src/app/globals.css",
+        "bytes": 6594
+      },
+      {
+        "path": "src/app/layout.tsx",
+        "bytes": 278
+      }
+    ]
+  },
+  {
+    "file": "fukulisane_one_history_derived.zip",
+    "sha256": "1a5c819078b5754713fbc4f3104b46c9330094abdfdc25961bdb9421cf0158cf",
+    "bytes": 3740,
+    "members": [
+      {
+        "path": "README.md",
+        "bytes": 397
+      },
+      {
+        "path": "05-execution-intelligence.md",
+        "bytes": 371
+      },
+      {
+        "path": "07-premium-capabilities.md",
+        "bytes": 524
+      },
+      {
+        "path": "02-business-intelligence.md",
+        "bytes": 486
+      },
+      {
+        "path": "08-brand-to-market.md",
+        "bytes": 335
+      },
+      {
+        "path": "01-core-architecture.md",
+        "bytes": 358
+      },
+      {
+        "path": "09-go-live.md",
+        "bytes": 362
+      },
+      {
+        "path": "03-customer-intelligence.md",
+        "bytes": 318
+      },
+      {
+        "path": "06-build-integrity.md",
+        "bytes": 446
+      },
+      {
+        "path": "04-opportunity-intelligence.md",
+        "bytes": 361
+      }
+    ]
+  },
+  {
+    "file": "fukulisaneconstruction-connected.zip",
+    "sha256": "ca90881a3734881cf4e19e1a20ca5ea3d668ebec46a4dbaafa28cf765f4d3354",
+    "bytes": 11199,
+    "members": [
+      {
+        "path": "fukulisane-connected/build-config.js",
+        "bytes": 365
+      },
+      {
+        "path": "fukulisane-connected/netlify.toml",
+        "bytes": 296
+      },
+      {
+        "path": "fukulisane-connected/supabase-config.js",
+        "bytes": 48
+      },
+      {
+        "path": "fukulisane-connected/README.md",
+        "bytes": 798
+      },
+      {
+        "path": "fukulisane-connected/index.html",
+        "bytes": 18525
+      },
+      {
+        "path": "fukulisane-connected/package.json",
+        "bytes": 131
+      },
+      {
+        "path": "fukulisane-connected/supabase.sql",
+        "bytes": 1381
+      },
+      {
+        "path": "fukulisane-connected/admin.html",
+        "bytes": 3892
+      }
+    ]
+  },
+  {
+    "file": "fukulisani-agent-os-handoff.zip",
+    "sha256": "13e24148746d2c2b2fb9fbe484eaf800d26a1c54cdfd896eac0f08fe73c92c81",
+    "bytes": 2169,
+    "members": [
+      {
+        "path": "README.md",
+        "bytes": 718
+      },
+      {
+        "path": "DEPLOYMENT.txt",
+        "bytes": 236
+      },
+      {
+        "path": "PLATFORM_REGISTRY.md",
+        "bytes": 1187
+      },
+      {
+        "path": "AGENT_OS.md",
+        "bytes": 700
+      }
+    ]
+  },
+  {
+    "file": "fukulisani-app-option3.tar.gz",
+    "sha256": "6314c5294eb317e9afaabf04e86bd5bfcfc0491cd583b06de0de4d323ba9956d",
+    "bytes": 6588,
+    "members": [
+      {
+        "path": "fukulisani-app/design-qa.md",
+        "bytes": 672
+      },
+      {
+        "path": "fukulisani-app/index.html",
+        "bytes": 19146
+      }
+    ]
+  },
+  {
+    "file": "fukulisani-app.tar.gz",
+    "sha256": "c2db3311bf0b4c092615d626f5501432409f920fa7c9c10c57ce1db27327d7ab",
+    "bytes": 6662,
+    "members": [
+      {
+        "path": "./design-qa.md",
+        "bytes": 555
+      },
+      {
+        "path": "./index.html",
+        "bytes": 19038
+      }
+    ]
+  },
+  {
+    "file": "fukulisneconstruction-ready.zip",
+    "sha256": "a6ddec4725235adf8926e8b9c497605a2a69fb8876cbdfddfcaffc1b996e9c33",
+    "bytes": 6854,
+    "members": [
+      {
+        "path": "fukulisneconstruction/netlify.toml",
+        "bytes": 264
+      },
+      {
+        "path": "fukulisneconstruction/index.html",
+        "bytes": 16912
+      },
+      {
+        "path": "fukulisneconstruction/README.txt",
+        "bytes": 660
+      }
+    ]
+  },
+  {
+    "file": "zuxuru-digital-studio-repository.zip",
+    "sha256": "27ba26e3779b8939cc1d32fb8b5d2d2cb623c8a678f36302b0530b27e22b1b60",
+    "bytes": 22503,
+    "members": [
+      {
+        "path": "zuxuru-digital-studio/apps/web/app/layout.tsx",
+        "bytes": 340
+      },
+      {
+        "path": "zuxuru-digital-studio/apps/web/app/studio/content/page.tsx",
+        "bytes": 942
+      },
+      {
+        "path": "zuxuru-digital-studio/apps/web/app/studio/website/page.tsx",
+        "bytes": 1062
+      },
+      {
+        "path": "zuxuru-digital-studio/apps/web/app/studio/livestream/page.tsx",
+        "bytes": 905
+      },
+      {
+        "path": "zuxuru-digital-studio/apps/web/app/studio/page.tsx",
+        "bytes": 1996
+      },
+      {
+        "path": "zuxuru-digital-studio/apps/web/app/studio/recording/page.tsx",
+        "bytes": 649
+      },
+      {
+        "path": "zuxuru-digital-studio/apps/web/app/studio/podcast/page.tsx",
+        "bytes": 744
+      },
+      {
+        "path": "zuxuru-digital-studio/apps/web/app/studio/camera/page.tsx",
+        "bytes": 1126
+      },
+      {
+        "path": "zuxuru-digital-studio/apps/web/app/studio/social/page.tsx",
+        "bytes": 880
+      },
+      {
+        "path": "zuxuru-digital-studio/apps/web/app/page.tsx",
+        "bytes": 2431
+      },
+      {
+        "path": "zuxuru-digital-studio/apps/web/package.json",
+        "bytes": 203
+      },
+      {
+        "path": "zuxuru-digital-studio/apps/web/next.config.ts",
+        "bytes": 125
+      },
+      {
+        "path": "zuxuru-digital-studio/apps/web/tsconfig.json",
+        "bytes": 271
+      },
+      {
+        "path": "zuxuru-digital-studio/apps/api/requirements.txt",
+        "bytes": 35
+      },
+      {
+        "path": "zuxuru-digital-studio/apps/api/app/main.py",
+        "bytes": 696
+      },
+      {
+        "path": "zuxuru-digital-studio/docs/product-flow.md",
+        "bytes": 833
+      },
+      {
+        "path": "zuxuru-digital-studio/docs/github.md",
+        "bytes": 451
+      },
+      {
+        "path": "zuxuru-digital-studio/docs/architecture.md",
+        "bytes": 1030
+      },
+      {
+        "path": "zuxuru-digital-studio/.env.example",
+        "bytes": 65
+      },
+      {
+        "path": "zuxuru-digital-studio/packages/core/README.md",
+        "bytes": 204
+      },
+      {
+        "path": "zuxuru-digital-studio/packages/adapters/ai-editing/README.md",
+        "bytes": 118
+      },
+      {
+        "path": "zuxuru-digital-studio/packages/adapters/publishing/README.md",
+        "bytes": 118
+      },
+      {
+        "path": "zuxuru-digital-studio/packages/adapters/website/README.md",
+        "bytes": 115
+      },
+      {
+        "path": "zuxuru-digital-studio/packages/adapters/storage/README.md",
+        "bytes": 115
+      },
+      {
+        "path": "zuxuru-digital-studio/packages/adapters/analytics/README.md",
+        "bytes": 117
+      },
+      {
+        "path": "zuxuru-digital-studio/packages/adapters/podcast/README.md",
+        "bytes": 115
+      },
+      {
+        "path": "zuxuru-digital-studio/packages/adapters/streaming/README.md",
+        "bytes": 117
+      },
+      {
+        "path": "zuxuru-digital-studio/packages/adapters/social/README.md",
+        "bytes": 114
+      },
+      {
+        "path": "zuxuru-digital-studio/README.md",
+        "bytes": 1611
+      },
+      {
+        "path": "zuxuru-digital-studio/.gitignore",
+        "bytes": 79
+      }
+    ]
+  },
+  {
+    "file": "zuxuru-engine.zip",
+    "sha256": "7c8666e91de9e2bb030a48a90ffd0c9983f8446964cfe999dbbd1eb103e8c948",
+    "bytes": 9790,
+    "members": [
+      {
+        "path": "zuxuru-engine/public/index.html",
+        "bytes": 5921
+      },
+      {
+        "path": "zuxuru-engine/src/engine.js",
+        "bytes": 11876
+      },
+      {
+        "path": "zuxuru-engine/server.js",
+        "bytes": 1682
+      },
+      {
+        "path": "zuxuru-engine/package.json",
+        "bytes": 163
+      },
+      {
+        "path": "zuxuru-engine/README.md",
+        "bytes": 1799
+      }
+    ]
+  },
+  {
+    "file": "zuxuru-galleria-evidence-module.zip",
+    "sha256": "c06dd68475c2f9ad3b7eaf9839cb97ab9f25b9771f6c2c09363d4bcf4c684210",
+    "bytes": 5482,
+    "members": [
+      {
+        "path": "zuxuru-galleria-module/src/components/zuxuru/GalleriaEvidenceWorkspace.tsx",
+        "bytes": 5268
+      },
+      {
+        "path": "zuxuru-galleria-module/src/lib/zuxuru/galleria-evidence.ts",
+        "bytes": 3365
+      },
+      {
+        "path": "zuxuru-galleria-module/README.md",
+        "bytes": 1430
+      }
+    ]
+  },
+  {
+    "file": "zuxuru-growth-engine-mvp.zip",
+    "sha256": "68884ee63e21aa84f419e14dc019024b9012bbb5dab0b1262f59a738fa60ccc4",
+    "bytes": 6537,
+    "members": [
+      {
+        "path": "zuxuru-app/README.md",
+        "bytes": 936
+      },
+      {
+        "path": "zuxuru-app/index.html",
+        "bytes": 16706
+      }
+    ]
+  },
+  {
+    "file": "zuxuru-investigation-platform.zip",
+    "sha256": "1916399662e7330c443f23d38c5d071fa2ece3db8c3532b82ee21cdff04cbba8",
+    "bytes": 8393,
+    "members": [
+      {
+        "path": "zuxuru-app/next-env.d.ts",
+        "bytes": 81
+      },
+      {
+        "path": "zuxuru-app/.env.example",
+        "bytes": 201
+      },
+      {
+        "path": "zuxuru-app/package.json",
+        "bytes": 111
+      },
+      {
+        "path": "zuxuru-app/tsconfig.json",
+        "bytes": 422
+      },
+      {
+        "path": "zuxuru-app/README.md",
+        "bytes": 1118
+      },
+      {
+        "path": "zuxuru-app/server.js",
+        "bytes": 7244
+      },
+      {
+        "path": "zuxuru-app/public/index.html",
+        "bytes": 6596
+      }
+    ]
+  },
+  {
+    "file": "zuxuru-render-ready.zip",
+    "sha256": "397997d9d373ef67514ae5467108b6c38d641afa06a6cdbfca3a7879a6c2e261",
+    "bytes": 8016,
+    "members": [
+      {
+        "path": "zuxuru-app/README.md",
+        "bytes": 713
+      },
+      {
+        "path": "zuxuru-app/server.js",
+        "bytes": 1620
+      },
+      {
+        "path": "zuxuru-app/package.json",
+        "bytes": 263
+      },
+      {
+        "path": "zuxuru-app/render.yaml",
+        "bytes": 220
+      },
+      {
+        "path": "zuxuru-app/public/index.html",
+        "bytes": 14864
+      }
+    ]
+  },
+  {
+    "file": "zuxuru-storefront-v0.1.zip",
+    "sha256": "912a51bf3a703d0d0f8c4a495ac8bae64d851515267a6ae0482a951afe19c5b5",
+    "bytes": 2189937,
+    "members": [
+      {
+        "path": "zuxuru-storefront/public/assets/storefront-reference.png",
+        "bytes": 1644558
+      },
+      {
+        "path": "zuxuru-storefront/public/assets/zuxuru-hero.mp4",
+        "bytes": 712814
+      },
+      {
+        "path": "zuxuru-storefront/index.html",
+        "bytes": 12865
+      }
+    ]
+  },
+  {
+    "file": "zuxuru-storefront.zip",
+    "sha256": "9cc7f3b4a7f2c761bb09318d7d013d4c31101752a8a1f5c9c3801d4e17b2e760",
+    "bytes": 1479783,
+    "members": [
+      {
+        "path": "zuxuru-storefront/index.html",
+        "bytes": 4536
+      },
+      {
+        "path": "zuxuru-storefront/README.md",
+        "bytes": 662
+      },
+      {
+        "path": "zuxuru-storefront/styles.css",
+        "bytes": 7018
+      },
+      {
+        "path": "zuxuru-storefront/app.js",
+        "bytes": 897
+      },
+      {
+        "path": "zuxuru-storefront/assets/hero.png",
+        "bytes": 1644558
+      }
+    ]
+  }
+]

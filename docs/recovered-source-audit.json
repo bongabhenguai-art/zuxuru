@@ -1,0 +1,1082 @@
+[
+  {
+    "archive": "ZUXURU_ALIGNED_PUBLIC_APP.tar.gz",
+    "member": "zuxuru-app/app.js",
+    "bytes": 1954,
+    "potential_demo_markers": 2,
+    "has_external_fetch": false,
+    "has_local_storage": true
+  },
+  {
+    "archive": "ZUXURU_ALIGNED_PUBLIC_APP.tar.gz",
+    "member": "zuxuru-app/index.html",
+    "bytes": 6024,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "ZUXURU_ALIGNED_PUBLIC_APP.tar.gz",
+    "member": "zuxuru-app/README.md",
+    "bytes": 969,
+    "potential_demo_markers": 3,
+    "has_external_fetch": false,
+    "has_local_storage": true
+  },
+  {
+    "archive": "ZUXURU_APP_MVP.zip",
+    "member": "zuxuru-app/docs/ZUXURU_IMPLEMENTATION_BLUEPRINT.md",
+    "bytes": 3205,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "ZUXURU_APP_MVP.zip",
+    "member": "zuxuru-app/docs/ZUXURU_INTEGRATION_MATRIX.md",
+    "bytes": 1739,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "ZUXURU_APP_MVP.zip",
+    "member": "zuxuru-app/docs/ZUXURU_FINAL_MASTER_BUILD_SPEC.md",
+    "bytes": 12201,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "ZUXURU_APP_MVP.zip",
+    "member": "zuxuru-app/app.js",
+    "bytes": 2288,
+    "potential_demo_markers": 2,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "ZUXURU_APP_MVP.zip",
+    "member": "zuxuru-app/modules/content-studio/README.md",
+    "bytes": 279,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "ZUXURU_APP_MVP.zip",
+    "member": "zuxuru-app/index.html",
+    "bytes": 8269,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "ZUXURU_APP_MVP.zip",
+    "member": "zuxuru-app/README.md",
+    "bytes": 861,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "ZUXURU_FINAL_MASTER_BUILD_FILES.zip",
+    "member": "ZUXURU_FINAL_MASTER_BUILD_SPEC.md",
+    "bytes": 12201,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "ZUXURU_FINAL_MASTER_BUILD_FILES.zip",
+    "member": "ZUXURU_IMPLEMENTATION_BLUEPRINT.md",
+    "bytes": 3205,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "ZUXURU_FINAL_MASTER_BUILD_FILES.zip",
+    "member": "ZUXURU_INTEGRATION_MATRIX.md",
+    "bytes": 1739,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "ZUXURU_FINAL_MASTER_BUILD_FILES.zip",
+    "member": "ZUXURU_FINAL_BUILD_README.md",
+    "bytes": 1094,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "ZUXURU_USABLE_MVP.zip",
+    "member": "zuxuru-app/docs/ZUXURU_IMPLEMENTATION_BLUEPRINT.md",
+    "bytes": 3205,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "ZUXURU_USABLE_MVP.zip",
+    "member": "zuxuru-app/docs/ZUXURU_INTEGRATION_MATRIX.md",
+    "bytes": 1739,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "ZUXURU_USABLE_MVP.zip",
+    "member": "zuxuru-app/docs/ZUXURU_FINAL_MASTER_BUILD_SPEC.md",
+    "bytes": 12201,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "ZUXURU_USABLE_MVP.zip",
+    "member": "zuxuru-app/app.js",
+    "bytes": 6049,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": true
+  },
+  {
+    "archive": "ZUXURU_USABLE_MVP.zip",
+    "member": "zuxuru-app/modules/content-studio/README.md",
+    "bytes": 279,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "ZUXURU_USABLE_MVP.zip",
+    "member": "zuxuru-app/index.html",
+    "bytes": 10225,
+    "potential_demo_markers": 7,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "ZUXURU_USABLE_MVP.zip",
+    "member": "zuxuru-app/README.md",
+    "bytes": 611,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": true
+  },
+  {
+    "archive": "Zuxuru-Phase1-Foundation.zip",
+    "member": "index.html",
+    "bytes": 12025,
+    "potential_demo_markers": 5,
+    "has_external_fetch": false,
+    "has_local_storage": true
+  },
+  {
+    "archive": "Zuxuru-Phase1-Foundation.zip",
+    "member": "README.md",
+    "bytes": 522,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru-Phase1-Foundation.zip",
+    "member": "app/page.tsx",
+    "bytes": 6311,
+    "potential_demo_markers": 5,
+    "has_external_fetch": false,
+    "has_local_storage": true
+  },
+  {
+    "archive": "Zuxuru-Phase1-Foundation.zip",
+    "member": "app/layout.tsx",
+    "bytes": 321,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru-Phase1-Foundation.zip",
+    "member": "package.json",
+    "bytes": 193,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru1_real-execution-build.zip",
+    "member": "index.html",
+    "bytes": 30122,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": true
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/00_MASTER_SYSTEM.md",
+    "bytes": 3846,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/01_APP_RUNTIME.md",
+    "bytes": 1731,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/02_JARVIS_ADAPTATION.md",
+    "bytes": 4049,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/03_MALL_SYSTEM.md",
+    "bytes": 2014,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/04_COMPANY_SYSTEM.md",
+    "bytes": 1612,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/05_FASHION_DESIGN_SYSTEM.md",
+    "bytes": 1814,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/06_CIA_CONNECT_INTELLIGENCE_ARCHITECTURE.md",
+    "bytes": 1358,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/07_STUDIO.md",
+    "bytes": 1010,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/08_BUILDER_WEBSITE.md",
+    "bytes": 1117,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/09_GROWTH_ENGINES.md",
+    "bytes": 1273,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/10_PACKAGES.md",
+    "bytes": 2230,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/11_DATA_MODEL.md",
+    "bytes": 1125,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/12_API_AND_WORKFLOWS.md",
+    "bytes": 1558,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/13_SECURITY_APPROVALS.md",
+    "bytes": 972,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/14_BUILD_PHASES.md",
+    "bytes": 1467,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/15_JARVIS_TO_ZUXURU_FILE_MAP.md",
+    "bytes": 2313,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/16_VERTICAL_PACKAGE_MATRIX.md",
+    "bytes": 1444,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Build_Spec_Files.zip",
+    "member": "Zuxuru_Build_Spec_Files/INDEX.md",
+    "bytes": 1138,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Storefront.zip",
+    "member": "zuxuru_storefront/README.md",
+    "bytes": 281,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "Zuxuru_Storefront.zip",
+    "member": "zuxuru_storefront/index.html",
+    "bytes": 11425,
+    "potential_demo_markers": 2,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane-app.zip",
+    "member": "fukulisane-app/index.html",
+    "bytes": 8229,
+    "potential_demo_markers": 4,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane-construction-platform-history.zip",
+    "member": "fukulisane-history-package/HISTORY.md",
+    "bytes": 4349,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane-construction-platform-history.zip",
+    "member": "fukulisane-history-package/RELEASE_NOTES.md",
+    "bytes": 438,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane-live-netlify.zip",
+    "member": "fukulisane-live/netlify/functions/scan.mjs",
+    "bytes": 2076,
+    "potential_demo_markers": 0,
+    "has_external_fetch": true,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane-live-netlify.zip",
+    "member": "fukulisane-live/README.md",
+    "bytes": 955,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane-live-netlify.zip",
+    "member": "fukulisane-live/index.html",
+    "bytes": 11771,
+    "potential_demo_markers": 2,
+    "has_external_fetch": true,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane-mvp.zip",
+    "member": "package.json",
+    "bytes": 359,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane-mvp.zip",
+    "member": "src/app/page.tsx",
+    "bytes": 6261,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane-mvp.zip",
+    "member": "src/app/layout.tsx",
+    "bytes": 278,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane_one_history_derived.zip",
+    "member": "README.md",
+    "bytes": 397,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane_one_history_derived.zip",
+    "member": "05-execution-intelligence.md",
+    "bytes": 371,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane_one_history_derived.zip",
+    "member": "07-premium-capabilities.md",
+    "bytes": 524,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane_one_history_derived.zip",
+    "member": "02-business-intelligence.md",
+    "bytes": 486,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane_one_history_derived.zip",
+    "member": "08-brand-to-market.md",
+    "bytes": 335,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane_one_history_derived.zip",
+    "member": "01-core-architecture.md",
+    "bytes": 358,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane_one_history_derived.zip",
+    "member": "09-go-live.md",
+    "bytes": 362,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane_one_history_derived.zip",
+    "member": "03-customer-intelligence.md",
+    "bytes": 318,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane_one_history_derived.zip",
+    "member": "06-build-integrity.md",
+    "bytes": 446,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisane_one_history_derived.zip",
+    "member": "04-opportunity-intelligence.md",
+    "bytes": 361,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisaneconstruction-connected.zip",
+    "member": "fukulisane-connected/build-config.js",
+    "bytes": 365,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisaneconstruction-connected.zip",
+    "member": "fukulisane-connected/supabase-config.js",
+    "bytes": 48,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisaneconstruction-connected.zip",
+    "member": "fukulisane-connected/README.md",
+    "bytes": 798,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisaneconstruction-connected.zip",
+    "member": "fukulisane-connected/index.html",
+    "bytes": 18525,
+    "potential_demo_markers": 2,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisaneconstruction-connected.zip",
+    "member": "fukulisane-connected/package.json",
+    "bytes": 131,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisaneconstruction-connected.zip",
+    "member": "fukulisane-connected/supabase.sql",
+    "bytes": 1381,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisaneconstruction-connected.zip",
+    "member": "fukulisane-connected/admin.html",
+    "bytes": 3892,
+    "potential_demo_markers": 2,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisani-agent-os-handoff.zip",
+    "member": "README.md",
+    "bytes": 718,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisani-agent-os-handoff.zip",
+    "member": "DEPLOYMENT.txt",
+    "bytes": 236,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisani-agent-os-handoff.zip",
+    "member": "PLATFORM_REGISTRY.md",
+    "bytes": 1187,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisani-agent-os-handoff.zip",
+    "member": "AGENT_OS.md",
+    "bytes": 700,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisani-app-option3.tar.gz",
+    "member": "fukulisani-app/design-qa.md",
+    "bytes": 672,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisani-app-option3.tar.gz",
+    "member": "fukulisani-app/index.html",
+    "bytes": 19146,
+    "potential_demo_markers": 3,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisani-app.tar.gz",
+    "member": "./design-qa.md",
+    "bytes": 555,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisani-app.tar.gz",
+    "member": "./index.html",
+    "bytes": 19038,
+    "potential_demo_markers": 4,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisneconstruction-ready.zip",
+    "member": "fukulisneconstruction/index.html",
+    "bytes": 16912,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "fukulisneconstruction-ready.zip",
+    "member": "fukulisneconstruction/README.txt",
+    "bytes": 660,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/apps/web/app/layout.tsx",
+    "bytes": 340,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/apps/web/app/studio/content/page.tsx",
+    "bytes": 942,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/apps/web/app/studio/website/page.tsx",
+    "bytes": 1062,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/apps/web/app/studio/livestream/page.tsx",
+    "bytes": 905,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/apps/web/app/studio/page.tsx",
+    "bytes": 1996,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/apps/web/app/studio/recording/page.tsx",
+    "bytes": 649,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/apps/web/app/studio/podcast/page.tsx",
+    "bytes": 744,
+    "potential_demo_markers": 2,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/apps/web/app/studio/camera/page.tsx",
+    "bytes": 1126,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/apps/web/app/studio/social/page.tsx",
+    "bytes": 880,
+    "potential_demo_markers": 3,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/apps/web/app/page.tsx",
+    "bytes": 2431,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/apps/web/package.json",
+    "bytes": 203,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/apps/web/next.config.ts",
+    "bytes": 125,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/apps/web/tsconfig.json",
+    "bytes": 271,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/apps/api/requirements.txt",
+    "bytes": 35,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/apps/api/app/main.py",
+    "bytes": 696,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/docs/product-flow.md",
+    "bytes": 833,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/docs/github.md",
+    "bytes": 451,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/docs/architecture.md",
+    "bytes": 1030,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/packages/core/README.md",
+    "bytes": 204,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/packages/adapters/ai-editing/README.md",
+    "bytes": 118,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/packages/adapters/publishing/README.md",
+    "bytes": 118,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/packages/adapters/website/README.md",
+    "bytes": 115,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/packages/adapters/storage/README.md",
+    "bytes": 115,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/packages/adapters/analytics/README.md",
+    "bytes": 117,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/packages/adapters/podcast/README.md",
+    "bytes": 115,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/packages/adapters/streaming/README.md",
+    "bytes": 117,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/packages/adapters/social/README.md",
+    "bytes": 114,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-digital-studio-repository.zip",
+    "member": "zuxuru-digital-studio/README.md",
+    "bytes": 1611,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-engine.zip",
+    "member": "zuxuru-engine/public/index.html",
+    "bytes": 5921,
+    "potential_demo_markers": 4,
+    "has_external_fetch": true,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-engine.zip",
+    "member": "zuxuru-engine/src/engine.js",
+    "bytes": 11876,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-engine.zip",
+    "member": "zuxuru-engine/server.js",
+    "bytes": 1682,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-engine.zip",
+    "member": "zuxuru-engine/package.json",
+    "bytes": 163,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-engine.zip",
+    "member": "zuxuru-engine/README.md",
+    "bytes": 1799,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-galleria-evidence-module.zip",
+    "member": "zuxuru-galleria-module/src/components/zuxuru/GalleriaEvidenceWorkspace.tsx",
+    "bytes": 5268,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-galleria-evidence-module.zip",
+    "member": "zuxuru-galleria-module/src/lib/zuxuru/galleria-evidence.ts",
+    "bytes": 3365,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-galleria-evidence-module.zip",
+    "member": "zuxuru-galleria-module/README.md",
+    "bytes": 1430,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-growth-engine-mvp.zip",
+    "member": "zuxuru-app/README.md",
+    "bytes": 936,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-growth-engine-mvp.zip",
+    "member": "zuxuru-app/index.html",
+    "bytes": 16706,
+    "potential_demo_markers": 10,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-investigation-platform.zip",
+    "member": "zuxuru-app/next-env.d.ts",
+    "bytes": 81,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-investigation-platform.zip",
+    "member": "zuxuru-app/package.json",
+    "bytes": 111,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-investigation-platform.zip",
+    "member": "zuxuru-app/tsconfig.json",
+    "bytes": 422,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-investigation-platform.zip",
+    "member": "zuxuru-app/README.md",
+    "bytes": 1118,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-investigation-platform.zip",
+    "member": "zuxuru-app/server.js",
+    "bytes": 7244,
+    "potential_demo_markers": 0,
+    "has_external_fetch": true,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-investigation-platform.zip",
+    "member": "zuxuru-app/public/index.html",
+    "bytes": 6596,
+    "potential_demo_markers": 1,
+    "has_external_fetch": true,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-render-ready.zip",
+    "member": "zuxuru-app/README.md",
+    "bytes": 713,
+    "potential_demo_markers": 1,
+    "has_external_fetch": true,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-render-ready.zip",
+    "member": "zuxuru-app/server.js",
+    "bytes": 1620,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-render-ready.zip",
+    "member": "zuxuru-app/package.json",
+    "bytes": 263,
+    "potential_demo_markers": 0,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-render-ready.zip",
+    "member": "zuxuru-app/public/index.html",
+    "bytes": 14864,
+    "potential_demo_markers": 2,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-storefront-v0.1.zip",
+    "member": "zuxuru-storefront/index.html",
+    "bytes": 12865,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-storefront.zip",
+    "member": "zuxuru-storefront/index.html",
+    "bytes": 4536,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-storefront.zip",
+    "member": "zuxuru-storefront/README.md",
+    "bytes": 662,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  },
+  {
+    "archive": "zuxuru-storefront.zip",
+    "member": "zuxuru-storefront/app.js",
+    "bytes": 897,
+    "potential_demo_markers": 1,
+    "has_external_fetch": false,
+    "has_local_storage": false
+  }
+]

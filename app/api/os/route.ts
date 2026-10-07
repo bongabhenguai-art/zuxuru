@@ -1,11 +1,13 @@
+import {aiStatus,connectAI,disconnectAI,runAI} from '@/lib/ai-engine';
+import {analyzeBusiness} from '@/lib/intelligence';
 import {postizStatus,connectPostiz,disconnectPostiz,postizChannels,postizAuthorize,publishPostiz,verifyPublication} from '@/lib/postiz';
 import {searxForOwner,publicSearxForApp,connectSearx,businessDetails,addRelationship,rescore,growthPlan,approvePlan,runGrowthCycle} from '@/lib/growth';
 import {githubStatus,connectGitHub,disconnectGitHub,githubRepositories,inspectGitHub} from '@/lib/github';
 import { identity, list, get, save, remove, investigate, clean, runtime, isOwner, validatedProfile, searchKeyForOwner, connectSearch } from '@/lib/zuxuru';
 export const dynamic = 'force-dynamic';
-const kinds = ['profile','lead','asset','task','package','report','plan','relationship','history','measurement','workflow','publication'];
+const kinds = ['profile','lead','asset','task','package','report','plan','relationship','history','measurement','workflow','publication','intelligence','agent_run','memory'];
 export async function GET() {
- try { const u = await identity(); const searchKey=await searchKeyForOwner(u.userId);const searx=await searxForOwner(u.userId); const entries = await Promise.all(kinds.map(async k=>[k,(await list(u.userId,k)).map(p=>k==='profile'?validatedProfile(p):p)])); return Response.json({user:{name:u.displayName,email:u.email,ceo:isOwner(u.email)},...Object.fromEntries(entries),aiConfigured:false,postiz:await postizStatus(u.userId),github:isOwner(u.email)?await githubStatus(u.userId):null,searchService:{provider:searx?'SearXNG':searchKey?'Tavily':'Bing RSS (limited)',endpoint:searx,publicEnabled:isOwner(u.email)&&Boolean(searx)&&searx===await publicSearxForApp(),configured:Boolean(searx||searchKey),status:searx||searchKey?'Previously verified · run investigation to check live access':'Production search provider not configured'}},{headers:{'Cache-Control':'private, no-store'}}); }
+ try { const u = await identity(); const searchKey=await searchKeyForOwner(u.userId);const searx=await searxForOwner(u.userId); const entries = await Promise.all(kinds.map(async k=>[k,(await list(u.userId,k)).map(p=>k==='profile'?validatedProfile(p):p)])); return Response.json({user:{name:u.displayName,email:u.email,ceo:isOwner(u.email)},...Object.fromEntries(entries),aiConfigured:(await aiStatus(u.userId)).configured,ai:await aiStatus(u.userId),postiz:await postizStatus(u.userId),github:isOwner(u.email)?await githubStatus(u.userId):null,searchService:{provider:searx?'SearXNG':searchKey?'Tavily':'Bing RSS (limited)',endpoint:searx,publicEnabled:isOwner(u.email)&&Boolean(searx)&&searx===await publicSearxForApp(),configured:Boolean(searx||searchKey),status:searx||searchKey?'Previously verified · run investigation to check live access':'Production search provider not configured'}},{headers:{'Cache-Control':'private, no-store'}}); }
  catch(e){return Response.json({error:String((e as Error).message)},{status:401,headers:{'Cache-Control':'private, no-store'}});}
 }
 export async function POST(req:Request) {
@@ -16,6 +18,12 @@ export async function POST(req:Request) {
  const b:any=await req.json(); if(!b || typeof b!=="object" || Array.isArray(b))throw Error("Invalid request"); const id=clean(b.id,100); let result;
  if(String(b.action).startsWith('github_')&&!isOwner(u.email))return Response.json({error:'CEO builder access required'},{status:403,headers:{'Cache-Control':'private, no-store'}});
  switch(b.action){
+ case 'ai_connect': {result=await connectAI(owner,clean(b.base,2000),clean(b.apiKey,501),clean(b.model,200));break;}
+ case 'ai_disconnect': {result=await disconnectAI(owner);break;}
+ case 'ai_analyze': {result=await runAI(owner,id,clean(b.task,100),b.consent===true);break;}
+ case 'intelligence_analyze': {result=await analyzeBusiness(owner,id);break;}
+ case 'memory_save': {const profileId=clean(b.profileId,100);const p=validatedProfile(await get(owner,'profile',profileId));if(!p.identityConfirmed)throw Error('Confirm identity before adding business memory.');const text=clean(b.text,4000),title=clean(b.title,180);if(!text||!title)throw Error('Enter a memory title and note.');result=await save(owner,'memory',{profileId,title,text,sourceType:'Owner-provided',state:'Not independently verified'},id||undefined);await save(owner,'history',{profileId,action:'Business memory saved',actor:'Account owner',memoryId:result.id});break;}
+
  case 'postiz_connect': {result=await connectPostiz(owner,clean(b.base,2000),clean(b.apiKey,501));break;}
  case 'postiz_disconnect': {result=await disconnectPostiz(owner);break;}
  case 'postiz_channels': {result=await postizChannels(owner);break;}
@@ -39,7 +47,7 @@ export async function POST(req:Request) {
  case 'confirm_profile': {const p=validatedProfile(await get(owner,'profile',id));if(b.confirmed&&!p.selectedEvidenceId)throw Error('Select a matching internet result first.');result=await save(owner,'profile',{...p,identityConfirmed:Boolean(b.confirmed)},id);break;}
  case 'lead_save': {if(!clean(b.name))throw Error('Enter the lead name.');result=await save(owner,'lead',{name:clean(b.name,180),contact:clean(b.contact,300),notes:clean(b.notes),stage:'New'});break;}
  case 'lead_stage': {if(!['New','Contacted','Qualified','Won','Lost'].includes(b.stage))throw Error('Invalid stage');result=await save(owner,'lead',{...await get(owner,'lead',id),stage:b.stage},id);break;}
- case 'delete': {if(!['lead','asset','task'].includes(b.kind))throw Error('Invalid record kind');await remove(owner,b.kind,id);result={deleted:true};break;}
+ case 'delete': {if(!['lead','asset','task','memory'].includes(b.kind))throw Error('Invalid record kind');await remove(owner,b.kind,id);result={deleted:true};break;}
  case 'asset_save': {
  const previous=id?await get(owner,'asset',id):null;const title=clean(b.title,180);if(!title)throw Error('Enter a draft title.');
  const profileId=clean(b.profileId,100)||previous?.profileId||null;if(profileId)await get(owner,'profile',profileId);

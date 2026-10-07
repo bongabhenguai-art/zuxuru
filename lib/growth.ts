@@ -1,3 +1,4 @@
+import {businessIntelligence} from './intelligence-view';
 import {list,get,save,remove,clean,safeUrl,readPublic,validatedProfile,investigate,searchKeyForOwner} from './zuxuru';
 
 export async function searxForOwner(owner:string){return (await list(owner,'searx_connection'))[0]?.endpoint||null;}
@@ -49,8 +50,7 @@ export async function rescore(owner:string,id:string){
 }
 export async function growthPlan(owner:string,id:string){
  const p=validatedProfile(await get(owner,'profile',id));if(!p.identityConfirmed)throw Error('Confirm the business identity first.');
- const observations=p.score?.checks||[];
- const proposals=observations.filter((c:any)=>!c.observed).map((c:any)=>({title:'Improve '+c.name,need:c.name,sourceUrl:p.score.sourceUrl,evidence:'Signal not observed on the inspected page',expectedResult:'Repeat the same website rubric and verify this signal',state:'Proposed · approval required'}));
+ const proposals=businessIntelligence(p).opportunities.map((o:any)=>({...o,need:o.title,evidence:'Signal not observed on the inspected page',expectedResult:o.measurement,state:'Proposed · approval required'}));
  if(!proposals.length)proposals.push({title:p.score?'Review wider platform evidence':'Add an official website for measurement',need:p.score?'Connected platform analysis':'Website evidence',sourceUrl:p.selectedSourceUrl,evidence:p.score?'All four inspected website signals are present; wider business visibility remains unmeasured.':'No readable official website has been measured.',expectedResult:'Add independently inspectable evidence',state:'Proposed · approval required'});
  const existing=(await list(owner,'package')).find(x=>x.profileId===id&&x.basisAt===p.investigatedAt);
  if(existing)return existing;
