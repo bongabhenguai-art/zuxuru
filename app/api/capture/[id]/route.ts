@@ -1,0 +1,3 @@
+import {identity,get,runtime} from '@/lib/zuxuru';
+export const dynamic='force-dynamic';
+export async function GET(_:Request,{params}:{params:Promise<{id:string}>}){try{const u=await identity(),{id}=await params,asset=await get(u.userId,'asset',id);if(!asset.filePath)return new Response('No attachment',{status:404});const object=await runtime().BUCKET.get(asset.filePath);if(!object)return new Response('Attachment unavailable',{status:404});return new Response(object.body,{headers:{'Content-Type':asset.mime,'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'}});}catch{return new Response('Permission Missing',{status:403});}}
