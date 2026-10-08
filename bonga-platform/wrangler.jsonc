@@ -27,5 +27,11 @@
     "JARVIS_OWNER_EMAIL": "donlegendwear@gmail.com",
     "CF_ACCESS_ISSUER": "https://bongabhenguai.cloudflareaccess.com",
     "CF_ACCESS_AUD": "9ae2e6d6ca4a7ceeda4b3fbb2aec6c5733c5ce3a31e8e8e2bcb36a8b13e6a1c4"
-  }
+  },
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "bonga-bhengu-media"
+    }
+  ]
 }
