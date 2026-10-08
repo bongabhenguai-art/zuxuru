@@ -8,12 +8,14 @@ export async function cloudReports(request,env,verify=jwtVerify){
   if(request.method==='GET'){
     if(!request.headers.get('oai-authenticated-user-id')||request.headers.get('oai-authenticated-user-email')?.toLowerCase()!==env.JARVIS_OWNER_EMAIL?.toLowerCase())return reply({error:'Sign in with the website owner account.'},403);
     try{
-      const owner=env.JARVIS_OWNER_EMAIL.toLowerCase(),id=new URL(request.url).searchParams.get('report');
+      const params=new URL(request.url).searchParams,owner=env.JARVIS_OWNER_EMAIL.toLowerCase(),id=params.get('report'),kind=params.get('kind');
+      if(kind&&kind!=='morning')return reply({error:'Invalid report type.'},400);
+      const filter=kind==='morning'?" AND report LIKE '# Bonga Bhengu morning fashion and social report%'":'';
       if(id&&(!/^[A-Za-z0-9_-]{1,200}$/.test(id)))return reply({error:'Invalid report selection.'},400);
       const report=id
-        ? await env.DB.prepare('SELECT id,report,run_id,created_at FROM jarvis_cloud_reports WHERE owner_email = ? AND id = ? LIMIT 1').bind(owner,id).first()
-        : await env.DB.prepare('SELECT id,report,run_id,created_at FROM jarvis_cloud_reports WHERE owner_email = ? ORDER BY created_at DESC LIMIT 1').bind(owner).first();
-      const history=await env.DB.prepare('SELECT id,run_id,created_at FROM jarvis_cloud_reports WHERE owner_email = ? ORDER BY created_at DESC LIMIT 10').bind(owner).all();
+        ? await env.DB.prepare('SELECT id,report,run_id,created_at FROM jarvis_cloud_reports WHERE owner_email = ? AND id = ?'+filter+' LIMIT 1').bind(owner,id).first()
+        : await env.DB.prepare('SELECT id,report,run_id,created_at FROM jarvis_cloud_reports WHERE owner_email = ?'+filter+' ORDER BY created_at DESC LIMIT 1').bind(owner).first();
+      const history=await env.DB.prepare('SELECT id,run_id,created_at FROM jarvis_cloud_reports WHERE owner_email = ?'+filter+' ORDER BY created_at DESC LIMIT 10').bind(owner).all();
       if(id&&!report)return reply({error:'Report not found in your workspace.'},404);
       return reply({report:report||null,history:history.results||[]});
     }catch{return reply({error:'Cloud report storage unavailable.'},503);}

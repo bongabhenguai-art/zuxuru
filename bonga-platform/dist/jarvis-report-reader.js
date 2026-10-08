@@ -1,18 +1,21 @@
 (()=>{const input=document.getElementById('jarvis-report-file');if(!input)return;const text=document.getElementById('jarvis-report-text'),status=document.getElementById('jarvis-report-status');let generation=0;const runLink=document.getElementById('jarvis-report-run');const resetRun=()=>{if(runLink){runLink.hidden=true;runLink.removeAttribute('href');}};const cloud=document.getElementById('jarvis-load-cloud-report');const history=document.getElementById('jarvis-cloud-history'),openHistory=document.getElementById('jarvis-open-cloud-history');
-const openCloud=async(id='')=>{
+const morning=document.getElementById('jarvis-load-morning-report');let currentKind='';
+const openCloud=async(id='',kind='')=>{
   if(text.value.trim()&&!confirm('Replace the report currently open?'))return;
-  const attempt=++generation;cloud.disabled=true;if(openHistory)openHistory.disabled=true;status.textContent='Opening your cloud report…';
+  const attempt=++generation;cloud.disabled=true;if(morning)morning.disabled=true;if(openHistory)openHistory.disabled=true;status.textContent='Opening your cloud report…';
   try{
-    const r=await fetch('/api/jarvis/cloud/report'+(id?'?report='+encodeURIComponent(id):'')),d=await r.json();
-    if(!r.ok)throw Error(d.error||'Cloud report unavailable');if(attempt!==generation)return;
+    const query=new URLSearchParams();if(id)query.set('report',id);if(kind)query.set('kind',kind);
+    const r=await fetch('/api/jarvis/cloud/report'+(query.size?'?'+query.toString():'')),d=await r.json();
+    if(!r.ok)throw Error(d.error||'Cloud report unavailable');if(attempt!==generation)return;currentKind=kind;
     if(history){history.replaceChildren();for(const entry of d.history||[]){const option=document.createElement('option');option.value=entry.id;option.textContent=new Date(entry.created_at).toLocaleString()+' · Run '+entry.run_id;history.append(option);}if(d.report?.id)history.value=d.report.id;}
-    if(!d.report){status.textContent='No cloud report received yet. Run Jarvis in GitHub first.';return;}
-    text.value=d.report.report;resetRun();if(runLink&&/^\d+$/.test(String(d.report.run_id))){runLink.href='https://github.com/bongabhenguai-art/zuxuru/actions/runs/'+d.report.run_id;runLink.hidden=false;}status.textContent='Cloud report received '+new Date(d.report.created_at).toLocaleString()+'. Review its claims before acting.';
+    if(!d.report){status.textContent='No matching report received yet. Run the morning report or a task in GitHub first.';return;}
+    text.value=d.report.report;resetRun();if(runLink&&/^\d+$/.test(String(d.report.run_id))){runLink.href='https://github.com/bongabhenguai-art/zuxuru/actions/runs/'+d.report.run_id;runLink.hidden=false;}const received=new Date(d.report.created_at),day=date=>new Intl.DateTimeFormat('en-ZA',{timeZone:'Africa/Johannesburg',year:'numeric',month:'2-digit',day:'2-digit'}).format(date);const freshness=Number.isNaN(received.getTime())?'Date unavailable':day(received)===day(new Date())?'Received today':'Older report — not today’s update';status.textContent=freshness+'. Received '+received.toLocaleString('en-ZA',{timeZone:'Africa/Johannesburg'})+' (South Africa). Review its claims before acting.';
   }catch(e){if(attempt===generation)status.textContent=e.message||'Cloud report unavailable';}
-  finally{cloud.disabled=false;if(openHistory)openHistory.disabled=!history?.value;}
+  finally{cloud.disabled=false;if(morning)morning.disabled=false;if(openHistory)openHistory.disabled=!history?.value;}
 };
 if(cloud)cloud.onclick=()=>openCloud();
-if(openHistory)openHistory.onclick=()=>{if(history.value)openCloud(history.value);};
+if(morning)morning.onclick=()=>openCloud('','morning');
+if(openHistory)openHistory.onclick=()=>{if(history.value)openCloud(history.value,currentKind);};
 input.onchange=async()=>{const attempt=++generation;try{const file=input.files[0];if(!file)return;if(file.size>200000||!/^.*\.(md|txt)$/i.test(file.name))throw Error('Choose a Markdown or text report under 200 KB. Extract the GitHub ZIP first.');const value=await file.text();if(attempt!==generation)return;if(!value.trim()||value.includes('\u0000'))throw Error('This report is empty or is not a text file.');text.value=value.slice(0,40000);resetRun();status.textContent='Opened '+file.name+' on this device. Review dates and proof links; importing does not verify the claims.';}catch(e){if(attempt===generation)status.textContent=e.message;}finally{input.value='';}};
 const download=document.getElementById('jarvis-report-download');
 if(download)download.onclick=()=>{
