@@ -13,6 +13,20 @@
     figure.addEventListener('pointermove',event=>{if(reduced.matches||event.pointerType==='touch')return;const bounds=figure.getBoundingClientRect();targetX=Math.max(8,Math.min(event.clientX-bounds.left+12,bounds.width-190));targetY=Math.max(8,Math.min(event.clientY-bounds.top+12,bounds.height-34));if(!frame)frame=requestAnimationFrame(draw);});
     figure.addEventListener('pointerleave',()=>{cancelAnimationFrame(frame);frame=0;});
   }
+
+  // Editorial technical metadata: describe presentation, not unverified garment specifications.
+  for(const card of cards){
+    const info=card.querySelector('.collection-card-info');if(!info||info.querySelector('.bonga-spec-list'))continue;
+    const title=card.querySelector('h3')?.textContent?.trim()||'Fashion concept';
+    const specs=document.createElement('div');specs.className='bonga-spec-list';specs.setAttribute('aria-label','Design presentation details');
+    for(const [key,value] of [['FORMAT','Digital fashion concept'],['COLLECTION',title],['NEXT STEP','Request a design consultation']]){
+      const row=document.createElement('div');row.className='bonga-spec-row';
+      const label=document.createElement('span');label.textContent=key;
+      const detail=document.createElement('span');detail.textContent=value;
+      row.append(label,detail);specs.append(row);
+    }
+    info.append(specs);
+  }
   const video=document.getElementById('workspace-ad-video'),button=document.getElementById('workspace-ad-toggle');if(!video||!button)return;
   let visible=false,manualPaused=reduced.matches,autoPausing=false;const pauseAuto=()=>{if(!video.paused){autoPausing=true;video.pause();}};
   const play=()=>{if(visible&&!document.hidden&&!manualPaused)video.play().catch(()=>{});};
