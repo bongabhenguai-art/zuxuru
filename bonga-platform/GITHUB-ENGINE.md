@@ -12,3 +12,5 @@ Polsia has no configured website connector. Social accounts have not been author
 Upstream candidates for future tools: https://github.com/IBM/mcp-context-forge (gateway), https://github.com/PrefectHQ/fastmcp (MCP tools), https://github.com/github/github-mcp-server (GitHub operations). These are references, not installed dependencies.
 
 Creative Studio is an embedded OS execution environment. Studio jobs originate from marketing/branding tasks, with deduplicated source IDs, private media ownership checks, revision-checked review/approval transitions and owner-entered measurement sources. Camera recording and publication are separate; no platform connection or AI director is implied. Five physical phones still require hardware testing on shared Wi-Fi.
+
+Camera invitations use locally bundled QRCode.js (MIT), pinned to davidshimjs/qrcodejs commit 04f46c6a0708418cb7b96fc563eacae0fbf77674. License: dist/STUDIO-QR-LICENSE.txt. QR generation makes no remote image request; invitation tokens remain in the URL fragment.
