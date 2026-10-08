@@ -165,3 +165,13 @@ body.cyber-fashion #bonga-execute-matrix #bonga-tier-content{animation:bonga-lux
 @media(hover:hover){.cyber-fashion .bonga-spec-row:hover{background:rgba(200,169,107,.1);color:#F6F3EC}.cyber-fashion .bonga-spec-row:hover::after{transform:scaleX(1)}}
 @media(max-width:600px){.cyber-fashion .bonga-spec-row{grid-template-columns:1fr;gap:3px}}
 @media(prefers-reduced-motion:reduce){.cyber-fashion .bonga-spec-row,.cyber-fashion .bonga-spec-row::after{transition:none!important}}
+
+/* Editorial collection choreography: premium, low-motion, progressive enhancement. */
+.cyber-fashion .collection-card{position:relative;isolation:isolate}
+.cyber-fashion .collection-card figure{overflow:hidden}
+.cyber-fashion .collection-card figure img{transition:transform .75s cubic-bezier(.18,.65,.2,1),filter .5s ease;will-change:auto}
+@media(hover:hover){.cyber-fashion .collection-card:hover figure img{transform:scale(1.035);filter:brightness(1.045)}}
+.cyber-fashion .collection-card .bonga-spec-row{opacity:1;transform:none}
+@media(prefers-reduced-motion:no-preference){.cyber-fashion .collection-card.bonga-in-view .bonga-spec-row{animation:bonga-lux-reveal .5s ease-out both}.cyber-fashion .collection-card.bonga-in-view .bonga-spec-row:nth-child(2){animation-delay:.08s}.cyber-fashion .collection-card.bonga-in-view .bonga-spec-row:nth-child(3){animation-delay:.16s}}
+.cyber-fashion .collection-card:focus-within{outline:1px solid #C8A96B;outline-offset:4px}
+@media(prefers-reduced-motion:reduce){.cyber-fashion .collection-card figure img{transition:none!important}.cyber-fashion .collection-card:hover figure img{transform:none!important;filter:none!important}.cyber-fashion .collection-card .bonga-spec-row{animation:none!important}}
