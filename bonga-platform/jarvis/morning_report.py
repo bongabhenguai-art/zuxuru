@@ -47,10 +47,24 @@ def bluesky_items(body,now):
         items.append({'title':clean(record.get('text','')),'url':'https://bsky.app/profile/'+handle+'/post/'+key,'published':stamp.isoformat(),'kind':'Public Bluesky post'})
         if len(items)>=5:break
     return items
+def mastodon_items(body,now):
+    items=[]
+    for post in json.loads(body)[:10]:
+        if post.get('visibility')!='public' or post.get('sensitive') or post.get('reblog'):continue
+        link=post.get('url','')
+        if not link.startswith('https://'):continue
+        try:
+            stamp=datetime.fromisoformat(post.get('created_at','').replace('Z','+00:00'))
+            if stamp.tzinfo is None or stamp<now-timedelta(days=1) or stamp>now+timedelta(hours=1):continue
+        except ValueError:continue
+        items.append({'title':clean(post.get('content','')),'url':link,'published':stamp.isoformat(),'kind':'Public Mastodon fashion post'})
+        if len(items)>=5:break
+    return items
 def collect(opener=urllib.request.urlopen,now=None):
     now=now or datetime.now(timezone.utc);evidence=[];coverage=[]
     sources=[(label,'https://news.google.com/rss/search?'+urllib.parse.urlencode({'q':query,'hl':'en-ZA','gl':'ZA','ceid':'ZA:en'}),rss_items) for label,query in NEWS]
     sources.append(('Bluesky fashion','https://public.api.bsky.app/xrpc/app.bsky.feed.searchPosts?'+urllib.parse.urlencode({'q':'fashion','sort':'latest','limit':10,'since':(now-timedelta(days=1)).isoformat()}),bluesky_items))
+    sources.append(('Mastodon fashion','https://mastodon.social/api/v1/timelines/tag/fashion?limit=10',mastodon_items))
     seen=set()
     for label,url,parse in sources:
         try:
@@ -66,7 +80,7 @@ def collect(opener=urllib.request.urlopen,now=None):
 def make_report(evidence,coverage,now,analyse=generate):
     lines=['# Bonga Bhengu morning fashion and social report',now.astimezone(timezone(timedelta(hours=2))).isoformat(),
       'Public evidence snapshot. Draft for human review. Mentions are not proof of sales, a top-selling style or a qualified customer.',
-      'Coverage: Bluesky public posts plus indexed news about fashion, TikTok and Instagram. Private accounts, personal messages and connected-account analytics are not accessed.',
+      'Coverage: Mastodon and Bluesky public posts plus indexed news about fashion, TikTok and Instagram. Private accounts, personal messages and connected-account analytics are not accessed.',
       '## Collection status']
     lines+=['- '+label+': '+state for label,state in coverage]
     lines+=['## Evidence links']

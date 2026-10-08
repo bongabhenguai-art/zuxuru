@@ -70,3 +70,5 @@ jobs:
         run: python bonga-platform/jarvis/send_cloud_report.py
 
 # Verify dashboard delivery diagnostics.
+
+# Verify public Mastodon evidence alongside indexed social news.
