@@ -1,0 +1,1 @@
+(()=>{'use strict';let token=null;window.bongaRunGate={active:()=>token!==null,begin(){if(token)throw Error('A workflow is already running. Wait for its result before starting another.');if(!window.designerCloudReady?.())throw Error('Wait for Cloud saved, or retry your cloud save first.');const own={};token=own;return()=>{if(token===own)token=null;};}};})();
