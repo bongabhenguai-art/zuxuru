@@ -86,3 +86,21 @@ body.cyber-fashion{background:var(--cyber-black);color:var(--cyber-white);font-f
 .landing-digital-screen .workspace-ad-label{font-size:clamp(9px,1vw,13px);letter-spacing:.1em}
 .landing-screen-actions{display:flex;gap:24px;flex-wrap:wrap;align-items:center;margin-top:24px}
 @media(max-width:720px){.landing-screen-heading{display:block}.landing-digital-screen .workspace-ad-frame{aspect-ratio:16/9;max-height:none}.landing-digital-screen .workspace-ad-label{top:8px;left:8px}.landing-digital-screen .workspace-ad-enquire{bottom:8px;left:8px;font-size:11px;padding:10px}.landing-screen-heading>p{max-width:none}}
+
+/* Bonga Bhengu brand palette v2 — additive, scoped to fashion workspace. */
+body.cyber-fashion.designer-dashboard{--cyber-black:#050507;--cyber-white:#F7FAFF;--cyber-cyan:#00FFFF;--cyber-green:#39FF14;--cyber-gold:#D4AF37;--cyber-pink:#00FFFF;--cyber-line:rgba(0,255,255,.20);background:#050507;color:#F7FAFF}
+.cyber-fashion.designer-dashboard :is(.designer-sidebar,.dashboard-metrics article,.dashboard-actions a,.record,.designer-content>section,#bonga-execute-matrix){background:#0C0D12;border-color:rgba(0,255,255,.20)}
+.cyber-fashion.designer-dashboard .designer-sidebar{background:#08090E;border-right-color:rgba(0,255,255,.22)}
+.cyber-fashion.designer-dashboard :is(a,.eyebrow,summary,.dashboard-metrics strong){color:#00FFFF}
+.cyber-fashion.designer-dashboard :is(.designer-sidebar nav a,.dashboard-actions a){transition:background-color .2s,border-color .2s,color .2s}
+.cyber-fashion.designer-dashboard .designer-sidebar nav a{color:#D1DFE5}
+.cyber-fashion.designer-dashboard .designer-sidebar nav a:hover,.cyber-fashion.designer-dashboard .designer-sidebar nav a.active{background:#00383D;color:#F7FAFF;border-color:#00FFFF}
+.cyber-fashion.designer-dashboard :is(button,.button){background:#00FFFF;color:#050507;border:1px solid #00FFFF;border-radius:6px}
+.cyber-fashion.designer-dashboard :is(button,.button):hover{background:#39FF14;border-color:#39FF14;color:#050507}
+.cyber-fashion.designer-dashboard :is(input,textarea,select){background:#080A10;border:1px solid #4C666E;color:#F7FAFF}
+.cyber-fashion.designer-dashboard :is(input,textarea,select,button,a):focus-visible{outline:3px solid #39FF14;outline-offset:3px}
+.cyber-fashion.designer-dashboard .dashboard-next{background:#10150F;border-left-color:#39FF14}
+.cyber-fashion.designer-dashboard #bonga-execute-matrix{background:#050507;border-color:#00FFFF66}
+.cyber-fashion.designer-dashboard #bonga-execute-matrix [data-bonga-tier][aria-pressed="true"]{background:#39FF14;border-color:#39FF14;color:#050507}
+.cyber-fashion.designer-dashboard #bonga-execute-matrix strong{color:#D4AF37}
+@media(prefers-reduced-motion:reduce){.cyber-fashion.designer-dashboard *{transition-duration:.01ms!important;animation-duration:.01ms!important}}
