@@ -15,9 +15,7 @@ export async function jarvisConnection(request,env){
  if(env.OPENAI_API_KEY)return vaultReply({error:'A hosting-managed key is active. Change it in hosting settings.'},409);
  const body=await request.text();if(body.length>4000)return vaultReply({error:'Connection request too long.'},413);let data;try{data=JSON.parse(body);}catch{return vaultReply({error:'Invalid connection request.'},400);}
  const key=typeof data.key==='string'?data.key.trim():'';if(!/^sk-[A-Za-z0-9_-]{20,350}$/.test(key))return vaultReply({error:'Enter the full OpenAI secret key, not its name or masked value.'},400);
- const check=await fetch('https://api.openai.com/v1/models',{headers:{authorization:'Bearer '+key},signal:AbortSignal.timeout(15000)});
- if(!check.ok)return vaultReply({error:check.status===401?'OpenAI rejected this key. Check the full secret value.':'OpenAI could not validate this key. Check its permissions or try again.'},check.status===401?400:502);
  const iv=crypto.getRandomValues(new Uint8Array(12)),encrypted=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:vaultAAD(env)},await vaultCipher(env),new TextEncoder().encode(key)));const encode=v=>btoa(String.fromCharCode(...v));await (env.VAULT||env.MEDIA).put(vaultObject,JSON.stringify({version:1,iv:encode(iv),ciphertext:encode(encrypted)}),{httpMetadata:{contentType:'application/json'}});
- return vaultReply({configured:true,message:'Key validated and encrypted. Ask Jarvis to check model access and account allowance.'});
+ return vaultReply({configured:true,verified:false,message:'Key saved and encrypted. Click Test AI response to verify the key, model access and account allowance.'});
  }catch{return vaultReply({error:'Could not complete the private connection. Try again; no secret value is displayed.'},503);}
 }
