@@ -1,6 +1,7 @@
 import app from '../worker/index.mjs';
 import {verifiedIdentity,trustedRequest} from './identity.mjs';
 import {dropboxStorage} from './dropbox-storage.mjs';
+import {cloudflareNavigation} from './navigation.mjs';
 const privatePage=p=>['/workspace','/workspace.html','/fashion-service.html','/digital-studio.html','/signin-with-chatgpt'].includes(p);
 export default {
   async fetch(request,env,ctx){
@@ -8,7 +9,7 @@ export default {
     const url=new URL(request.url),identity=await verifiedIdentity(request,env);
     request=trustedRequest(request,identity);
     if(privatePage(url.pathname)&&!identity)return new Response('Dashboard login needs Cloudflare Access setup. Your existing Bonga Bhengu dashboard remains available on its current website.',{status:401,headers:{'content-type':'text/plain;charset=utf-8','cache-control':'no-store'}});
-    if(url.pathname==='/signin-with-chatgpt')return Response.redirect(url.origin+'/fashion-service.html',302);
+    const navigation=cloudflareNavigation(url);if(navigation)return navigation;
     const result=await app.fetch(request,env,ctx);
     if(result.status!==404||url.pathname.startsWith('/api/')||url.pathname==='/mcp'||!['GET','HEAD'].includes(request.method))return result;
     if(url.pathname.startsWith('/server/')||url.pathname.startsWith('/.'))return result;
