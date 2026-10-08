@@ -27,6 +27,18 @@
     }
     info.append(specs);
   }
+  // Reveal the editorial cards as they enter view, including keyboard navigation.
+  for(const card of cards){
+    card.addEventListener('focusin',()=>card.classList.remove('lookbook-motion-pending'));
+  }
+  const collectionGrid=document.querySelector('.collection-grid');
+  if(collectionGrid&&'IntersectionObserver' in window&&!reduced.matches){
+    const detailObserver=new IntersectionObserver(entries=>{
+      for(const entry of entries){if(entry.isIntersecting){entry.target.classList.add('bonga-in-view');detailObserver.unobserve(entry.target);}}
+    },{threshold:.12});
+    for(const card of cards)detailObserver.observe(card);
+    reduced.addEventListener?.('change',()=>{if(reduced.matches){detailObserver.disconnect();cards.forEach(card=>card.classList.add('bonga-in-view'));}});
+  }else cards.forEach(card=>card.classList.add('bonga-in-view'));
   const video=document.getElementById('workspace-ad-video'),button=document.getElementById('workspace-ad-toggle');if(!video||!button)return;
   let visible=false,manualPaused=reduced.matches,autoPausing=false;const pauseAuto=()=>{if(!video.paused){autoPausing=true;video.pause();}};
   const play=()=>{if(visible&&!document.hidden&&!manualPaused)video.play().catch(()=>{});};
