@@ -168,3 +168,26 @@ reviewDetails.open=false;for(const fn of reviewDetails.listeners.toggle)await fn
 let reviewAttempts=0;reviewContext.fetch=async()=>{reviewAttempts++;if(reviewAttempts===1)throw Error('Offline');return {ok:true,json:async()=>({files:[]})};};
 const retryDetails=reviewElement('details');reviewContext.window.addStudioMediaReview(retryDetails,reviewJob,()=>{});retryDetails.open=true;for(const fn of retryDetails.listeners.toggle)await fn();assert.equal(retryDetails.children[0].textContent,'Offline');for(const fn of retryDetails.listeners.toggle)await fn();assert.equal(reviewAttempts,2);
 console.log('PASS private media review: lazy previews, safe names, missing assets, original-job final selection, no autoplay, playback pause and retry.');
+
+const reviewEdits=[];reviewContext.document.dispatchEvent=event=>reviewEdits.push(event);reviewContext.CustomEvent=class{constructor(type,options){this.type=type;this.detail=options.detail;}};
+reviewPanel.children[0].children.find(x=>x.textContent==='Edit image').onclick();
+reviewPanel.children[1].children.find(x=>x.textContent==='Trim video').onclick();
+assert.equal(reviewEdits[0].type,'media-edit-image');assert.equal(reviewEdits[0].detail.studioJobId,'original');assert.equal(reviewEdits[0].detail.url,'/api/designer/media/image%2F1');
+assert.equal(reviewEdits[1].type,'media-edit-video');assert.equal(reviewEdits[1].detail.studioJobId,'original');assert.equal(previewVideo.paused,true);
+reviewContext.fetch=async()=>({ok:true,json:async()=>({files:[{id:'video',name:'Film.webm',content_type:'video/webm'}]})});
+const archivedReview=reviewElement('details');reviewContext.window.addStudioMediaReview(archivedReview,{...reviewJob,archived:true},()=>{});archivedReview.open=true;for(const fn of archivedReview.listeners.toggle)await fn();
+assert.equal(archivedReview.children[0].children[1].children.some(x=>x.textContent==='Trim video'),false);
+console.log('PASS review-to-editor handoff: original project, canonical private media URLs, paused playback and no archive editing.');
+
+const imageEditorElements={};for(const id of ['image-edit-dialog','image-edit-canvas','image-edit-status','image-edit-zoom','image-edit-ratio','image-edit-rotate','image-edit-close','image-edit-save','studio-media-status'])imageEditorElements[id]={};
+imageEditorElements['image-edit-dialog'].showModal=function(){this.open=true;};imageEditorElements['image-edit-dialog'].close=function(){this.open=false;};
+imageEditorElements['image-edit-canvas'].getContext=()=>({fillRect(){},translate(){},scale(){},rotate(){},drawImage(){}});
+const requestedImages=[],imageEditorListeners={};const imageEditorContext={window:{},document:{getElementById:id=>imageEditorElements[id],addEventListener:(name,fn)=>imageEditorListeners[name]=fn},Image:class{constructor(){this.width=100;this.height=100;requestedImages.push(this);}}};
+vm.runInNewContext(fs.readFileSync(new URL('../dist/studio-image-editor.js',import.meta.url),'utf8'),imageEditorContext);
+imageEditorListeners['media-edit-image']({detail:{name:'Original.jpg',url:'/api/designer/media/original',studioJobId:'original-job'}});
+imageEditorListeners['media-edit-image']({detail:{name:'Another.jpg',url:'/api/designer/media/another'}});assert.equal(requestedImages.length,1);
+requestedImages[0].onload();assert.equal(imageEditorElements['image-edit-dialog'].open,true);
+imageEditorListeners['media-edit-image']({detail:{name:'Another.jpg',url:'/api/designer/media/another'}});assert.equal(requestedImages.length,1);
+imageEditorElements['image-edit-close'].onclick();imageEditorListeners['media-edit-image']({detail:{name:'Another.jpg',url:'/api/designer/media/another'}});assert.equal(requestedImages.length,2);
+requestedImages[1].onerror();imageEditorListeners['media-edit-image']({detail:{name:'Retry.jpg',url:'/api/designer/media/retry'}});assert.equal(requestedImages.length,3);
+console.log('PASS image editor prevents overlapping loads and open edits, and permits retry after an image loading failure.');
