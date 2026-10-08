@@ -59,7 +59,7 @@
     nav.append(previous,count,next);
     detail.append(eyebrow,heading,description,nav,enquiry,share,shareStatus);inner.append(image,detail);dialog.append(close,inner);
     dialog.setAttribute('aria-labelledby',heading.id);document.body.append(dialog);
-    let activeCard=null,returnFocus=null;
+    let activeCard=null,returnFocus=null,restoreFocus=true;
     const visibleCards=()=>cards.filter(card=>!card.hidden&&getComputedStyle(card).display!=='none'&&getComputedStyle(card).visibility!=='hidden');
     const displayCard=card=>{
       const art=card?.querySelector('figure img');if(!art)return;
@@ -81,16 +81,16 @@
     const hide=()=>{if(dialog.open)dialog.close();};
     close.addEventListener('click',hide);
     dialog.addEventListener('click',event=>{if(event.target===dialog)hide();});
-    dialog.addEventListener('close',()=>{image.removeAttribute('src');if(returnFocus?.isConnected)returnFocus.focus();});
+    dialog.addEventListener('close',()=>{image.removeAttribute('src');if(restoreFocus&&returnFocus?.isConnected)returnFocus.focus();restoreFocus=true;});
     enquiry.addEventListener('click',()=>{
       const action=activeCard?.querySelector('.collection-enquire');
-      hide();
+      restoreFocus=false;hide();
       if(action){action.click();const form=document.querySelector('#brief-form');if(form&&!form.hidden){const first=form.querySelector('input:not([type=hidden]),textarea,select');first?.focus({preventScroll:true});}}
     });
     for(const card of cards){
       const art=card.querySelector('figure img');if(!art)continue;
       const open=document.createElement('button');open.type='button';open.className='bonga-look-preview';open.textContent='View design details';
-      open.addEventListener('click',()=>{returnFocus=open;displayCard(card);if(typeof dialog.showModal==='function')dialog.showModal();});
+      open.addEventListener('click',()=>{restoreFocus=true;returnFocus=open;displayCard(card);if(typeof dialog.showModal==='function')dialog.showModal();});
       const info=card.querySelector('.collection-card-info');if(info)info.append(open);
     }
     // Restore the correct filter for shared design URLs instead of forcing a hidden card visible.
