@@ -156,3 +156,12 @@ body.cyber-fashion .virtual-atelier .atelier-label::after{content:'';display:blo
 body.cyber-fashion :is(button,.button,.gold-button){transition:background-color .2s ease,border-color .2s ease,color .2s ease,box-shadow .2s ease}
 body.cyber-fashion #bonga-execute-matrix #bonga-tier-content{animation:bonga-lux-reveal .3s ease-out both}
 @media(prefers-reduced-motion:reduce){body.cyber-fashion :is(.dashboard-overview,.virtual-atelier,.hero,.virtual-atelier .atelier-label::after,#bonga-execute-matrix #bonga-tier-content){animation:none!important}body.cyber-fashion :is(.dashboard-metrics article,.dashboard-actions a,.package-grid article,.studio-offers article,.camera-card):hover{transform:none!important}}
+
+/* Luxury lookbook: interactive specification lines, no fictitious material claims. */
+.cyber-fashion .bonga-spec-list{display:grid;gap:0;width:100%;margin-top:16px;padding-top:8px;border-top:1px solid rgba(200,169,107,.22)}
+.cyber-fashion .bonga-spec-row{position:relative;display:grid;grid-template-columns:minmax(85px,1fr) minmax(0,2fr);gap:12px;align-items:center;padding:11px 10px;color:#C5C9CD;border-bottom:1px solid rgba(200,169,107,.12);font-size:clamp(10px,.9vw,12px);line-height:1.5;transition:color .2s ease,background-color .2s ease}
+.cyber-fashion .bonga-spec-row span:first-child{color:#D6B77B;letter-spacing:.12em;font-size:.85em}
+.cyber-fashion .bonga-spec-row::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:1px;background:#C8A96B;transform:scaleX(0);transform-origin:left;transition:transform .32s cubic-bezier(.2,.7,.2,1)}
+@media(hover:hover){.cyber-fashion .bonga-spec-row:hover{background:rgba(200,169,107,.1);color:#F6F3EC}.cyber-fashion .bonga-spec-row:hover::after{transform:scaleX(1)}}
+@media(max-width:600px){.cyber-fashion .bonga-spec-row{grid-template-columns:1fr;gap:3px}}
+@media(prefers-reduced-motion:reduce){.cyber-fashion .bonga-spec-row,.cyber-fashion .bonga-spec-row::after{transition:none!important}}
