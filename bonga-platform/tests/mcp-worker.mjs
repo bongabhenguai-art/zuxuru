@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import worker from '../dist/server/index.js';
 const original=globalThis.Function;
-globalThis.Function=function(){throw new Error('Dynamic compilation disabled like Workers');};
+globalThis.Function=new Proxy(original,{construct(){throw new Error('Dynamic compilation disabled like Workers');},apply(){throw new Error('Dynamic compilation disabled like Workers');}});
 try{
   const request=(method,params={})=>new Request('https://test/mcp',{method:'POST',headers:{'content-type':'application/json',accept:'application/json, text/event-stream'},body:JSON.stringify({jsonrpc:'2.0',id:1,method,params})});
   const init=await worker.fetch(request('initialize',{protocolVersion:'2025-11-25',capabilities:{},clientInfo:{name:'test',version:'1'}}),{});
