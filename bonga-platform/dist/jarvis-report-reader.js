@@ -1,4 +1,4 @@
-(()=>{const input=document.getElementById('jarvis-report-file');if(!input)return;const text=document.getElementById('jarvis-report-text'),status=document.getElementById('jarvis-report-status');let generation=0;const sourceList=document.getElementById('jarvis-report-sources'),sourceCount=document.getElementById('jarvis-report-source-count');
+(()=>{const input=document.getElementById('jarvis-report-file');if(!input)return;const text=document.getElementById('jarvis-report-text'),status=document.getElementById('jarvis-report-status');let generation=0;let reportComparison=null;const sourceList=document.getElementById('jarvis-report-sources'),sourceCount=document.getElementById('jarvis-report-source-count');
 const prepareTask=(area,title,deliverable)=>{
   const form=document.getElementById('designer-task-form');
   if(!form){status.textContent='Daily work is unavailable. Refresh the dashboard.';return;}
@@ -13,6 +13,7 @@ const showDigest=()=>{
   if(!digest)return;
   const value=text.value,isMorning=value.startsWith('# Bonga Bhengu morning fashion and social report');
   digest.hidden=!isMorning;if(!isMorning)return;
+  const changes=document.getElementById('jarvis-report-changes');if(changes){changes.textContent=reportComparison?'Compared with the report delivered '+new Date(reportComparison.previous_created_at).toLocaleString('en-ZA',{timeZone:'Africa/Johannesburg'})+' (South Africa): '+reportComparison.new_links.length+' newly collected links; '+reportComparison.current_count+' links now, '+reportComparison.previous_count+' before. '+reportComparison.coverage_changes.map(x=>x.source+': '+x.before+' → '+x.now).join('; ')+' This compares collected snapshots, not sales or overall social popularity.':'No earlier saved morning report is available for comparison.';}
   if(coverage){
     coverage.replaceChildren();
     const section=value.match(/## Collection status\s+([\s\S]*?)(?=\n## |$)/)?.[1]||'';
@@ -48,7 +49,7 @@ const showSources=()=>{
       const url=new URL(line.slice(8).trim());
       if(url.protocol!=='https:'||url.username||url.password||seen.has(url.href)||count>=30)continue;
       seen.add(url.href);const item=document.createElement('li'),link=document.createElement('a');
-      link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';link.textContent=(title||'Open source')+' · '+url.hostname;item.append(link);
+      link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';link.textContent=(reportComparison?.new_links.includes(url.href)?'NEW · ':'')+(title||'Open source')+' · '+url.hostname;item.append(link);
       const area=document.createElement('select');area.setAttribute('aria-label','Work area for '+(title||'this source'));
       for(const [value,label] of [['marketing','Marketing & social'],['branding','Brand identity'],['products','Fashion product discovery'],['visibility','Visibility & SEO'],['opportunities','Opportunity review']]){const option=document.createElement('option');option.value=value;option.textContent=label;area.append(option);}
       area.value='marketing';const sourceTitle=title||'Public fashion source',sourceUrl=url.href;
@@ -63,7 +64,7 @@ const showSources=()=>{
   }
   if(sourceCount)sourceCount.textContent=count?count+' source links from this report. Check each source before acting.':'No source links in this report yet.';
 };
-text.addEventListener('input',showSources);
+text.addEventListener('input',()=>{reportComparison=null;showSources();});
 const runLink=document.getElementById('jarvis-report-run');const resetRun=()=>{if(runLink){runLink.hidden=true;runLink.removeAttribute('href');}};const cloud=document.getElementById('jarvis-load-cloud-report');const history=document.getElementById('jarvis-cloud-history'),openHistory=document.getElementById('jarvis-open-cloud-history');
 const morning=document.getElementById('jarvis-load-morning-report');let currentKind='';
 const openCloud=async(id='',kind='')=>{
@@ -75,14 +76,14 @@ const openCloud=async(id='',kind='')=>{
     if(!r.ok)throw Error(d.error||'Cloud report unavailable');if(attempt!==generation)return;currentKind=kind;
     if(history){history.replaceChildren();for(const entry of d.history||[]){const option=document.createElement('option');option.value=entry.id;option.textContent=new Date(entry.created_at).toLocaleString()+' · Run '+entry.run_id;history.append(option);}if(d.report?.id)history.value=d.report.id;}
     if(!d.report){status.textContent='No matching report received yet. Run the morning report or a task in GitHub first.';return;}
-    stopVoice();text.value=d.report.report;showSources();resetRun();if(runLink&&/^\d+$/.test(String(d.report.run_id))){runLink.href='https://github.com/bongabhenguai-art/zuxuru/actions/runs/'+d.report.run_id;runLink.hidden=false;}const received=new Date(d.report.created_at),day=date=>new Intl.DateTimeFormat('en-ZA',{timeZone:'Africa/Johannesburg',year:'numeric',month:'2-digit',day:'2-digit'}).format(date);const freshness=Number.isNaN(received.getTime())?'Date unavailable':day(received)===day(new Date())?'Received today':'Older report — not today’s update';status.textContent=freshness+'. Received '+received.toLocaleString('en-ZA',{timeZone:'Africa/Johannesburg'})+' (South Africa). Review its claims before acting.';
+    stopVoice();reportComparison=d.comparison||null;text.value=d.report.report;showSources();resetRun();if(runLink&&/^\d+$/.test(String(d.report.run_id))){runLink.href='https://github.com/bongabhenguai-art/zuxuru/actions/runs/'+d.report.run_id;runLink.hidden=false;}const received=new Date(d.report.created_at),day=date=>new Intl.DateTimeFormat('en-ZA',{timeZone:'Africa/Johannesburg',year:'numeric',month:'2-digit',day:'2-digit'}).format(date);const freshness=Number.isNaN(received.getTime())?'Date unavailable':day(received)===day(new Date())?'Received today':'Older report — not today’s update';status.textContent=freshness+'. Received '+received.toLocaleString('en-ZA',{timeZone:'Africa/Johannesburg'})+' (South Africa). Review its claims before acting.';
   }catch(e){if(attempt===generation)status.textContent=e.message||'Cloud report unavailable';}
   finally{cloud.disabled=false;if(morning)morning.disabled=false;if(openHistory)openHistory.disabled=!history?.value;}
 };
 if(cloud)cloud.onclick=()=>openCloud();
 if(morning)morning.onclick=()=>openCloud('','morning');
 if(openHistory)openHistory.onclick=()=>{if(history.value)openCloud(history.value,currentKind);};
-input.onchange=async()=>{const attempt=++generation;try{const file=input.files[0];if(!file)return;if(file.size>200000||!/^.*\.(md|txt)$/i.test(file.name))throw Error('Choose a Markdown or text report under 200 KB. Extract the GitHub ZIP first.');const value=await file.text();if(attempt!==generation)return;if(!value.trim()||value.includes('\u0000'))throw Error('This report is empty or is not a text file.');stopVoice();text.value=value.slice(0,40000);showSources();resetRun();status.textContent='Opened '+file.name+' on this device. Review dates and proof links; importing does not verify the claims.';}catch(e){if(attempt===generation)status.textContent=e.message;}finally{input.value='';}};
+input.onchange=async()=>{const attempt=++generation;try{const file=input.files[0];if(!file)return;if(file.size>200000||!/^.*\.(md|txt)$/i.test(file.name))throw Error('Choose a Markdown or text report under 200 KB. Extract the GitHub ZIP first.');const value=await file.text();if(attempt!==generation)return;if(!value.trim()||value.includes('\u0000'))throw Error('This report is empty or is not a text file.');stopVoice();reportComparison=null;text.value=value.slice(0,40000);showSources();resetRun();status.textContent='Opened '+file.name+' on this device. Review dates and proof links; importing does not verify the claims.';}catch(e){if(attempt===generation)status.textContent=e.message;}finally{input.value='';}};
 const download=document.getElementById('jarvis-report-download');
 if(download)download.onclick=()=>{
   if(!text.value.trim()){status.textContent='Open or paste a report first.';return;}

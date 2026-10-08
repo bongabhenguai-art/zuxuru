@@ -3,6 +3,17 @@ const issuer='https://token.actions.githubusercontent.com';
 const keys=createRemoteJWKSet(new URL(issuer+'/.well-known/jwks'));
 const repository='bongabhenguai-art/zuxuru';
 const workflow=repository+'/.github/workflows/jarvis-open-source.yml@refs/heads/main';
+export function compareReports(current,previous){
+  if(!previous)return null;
+  const links=value=>new Set((value.match(/^Source: https:\/\/\S+/gm)||[]).map(line=>line.slice(8).trim()));
+  const currentLinks=links(current.report),oldLinks=links(previous.report);
+  const coverage=value=>{
+    const block=value.match(/## Collection status\s+([\s\S]*?)(?=\n## |$)/)?.[1]||'';
+    const results={};for(const line of block.split('\n')){const match=line.match(/^- (.+?): (Fetched|Unavailable)/);if(match)results[match[1]]=match[2];}return results;
+  };
+  const now=coverage(current.report),before=coverage(previous.report);
+  return {previous_created_at:previous.created_at,new_links:[...currentLinks].filter(link=>!oldLinks.has(link)),current_count:currentLinks.size,previous_count:oldLinks.size,coverage_changes:Object.keys(now).filter(key=>before[key]&&now[key]!==before[key]).map(key=>({source:key,before:before[key],now:now[key]}))};
+}
 export async function cloudReports(request,env,verify=jwtVerify){
   const reply=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:{'content-type':'application/json','cache-control':'no-store'}});
   if(request.method==='GET'){
@@ -17,7 +28,12 @@ export async function cloudReports(request,env,verify=jwtVerify){
         : await env.DB.prepare('SELECT id,report,run_id,created_at FROM jarvis_cloud_reports WHERE owner_email = ?'+filter+' ORDER BY created_at DESC LIMIT 1').bind(owner).first();
       const history=await env.DB.prepare('SELECT id,run_id,created_at FROM jarvis_cloud_reports WHERE owner_email = ?'+filter+' ORDER BY created_at DESC LIMIT 10').bind(owner).all();
       if(id&&!report)return reply({error:'Report not found in your workspace.'},404);
-      return reply({report:report||null,history:history.results||[]});
+      let comparison=null;
+      if(report?.report.startsWith('# Bonga Bhengu morning fashion and social report')){
+        const previous=await env.DB.prepare("SELECT report,created_at FROM jarvis_cloud_reports WHERE owner_email = ? AND report LIKE '# Bonga Bhengu morning fashion and social report%' AND created_at < ? ORDER BY created_at DESC LIMIT 1").bind(owner,report.created_at).first();
+        comparison=compareReports(report,previous);
+      }
+      return reply({report:report||null,history:history.results||[],comparison});
     }catch{return reply({error:'Cloud report storage unavailable.'},503);}
   }
   if(request.method!=='POST')return reply({error:'Method not allowed'},405);
