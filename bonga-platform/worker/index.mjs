@@ -1,3 +1,4 @@
+import {studioAnalytics,summarizeStudio} from './studio-analytics.mjs';
 import {studioJobs,routeStudioTasks} from './studio-jobs.mjs';
 import {systemEngine} from './system-engine.mjs';
 import {studioCampaigns,validateCampaign} from './studio-campaigns.mjs';
@@ -20,6 +21,7 @@ export default {
   async fetch(request,env){
     const url=new URL(request.url);
     if(url.pathname==='/api/system/run')return systemEngine(request,env);
+    if(url.pathname==='/api/studio/analytics')return studioAnalytics(request,env);
     if(url.pathname==='/api/studio/jobs')return studioJobs(request,env);
     if(url.pathname.startsWith('/api/studio/campaigns'))return studioCampaigns(request,env);
     if(['/api/public/status','/api/public/packages','/api/designer/package'].includes(url.pathname))return landingSystem(request,env);
