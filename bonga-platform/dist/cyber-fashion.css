@@ -104,3 +104,25 @@ body.cyber-fashion.designer-dashboard{--cyber-black:#050507;--cyber-white:#F7FAF
 .cyber-fashion.designer-dashboard #bonga-execute-matrix [data-bonga-tier][aria-pressed="true"]{background:#39FF14;border-color:#39FF14;color:#050507}
 .cyber-fashion.designer-dashboard #bonga-execute-matrix strong{color:#D4AF37}
 @media(prefers-reduced-motion:reduce){.cyber-fashion.designer-dashboard *{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+
+/* Bonga Bhengu premium corporate identity: understated luxury, not neon UI. */
+body.cyber-fashion.designer-dashboard{--cyber-black:#090B0E;--cyber-white:#F6F3EC;--cyber-cyan:#C8A96B;--cyber-green:#C8A96B;--cyber-gold:#C8A96B;--cyber-pink:#C8A96B;--cyber-line:rgba(200,169,107,.20);background:#090B0E;color:#F6F3EC;letter-spacing:.005em}
+.cyber-fashion.designer-dashboard :is(.designer-sidebar,.dashboard-metrics article,.dashboard-actions a,.record,.designer-content>section,#bonga-execute-matrix){background:#11151A;border:1px solid rgba(200,169,107,.17);border-radius:10px;box-shadow:0 12px 38px rgba(0,0,0,.13)}
+.cyber-fashion.designer-dashboard .designer-sidebar{background:#0D1014;border-right:1px solid #35302A;border-radius:0;box-shadow:none}
+.cyber-fashion.designer-dashboard :is(h1,h2,h3){color:#F6F3EC;letter-spacing:-.025em}
+.cyber-fashion.designer-dashboard h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;line-height:1.12}
+.cyber-fashion.designer-dashboard :is(p,label,.dashboard-metrics span){color:#B9BEC5}
+.cyber-fashion.designer-dashboard :is(a,.eyebrow,summary,.dashboard-metrics strong){color:#D6B77B}
+.cyber-fashion.designer-dashboard .designer-sidebar nav a{color:#C9CDD1;border-radius:6px}
+.cyber-fashion.designer-dashboard .designer-sidebar nav a:hover,.cyber-fashion.designer-dashboard .designer-sidebar nav a.active{background:#24221F;color:#F6F3EC;border-left:2px solid #C8A96B}
+.cyber-fashion.designer-dashboard :is(button,.button){background:#C8A96B;color:#11151A;border:1px solid #C8A96B;border-radius:5px;box-shadow:none;font-weight:700;letter-spacing:.035em}
+.cyber-fashion.designer-dashboard :is(button,.button):hover{background:#E4CB99;border-color:#E4CB99;color:#090B0E;box-shadow:0 5px 18px rgba(200,169,107,.12)}
+.cyber-fashion.designer-dashboard :is(input,textarea,select){background:#0B0F14;color:#F6F3EC;border:1px solid #4B5058;border-radius:5px}
+.cyber-fashion.designer-dashboard :is(input,textarea,select,button,a):focus-visible{outline:2px solid #E4CB99;outline-offset:3px}
+.cyber-fashion.designer-dashboard .dashboard-next{background:#1A1B1C;border-left:3px solid #C8A96B}
+.cyber-fashion.designer-dashboard #bonga-execute-matrix{background:#11151A!important;border:1px solid #6E5D40!important}
+.cyber-fashion.designer-dashboard #bonga-execute-matrix>p{color:#D6B77B!important}
+.cyber-fashion.designer-dashboard #bonga-execute-matrix [data-bonga-tier][aria-pressed="true"]{background:#E4CB99;border-color:#E4CB99;color:#090B0E}
+.cyber-fashion.designer-dashboard #bonga-execute-matrix strong{color:#D6B77B!important}
+.cyber-fashion.designer-dashboard .dashboard-actions a:hover{border-color:#C8A96B;transform:translateY(-1px)}
+@media(max-width:650px){.cyber-fashion.designer-dashboard .designer-content{padding:16px}.cyber-fashion.designer-dashboard #bonga-execute-matrix{padding:16px!important}}
