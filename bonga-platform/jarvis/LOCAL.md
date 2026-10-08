@@ -4,7 +4,7 @@ The SAME local_runner.py, model and task instructions run on either machine. Thi
 
 ## Cloud
 
-Open https://github.com/bongabhenguai-art/zuxuru/actions/workflows/jarvis-open-source.yml . Select Run workflow, leave execution=cloud, enter a task, then start. A temporary Ubuntu runner installs Ollama and runs the small model. Download the jarvis-local-report artifact after the job completes. Standard public runners are free subject to GitHub limits; private-repository usage depends on included allowances.
+Open https://github.com/bongabhenguai-art/zuxuru/actions/workflows/jarvis-open-source.yml . Select Run workflow, leave execution=cloud, enter a task, then start. A temporary Ubuntu runner installs Ollama and runs the small model. After the job completes, open the private Bonga Bhengu dashboard and click Open latest cloud report. The downloadable artifact remains available as a fallback. Standard public runners are free subject to GitHub limits; private-repository usage depends on included allowances.
 
 ## Laptop, standalone
 
@@ -16,6 +16,6 @@ Register a self-hosted Windows runner for this repository through Settings > Act
 
 ## Shared dashboard handoff
 
-Both options write the same Markdown report format. Open the report in the dashboard's existing downloaded-report reader, review a finding, then add it to daily work. Automatic cloud/local switching and direct live-chat connection are not implemented. Current-trend research, external publishing and customer outreach are not performed by this offline model. Neither mode runs as a permanent public server.
+GitHub workflow jobs deliver their Markdown report to the owner's private dashboard using a signed, short-lived GitHub job identity. No copied GitHub token is required. Click Open latest cloud report, review a finding, then add it to daily work. Standalone laptop runs can still use the downloaded-report reader. Automatic cloud/local switching and direct live-chat connection are not implemented. Current-trend research, external publishing and customer outreach are not performed by this offline model. Neither mode runs as a permanent public server.
 
-First actual inference on each execution target still needs verification. Unit checks cover local requests and response validation, not model installation or hardware speed.
+Cloud installation, model inference and private report delivery passed an actual GitHub Actions run. Laptop inference remains unverified on the owner's physical device.
