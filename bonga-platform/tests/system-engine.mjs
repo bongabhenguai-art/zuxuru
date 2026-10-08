@@ -152,3 +152,19 @@ assert.equal(progressPosts[0].id,'original-job');assert.equal(progressPosts[0].r
 await progressContext.change({action:'measure',views:1},{id:'measurement-job',revision:8});
 assert.equal(progressPosts[1].id,'measurement-job');assert.equal(progressPosts[1].revision,8);
 console.log('PASS delayed edits and results keep their original job and revision without changing the current selection.');
+
+const reviewElement=tag=>({tag,children:[],listeners:{},append(...items){this.children.push(...items);},replaceChildren(){this.children=[];this.textContent='';},addEventListener(name,fn){(this.listeners[name]??=[]).push(fn);},querySelectorAll(){return this.children.flatMap(c=>[...(['video','audio'].includes(c.tag)?[c]:[]),...c.querySelectorAll()]);},pause(){this.paused=true;}});
+const reviewContext={window:{},document:{createElement:reviewElement},fetch:async url=>{assert.equal(url,'/api/designer/media');return {ok:true,json:async()=>({files:[{id:'image/1',name:'<b>Actual image</b>',content_type:'image/jpeg'},{id:'video',name:'Film.webm',content_type:'video/webm'},{id:'audio',name:'Podcast.webm',content_type:'audio/webm'}]})};},encodeURIComponent};
+vm.runInNewContext(fs.readFileSync(new URL('../dist/studio-review.js',import.meta.url),'utf8'),reviewContext);
+const reviewDetails=reviewElement('details');const finalSelections=[];const reviewJob={id:'original',revision:3,mediaIds:['image/1','video','audio','deleted'],finalMediaId:'video'};
+reviewContext.window.addStudioMediaReview(reviewDetails,reviewJob,(id,target)=>finalSelections.push({id,target}));
+const reviewPanel=reviewDetails.children[0];assert.equal(reviewPanel.children.length,0);reviewDetails.open=true;for(const fn of reviewDetails.listeners.toggle)await fn();
+assert.equal(reviewPanel.children.length,4);assert.equal(reviewPanel.children[0].children[0].textContent,'<b>Actual image</b>');
+assert.equal(reviewPanel.children[0].children[1].src,'/api/designer/media/image%2F1');
+const previewVideo=reviewPanel.children[1].children[1];assert.equal(previewVideo.controls,true);assert.equal(previewVideo.preload,'metadata');assert.equal(previewVideo.autoplay,undefined);
+assert.equal(reviewPanel.children[1].children.at(-1).disabled,true);assert.equal(reviewPanel.children[2].children.at(-1).tag,'a');
+reviewPanel.children[0].children.at(-1).onclick();assert.equal(finalSelections[0].target.id,'original');assert.equal(finalSelections[0].target.revision,3);
+reviewDetails.open=false;for(const fn of reviewDetails.listeners.toggle)await fn();assert.equal(previewVideo.paused,true);
+let reviewAttempts=0;reviewContext.fetch=async()=>{reviewAttempts++;if(reviewAttempts===1)throw Error('Offline');return {ok:true,json:async()=>({files:[]})};};
+const retryDetails=reviewElement('details');reviewContext.window.addStudioMediaReview(retryDetails,reviewJob,()=>{});retryDetails.open=true;for(const fn of retryDetails.listeners.toggle)await fn();assert.equal(retryDetails.children[0].textContent,'Offline');for(const fn of retryDetails.listeners.toggle)await fn();assert.equal(reviewAttempts,2);
+console.log('PASS private media review: lazy previews, safe names, missing assets, original-job final selection, no autoplay, playback pause and retry.');

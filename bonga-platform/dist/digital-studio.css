@@ -7,3 +7,5 @@
 dialog{background:#141a20;color:#fff;border:1px solid #657783;border-radius:18px;width:min(600px,90vw)}dialog textarea{width:100%;min-height:120px}dialog::backdrop{background:#000b}
 
 .studio-camera-qr{display:inline-block;background:white;padding:12px;border-radius:8px;margin:12px 0}.studio-camera-qr img,.studio-camera-qr canvas{width:192px!important;height:192px!important;max-height:none!important}.studio-camera-qr:empty{display:none}
+
+#job-actions>details{width:100%}.studio-media-review{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:16px;margin:16px 0}.studio-media-card{padding:16px;background:#101419;border:1px solid #39444f;border-radius:12px;overflow:hidden}.studio-media-card h3{overflow-wrap:anywhere;font-size:1rem}.studio-media-card img,.studio-media-card video{display:block;width:100%;height:240px;object-fit:contain;background:#08090b;border-radius:8px;margin-bottom:12px}.studio-media-card audio{display:block;width:100%;margin-bottom:12px}.studio-media-card a{display:block;margin-bottom:10px}
