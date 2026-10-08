@@ -45,7 +45,7 @@ form.addEventListener('submit', event => {
   document.querySelector('#brief-text').textContent = currentBrief;
   document.querySelector('#email-brief').href = 'mailto:bongabhengu@yahoo.com?subject=' + encodeURIComponent('Project brief — ' + name) + '&body=' + encodeURIComponent(currentBrief);
   document.querySelector('#whatsapp-brief').href = 'https://wa.me/?text=' + encodeURIComponent(currentBrief);
-  form.hidden = true; result.hidden = false; status.textContent = 'Your brief is ready. Copy or download it to share with Bonga.'; document.querySelector('#brief-text').focus();
+  form.hidden = true; result.hidden = false; status.textContent = 'Your brief is ready, but it has not been sent. Select Open email draft and send the email, or share it yourself using the options below.'; document.querySelector('#brief-text').focus();
 });
 document.querySelector('#edit-brief').addEventListener('click',()=>editBrief(true));
 document.querySelector('#copy-brief').addEventListener('click',async()=>{ try { await navigator.clipboard.writeText(currentBrief); status.textContent='Brief copied. You can paste it into your message.'; } catch { const selection = window.getSelection(); const range = document.createRange(); range.selectNodeContents(document.querySelector('#brief-text')); selection.removeAllRanges(); selection.addRange(range); status.textContent='Your browser could not copy automatically. The brief is selected; use Copy.'; } });
