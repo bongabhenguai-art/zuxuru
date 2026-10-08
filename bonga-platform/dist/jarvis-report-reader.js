@@ -82,6 +82,15 @@ const openCloud=async(id='',kind='')=>{
 };
 if(cloud)cloud.onclick=()=>openCloud();
 if(morning)morning.onclick=()=>openCloud('','morning');
+const startDay=async()=>{
+  if(cloud?.disabled)return;
+  const panel=document.getElementById('jarvis-morning-report');if(panel){panel.open=true;panel.scrollIntoView({behavior:'auto',block:'start'});}
+  await openCloud('','morning');
+};
+const startDayButton=document.getElementById('jarvis-start-my-day');if(startDayButton)startDayButton.onclick=startDay;
+const openMorningLink=()=>{if(location.hash==='#jarvis-morning-report')startDay();};
+window.addEventListener('hashchange',openMorningLink);openMorningLink();
+
 if(openHistory)openHistory.onclick=()=>{if(history.value)openCloud(history.value,currentKind);};
 input.onchange=async()=>{const attempt=++generation;try{const file=input.files[0];if(!file)return;if(file.size>200000||!/^.*\.(md|txt)$/i.test(file.name))throw Error('Choose a Markdown or text report under 200 KB. Extract the GitHub ZIP first.');const value=await file.text();if(attempt!==generation)return;if(!value.trim()||value.includes('\u0000'))throw Error('This report is empty or is not a text file.');stopVoice();reportComparison=null;text.value=value.slice(0,40000);showSources();resetRun();status.textContent='Opened '+file.name+' on this device. Review dates and proof links; importing does not verify the claims.';}catch(e){if(attempt===generation)status.textContent=e.message;}finally{input.value='';}};
 const download=document.getElementById('jarvis-report-download');
