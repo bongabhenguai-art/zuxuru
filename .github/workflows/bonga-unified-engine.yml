@@ -20,6 +20,8 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24'
+      - name: Install pinned application dependencies
+        run: npm ci
       - name: Verify shared engine and Studio workflow on SQLite
         run: node tests/system-engine.mjs
       - name: Verify five camera signaling and company storage
@@ -28,5 +30,7 @@ jobs:
         run: node tests/designer-engine.mjs
       - name: Build complete hosted application
         run: node scripts/build-ai.mjs
+      - name: Verify bundled remote MCP on Worker restrictions
+        run: node tests/mcp-worker.mjs
       - name: Verify Worker entrypoint
         run: node --check dist/server/index.js

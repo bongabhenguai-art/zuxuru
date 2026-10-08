@@ -23,3 +23,27 @@ const vm=await import('node:vm');const attachmentSource=fs.readFileSync(new URL(
 const {studioZip,crc32}=await import('../dist/studio-zip.js');assert.equal(crc32(new TextEncoder().encode('123456789')),0xcbf43926);assert.throws(()=>studioZip([{name:'../private',data:'x'}]));const archive=studioZip([{name:'brief.json',data:'{"title":"Bonga"}'},{name:'media/sample.bin',data:new Uint8Array([0,1,2,255])}]);const {tmpdir}=await import('node:os'),{join}=await import('node:path'),{spawnSync}=await import('node:child_process');const testDir=fs.mkdtempSync(join(tmpdir(),'bonga-zip-'));try{const archivePath=join(testDir,'package.zip');fs.writeFileSync(archivePath,new Uint8Array(await archive.arrayBuffer()));const verified=spawnSync('python3',['-c','import sys,zipfile,json;z=zipfile.ZipFile(sys.argv[1]);assert z.testzip() is None;assert json.loads(z.read("brief.json"))["title"]=="Bonga";assert z.read("media/sample.bin")==bytes([0,1,2,255])',archivePath],{encoding:'utf8'});assert.equal(verified.status,0,verified.stderr);}finally{fs.rmSync(testDir,{recursive:true});}console.log('PASS project ZIP export read independently by Python zipfile, CRC validation and path safety.');
 
 const finalJob=(await (await studioJobs(studioReq(),{DB})).json()).jobs.find(j=>j.id===job.id);assert.equal((await studioJobs(studioReq({action:'final-media',id:job.id,revision:finalJob.revision,mediaId:'asset'}),{DB})).status,200);const selectedFinal=(await (await studioJobs(studioReq(),{DB})).json()).jobs.find(j=>j.id===job.id);assert.equal(selectedFinal.finalMediaId,'asset');assert.equal(selectedFinal.stage,'Review');assert(selectedFinal.campaignNeedsReview);console.log('PASS final campaign asset selection and review reset after approved-media changes.');
+// Remote MCP operates the same D1 records as the signed-in dashboard.
+const {businessMcp}=await import('../worker/business-mcp.mjs');
+const mcpRequest=(method,params={},user='alice',origin)=>new Request('https://test/mcp',{method:'POST',headers:{'content-type':'application/json',accept:'application/json, text/event-stream',...(user?{'oai-authenticated-user-id':user}:{}),...(origin?{origin}:{})},body:JSON.stringify({jsonrpc:'2.0',id:1,method,params})});
+let mcpResult=await (await businessMcp(mcpRequest('initialize',{protocolVersion:'2025-11-25',capabilities:{},clientInfo:{name:'test',version:'1'}},null),{DB})).json();
+assert.equal(mcpResult.result.serverInfo.name,'Bonga Bhengu business workspace');
+mcpResult=await (await businessMcp(mcpRequest('tools/list',{},null),{DB})).json();
+assert.equal(mcpResult.result.tools.length,3);
+assert.equal((await businessMcp(mcpRequest('tools/call',{name:'bonga_list_work',arguments:{}},null),{DB})).status,401);
+assert.equal((await businessMcp(mcpRequest('tools/call',{name:'bonga_list_work',arguments:{}},'alice','https://untrusted.example'),{DB})).status,403);
+mcpResult=await (await businessMcp(mcpRequest('tools/call',{name:'bonga_list_work',arguments:{}},'bob'),{DB})).json();
+assert.equal(mcpResult.result.structuredContent.workspaceExists,false);
+mcpResult=await (await businessMcp(mcpRequest('tools/call',{name:'bonga_list_work',arguments:{}}),{DB})).json();
+assert(mcpResult.result.structuredContent.tasks.length>=8);
+assert.equal(mcpResult.result.structuredContent.revision,sqlite.prepare('SELECT revision FROM designer_workspaces WHERE user_id=?').get('alice').revision);
+mcpResult=await (await businessMcp(mcpRequest('tools/call',{name:'bonga_assign_work',arguments:{confirm:false}}),{DB})).json();
+assert(mcpResult.result?.isError||mcpResult.error);
+sqlite.prepare('INSERT INTO designer_workspaces VALUES (?,?,?,?)').run('mcp-owner',JSON.stringify(payload),1,new Date().toISOString());
+mcpResult=await (await businessMcp(mcpRequest('tools/call',{name:'bonga_assign_work',arguments:{confirm:true}},'mcp-owner'),{DB})).json();
+assert.equal(mcpResult.result.structuredContent.added,8);
+assert.equal(mcpResult.result.structuredContent.jobsAdded,2);
+mcpResult=await (await businessMcp(mcpRequest('tools/call',{name:'bonga_list_studio_jobs',arguments:{}},'mcp-owner'),{DB})).json();
+assert.equal(mcpResult.result.structuredContent.jobs.length,2);
+assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM studio_jobs WHERE user_id=?').get('bob').n,0);
+console.log('PASS authenticated remote MCP: public discovery, private task isolation, origin rejection, shared workspace revision and real Studio handoff.');

@@ -1,3 +1,4 @@
+import {businessMcp} from './business-mcp.mjs';
 import {studioAnalytics,summarizeStudio} from './studio-analytics.mjs';
 import {studioJobs,routeStudioTasks} from './studio-jobs.mjs';
 import {systemEngine} from './system-engine.mjs';
@@ -20,6 +21,7 @@ const instructions = `You are Jarvis, Bonga Bhengu's fashion career and business
 export default {
   async fetch(request,env){
     const url=new URL(request.url);
+    if(url.pathname==='/mcp')return businessMcp(request,env);
     if(url.pathname==='/api/system/run')return systemEngine(request,env);
     if(url.pathname==='/api/studio/analytics')return studioAnalytics(request,env);
     if(url.pathname==='/api/studio/jobs')return studioJobs(request,env);
