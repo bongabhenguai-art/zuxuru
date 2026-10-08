@@ -14,12 +14,12 @@
     figure.addEventListener('pointerleave',()=>{cancelAnimationFrame(frame);frame=0;});
   }
   const video=document.getElementById('workspace-ad-video'),button=document.getElementById('workspace-ad-toggle');if(!video||!button)return;
-  let visible=false,manualPaused=reduced.matches;
+  let visible=false,manualPaused=reduced.matches,autoPausing=false;const pauseAuto=()=>{if(!video.paused){autoPausing=true;video.pause();}};
   const play=()=>{if(visible&&!document.hidden&&!manualPaused)video.play().catch(()=>{});};
   const update=()=>button.textContent=video.paused?'Play banner':'Pause banner';
-  video.addEventListener('play',update);video.addEventListener('pause',update);
-  button.addEventListener('click',()=>{if(video.paused){manualPaused=false;video.play().catch(()=>{});}else{manualPaused=true;video.pause();}});
-  if('IntersectionObserver' in window)new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible)play();else video.pause();},{threshold:.1}).observe(video);
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)video.pause();else play();});
-  reduced.addEventListener?.('change',()=>{if(reduced.matches){manualPaused=true;video.pause();}});
+  video.addEventListener('play',()=>{manualPaused=false;update();});video.addEventListener('pause',()=>{if(autoPausing)autoPausing=false;else manualPaused=true;update();});const sound=document.getElementById('workspace-ad-sound');if(sound){const soundState=()=>{const on=!video.muted&&video.volume!==0;sound.setAttribute('aria-pressed',String(on));sound.textContent=on?'Mute sound':'Turn sound on';};sound.addEventListener('click',()=>{const on=!video.muted&&video.volume!==0;video.muted=on;if(!on){if(video.volume===0)video.volume=1;manualPaused=false;video.play().catch(()=>{});}soundState();});video.addEventListener('volumechange',soundState);soundState();}
+  button.addEventListener('click',()=>{if(video.paused){manualPaused=false;video.play().catch(()=>{});}else{manualPaused=true;pauseAuto();}});
+  if('IntersectionObserver' in window)new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible)play();else pauseAuto();},{threshold:.1}).observe(video);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseAuto();else play();});
+  reduced.addEventListener?.('change',()=>{if(reduced.matches){manualPaused=true;pauseAuto();}});
 })();
