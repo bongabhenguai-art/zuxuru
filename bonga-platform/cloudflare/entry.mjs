@@ -2,9 +2,11 @@ import app from '../worker/index.mjs';
 import {verifiedIdentity,trustedRequest} from './identity.mjs';
 import {dropboxStorage} from './dropbox-storage.mjs';
 import {cloudflareNavigation} from './navigation.mjs';
+import {vaultStorage} from './vault-storage.mjs';
 const privatePage=p=>['/workspace','/workspace.html','/fashion-service.html','/digital-studio.html','/signin-with-chatgpt'].includes(p);
 export default {
   async fetch(request,env,ctx){
+    env={...env,VAULT:vaultStorage(env.DB)};
     const storage=dropboxStorage(env);if(storage)env={...env,MEDIA:storage};
     const url=new URL(request.url),identity=await verifiedIdentity(request,env);
     request=trustedRequest(request,identity);
