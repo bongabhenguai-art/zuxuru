@@ -7,7 +7,16 @@ export async function cloudReports(request,env,verify=jwtVerify){
   const reply=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:{'content-type':'application/json','cache-control':'no-store'}});
   if(request.method==='GET'){
     if(!request.headers.get('oai-authenticated-user-id')||request.headers.get('oai-authenticated-user-email')?.toLowerCase()!==env.JARVIS_OWNER_EMAIL?.toLowerCase())return reply({error:'Sign in with the website owner account.'},403);
-    try{const report=await env.DB.prepare('SELECT report,run_id,created_at FROM jarvis_cloud_reports WHERE owner_email = ? ORDER BY created_at DESC LIMIT 1').bind(env.JARVIS_OWNER_EMAIL.toLowerCase()).first();return reply({report:report||null});}catch{return reply({error:'Cloud report storage unavailable.'},503);}
+    try{
+      const owner=env.JARVIS_OWNER_EMAIL.toLowerCase(),id=new URL(request.url).searchParams.get('report');
+      if(id&&(!/^[A-Za-z0-9_-]{1,200}$/.test(id)))return reply({error:'Invalid report selection.'},400);
+      const report=id
+        ? await env.DB.prepare('SELECT id,report,run_id,created_at FROM jarvis_cloud_reports WHERE owner_email = ? AND id = ? LIMIT 1').bind(owner,id).first()
+        : await env.DB.prepare('SELECT id,report,run_id,created_at FROM jarvis_cloud_reports WHERE owner_email = ? ORDER BY created_at DESC LIMIT 1').bind(owner).first();
+      const history=await env.DB.prepare('SELECT id,run_id,created_at FROM jarvis_cloud_reports WHERE owner_email = ? ORDER BY created_at DESC LIMIT 10').bind(owner).all();
+      if(id&&!report)return reply({error:'Report not found in your workspace.'},404);
+      return reply({report:report||null,history:history.results||[]});
+    }catch{return reply({error:'Cloud report storage unavailable.'},503);}
   }
   if(request.method!=='POST')return reply({error:'Method not allowed'},405);
   const token=request.headers.get('authorization')?.match(/^Bearer ([A-Za-z0-9_.-]+)$/)?.[1];if(!token)return reply({error:'GitHub job authorization required.'},401);
