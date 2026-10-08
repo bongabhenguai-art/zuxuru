@@ -179,7 +179,7 @@ const archivedReview=reviewElement('details');reviewContext.window.addStudioMedi
 assert.equal(archivedReview.children[0].children[1].children.some(x=>x.textContent==='Trim video'),false);
 console.log('PASS review-to-editor handoff: original project, canonical private media URLs, paused playback and no archive editing.');
 
-const imageEditorElements={};for(const id of ['image-edit-dialog','image-edit-canvas','image-edit-status','image-edit-zoom','image-edit-ratio','image-edit-rotate','image-edit-close','image-edit-save','studio-media-status'])imageEditorElements[id]={};
+const imageEditorElements={};for(const id of ['image-edit-dialog','image-edit-canvas','image-edit-status','image-edit-zoom','image-edit-ratio','image-edit-rotate','image-edit-close','image-edit-save','studio-media-status'])imageEditorElements[id]={addEventListener(){}};
 imageEditorElements['image-edit-dialog'].showModal=function(){this.open=true;};imageEditorElements['image-edit-dialog'].close=function(){this.open=false;};
 imageEditorElements['image-edit-canvas'].getContext=()=>({fillRect(){},translate(){},scale(){},rotate(){},drawImage(){}});
 const requestedImages=[],imageEditorListeners={};const imageEditorContext={window:{},document:{getElementById:id=>imageEditorElements[id],addEventListener:(name,fn)=>imageEditorListeners[name]=fn},Image:class{constructor(){this.width=100;this.height=100;requestedImages.push(this);}}};
@@ -191,3 +191,15 @@ imageEditorListeners['media-edit-image']({detail:{name:'Another.jpg',url:'/api/d
 imageEditorElements['image-edit-close'].onclick();imageEditorListeners['media-edit-image']({detail:{name:'Another.jpg',url:'/api/designer/media/another'}});assert.equal(requestedImages.length,2);
 requestedImages[1].onerror();imageEditorListeners['media-edit-image']({detail:{name:'Retry.jpg',url:'/api/designer/media/retry'}});assert.equal(requestedImages.length,3);
 console.log('PASS image editor prevents overlapping loads and open edits, and permits retry after an image loading failure.');
+
+imageEditorElements['studio-media-refresh']={click(){}};
+requestedImages[2].onload();let editedUploads=0,editedExports=0;const editedAttachments=[];
+imageEditorElements['image-edit-canvas'].toBlob=callback=>{editedExports++;callback({type:'image/jpeg'});};
+imageEditorContext.fetch=async()=>{editedUploads++;return {ok:true,json:async()=>({file:{id:'edited-copy'}})};};
+imageEditorContext.encodeURIComponent=encodeURIComponent;
+imageEditorContext.window.attachStudioMedia=async(id,jobId)=>{editedAttachments.push({id,jobId});if(editedAttachments.length===1)throw Error('Temporary attachment error');};
+// Load an actual job-linked image before testing its save/retry path.
+imageEditorElements['image-edit-close'].onclick();imageEditorListeners['media-edit-image']({detail:{name:'Original.jpg',url:'/api/designer/media/original',studioJobId:'original-job'}});requestedImages[3].onload();
+await imageEditorElements['image-edit-save'].onclick();assert.equal(imageEditorElements['image-edit-dialog'].open,true);assert.equal(imageEditorElements['image-edit-save'].textContent,'Retry job attachment');assert.equal(imageEditorElements['image-edit-rotate'].disabled,true);
+await imageEditorElements['image-edit-save'].onclick();assert.equal(editedUploads,1);assert.equal(editedExports,1);assert.equal(editedAttachments.length,2);assert(editedAttachments.every(x=>x.id==='edited-copy'&&x.jobId==='original-job'));assert.equal(imageEditorElements['image-edit-dialog'].open,false);
+console.log('PASS image attachment retry reuses one exported/uploaded copy and retains the original creative job.');
