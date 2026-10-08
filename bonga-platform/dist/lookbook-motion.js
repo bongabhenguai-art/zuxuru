@@ -39,6 +39,32 @@
     for(const card of cards)detailObserver.observe(card);
     reduced.addEventListener?.('change',()=>{if(reduced.matches){detailObserver.disconnect();cards.forEach(card=>card.classList.add('bonga-in-view'));}});
   }else cards.forEach(card=>card.classList.add('bonga-in-view'));
+  // Accessible editorial preview: uses the real collection artwork and existing enquiry action.
+  if(cards.length&&typeof HTMLDialogElement!=='undefined'){
+    const dialog=document.createElement('dialog');dialog.className='bonga-look-dialog';dialog.setAttribute('aria-label','Fashion collection preview');
+    const inner=document.createElement('div');inner.className='bonga-look-dialog-inner';
+    const close=document.createElement('button');close.type='button';close.className='bonga-look-close';close.textContent='Close preview ×';
+    const image=document.createElement('img');image.className='bonga-look-image';image.alt='';
+    const detail=document.createElement('div');detail.className='bonga-look-detail';
+    const eyebrow=document.createElement('p');eyebrow.className='bonga-look-eyebrow';eyebrow.textContent='BONGA BHENGU / DESIGN EDIT';
+    const heading=document.createElement('h2');heading.id='bonga-look-title';
+    const description=document.createElement('p');
+    const enquiry=document.createElement('button');enquiry.type='button';enquiry.textContent='Enquire about this design →';
+    detail.append(eyebrow,heading,description,enquiry);inner.append(image,detail);dialog.append(close,inner);
+    dialog.setAttribute('aria-labelledby',heading.id);document.body.append(dialog);
+    let activeCard=null,returnFocus=null;
+    const hide=()=>{if(dialog.open)dialog.close();};
+    close.addEventListener('click',hide);
+    dialog.addEventListener('click',event=>{if(event.target===dialog)hide();});
+    dialog.addEventListener('close',()=>{if(returnFocus?.isConnected)returnFocus.focus();});
+    enquiry.addEventListener('click',()=>{hide();activeCard?.querySelector('.collection-enquire')?.click();});
+    for(const card of cards){
+      const art=card.querySelector('figure img');if(!art)continue;
+      const open=document.createElement('button');open.type='button';open.className='bonga-look-preview';open.textContent='View design details';
+      open.addEventListener('click',()=>{activeCard=card;returnFocus=open;image.src=art.currentSrc||art.src;image.alt=art.alt||'Fashion concept';heading.textContent=card.querySelector('h3')?.textContent||'Fashion concept';description.textContent=card.querySelector('.collection-card-info p')?.textContent||'Concept artwork';dialog.showModal();});
+      const info=card.querySelector('.collection-card-info');if(info)info.append(open);
+    }
+  }
   const video=document.getElementById('workspace-ad-video'),button=document.getElementById('workspace-ad-toggle');if(!video||!button)return;
   let visible=false,manualPaused=reduced.matches,autoPausing=false;const pauseAuto=()=>{if(!video.paused){autoPausing=true;video.pause();}};
   const play=()=>{if(visible&&!document.hidden&&!manualPaused)video.play().catch(()=>{});};
