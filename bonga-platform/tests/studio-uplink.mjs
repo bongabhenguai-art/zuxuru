@@ -1,0 +1,5 @@
+import vm from 'node:vm';import fs from 'node:fs';import assert from 'node:assert/strict';
+const elements=new Map(['[role=status]','[data-connect]','[data-disconnect]'].map(k=>[k,{disabled:false,textContent:''}]));let captured=0,calls=0;const root={querySelector:k=>elements.get(k)};
+const context={document:{getElementById:()=>root},window:{confirm:()=>true,addEventListener(){},createStudioUplink(){captured++;throw Error('must not capture')}},fetch:async()=>{calls++;return new Response(JSON.stringify({connected:false,message:'Connect server first'}));},AbortSignal,setTimeout,clearTimeout};
+vm.runInNewContext(fs.readFileSync('dist/studio-uplink.js','utf8'),context);const button=elements.get('[data-connect]');const p=button.onclick();await button.onclick();await p;assert.equal(calls,1);assert.equal(captured,0);assert.equal(button.disabled,false);assert.equal(elements.get('[role=status]').textContent,'Connect server first');assert.equal(elements.get('[data-disconnect]').disabled,true);
+console.log('PASS disconnected server blocks Programme capture; double clicks make one request and controls recover');
