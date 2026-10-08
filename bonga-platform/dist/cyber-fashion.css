@@ -126,3 +126,20 @@ body.cyber-fashion.designer-dashboard{--cyber-black:#090B0E;--cyber-white:#F6F3E
 .cyber-fashion.designer-dashboard #bonga-execute-matrix strong{color:#D6B77B!important}
 .cyber-fashion.designer-dashboard .dashboard-actions a:hover{border-color:#C8A96B;transform:translateY(-1px)}
 @media(max-width:650px){.cyber-fashion.designer-dashboard .designer-content{padding:16px}.cyber-fashion.designer-dashboard #bonga-execute-matrix{padding:16px!important}}
+
+/* Premium technology layer — shared public site and Digital Studio. */
+body.cyber-fashion:not(.designer-dashboard){--cyber-black:#090B0E;--cyber-white:#F6F3EC;--cyber-cyan:#C8A96B;--cyber-pink:#C8A96B;--cyber-line:rgba(200,169,107,.22);background:#090B0E;color:#F6F3EC}
+body.cyber-fashion:not(.designer-dashboard) :is(.hero,.collections,.services,.story,.contact,.ai-studio,.app-entry,.service-packages,.studio-main,.virtual-atelier,footer){background:#090B0E}
+body.cyber-fashion:not(.designer-dashboard) :is(.header,header){background:#0D1014;border-bottom:1px solid rgba(200,169,107,.22)}
+body.cyber-fashion:not(.designer-dashboard) :is(h1,h2,h3){color:#F6F3EC}
+body.cyber-fashion:not(.designer-dashboard) :is(.eyebrow,.atelier-label,.virtual-atelier .atelier-label){color:#D6B77B}
+body.cyber-fashion:not(.designer-dashboard) :is(.record,.camera-card,.studio-media-card,.package-grid article,.studio-offers article,.app-entry-grid a,#creative-job-panel){background:#11151A;border:1px solid rgba(200,169,107,.2);border-radius:8px}
+body.cyber-fashion:not(.designer-dashboard) :is(button,.button.primary,.gold-button,.package-grid button,.digital-banner a){background:#C8A96B;color:#090B0E;border:1px solid #C8A96B;border-radius:5px;box-shadow:none}
+body.cyber-fashion:not(.designer-dashboard) :is(button,.button.primary,.gold-button,.package-grid button,.digital-banner a):hover{background:#E4CB99;border-color:#E4CB99;color:#090B0E}
+body.cyber-fashion:not(.designer-dashboard) :is(a,button,input,select,textarea):focus-visible{outline:2px solid #E4CB99;outline-offset:3px}
+body.cyber-fashion:not(.designer-dashboard) :is(input,select,textarea){background:#0B0F14;color:#F6F3EC;border:1px solid #4B5058;border-radius:5px}
+body.cyber-fashion:not(.designer-dashboard) .virtual-atelier .atelier-grid{background-image:linear-gradient(90deg,rgba(200,169,107,.065) 1px,transparent 1px),linear-gradient(rgba(200,169,107,.065) 1px,transparent 1px)}
+body.cyber-fashion:not(.designer-dashboard) .virtual-atelier::after{background:linear-gradient(90deg,rgba(9,11,14,.08),rgba(9,11,14,.82))}
+body.cyber-fashion:not(.designer-dashboard) .operation-grid button{background:#171A20;color:#F6F3EC;border-color:rgba(200,169,107,.35)}
+body.cyber-fashion:not(.designer-dashboard) .operation-grid button:hover{background:#27251F;border-color:#C8A96B}
+@media(prefers-reduced-motion:reduce){body.cyber-fashion:not(.designer-dashboard) *{animation-duration:.01ms!important;transition-duration:.01ms!important}}
