@@ -75,14 +75,14 @@ const openCloud=async(id='',kind='')=>{
     if(!r.ok)throw Error(d.error||'Cloud report unavailable');if(attempt!==generation)return;currentKind=kind;
     if(history){history.replaceChildren();for(const entry of d.history||[]){const option=document.createElement('option');option.value=entry.id;option.textContent=new Date(entry.created_at).toLocaleString()+' · Run '+entry.run_id;history.append(option);}if(d.report?.id)history.value=d.report.id;}
     if(!d.report){status.textContent='No matching report received yet. Run the morning report or a task in GitHub first.';return;}
-    text.value=d.report.report;showSources();resetRun();if(runLink&&/^\d+$/.test(String(d.report.run_id))){runLink.href='https://github.com/bongabhenguai-art/zuxuru/actions/runs/'+d.report.run_id;runLink.hidden=false;}const received=new Date(d.report.created_at),day=date=>new Intl.DateTimeFormat('en-ZA',{timeZone:'Africa/Johannesburg',year:'numeric',month:'2-digit',day:'2-digit'}).format(date);const freshness=Number.isNaN(received.getTime())?'Date unavailable':day(received)===day(new Date())?'Received today':'Older report — not today’s update';status.textContent=freshness+'. Received '+received.toLocaleString('en-ZA',{timeZone:'Africa/Johannesburg'})+' (South Africa). Review its claims before acting.';
+    stopVoice();text.value=d.report.report;showSources();resetRun();if(runLink&&/^\d+$/.test(String(d.report.run_id))){runLink.href='https://github.com/bongabhenguai-art/zuxuru/actions/runs/'+d.report.run_id;runLink.hidden=false;}const received=new Date(d.report.created_at),day=date=>new Intl.DateTimeFormat('en-ZA',{timeZone:'Africa/Johannesburg',year:'numeric',month:'2-digit',day:'2-digit'}).format(date);const freshness=Number.isNaN(received.getTime())?'Date unavailable':day(received)===day(new Date())?'Received today':'Older report — not today’s update';status.textContent=freshness+'. Received '+received.toLocaleString('en-ZA',{timeZone:'Africa/Johannesburg'})+' (South Africa). Review its claims before acting.';
   }catch(e){if(attempt===generation)status.textContent=e.message||'Cloud report unavailable';}
   finally{cloud.disabled=false;if(morning)morning.disabled=false;if(openHistory)openHistory.disabled=!history?.value;}
 };
 if(cloud)cloud.onclick=()=>openCloud();
 if(morning)morning.onclick=()=>openCloud('','morning');
 if(openHistory)openHistory.onclick=()=>{if(history.value)openCloud(history.value,currentKind);};
-input.onchange=async()=>{const attempt=++generation;try{const file=input.files[0];if(!file)return;if(file.size>200000||!/^.*\.(md|txt)$/i.test(file.name))throw Error('Choose a Markdown or text report under 200 KB. Extract the GitHub ZIP first.');const value=await file.text();if(attempt!==generation)return;if(!value.trim()||value.includes('\u0000'))throw Error('This report is empty or is not a text file.');text.value=value.slice(0,40000);showSources();resetRun();status.textContent='Opened '+file.name+' on this device. Review dates and proof links; importing does not verify the claims.';}catch(e){if(attempt===generation)status.textContent=e.message;}finally{input.value='';}};
+input.onchange=async()=>{const attempt=++generation;try{const file=input.files[0];if(!file)return;if(file.size>200000||!/^.*\.(md|txt)$/i.test(file.name))throw Error('Choose a Markdown or text report under 200 KB. Extract the GitHub ZIP first.');const value=await file.text();if(attempt!==generation)return;if(!value.trim()||value.includes('\u0000'))throw Error('This report is empty or is not a text file.');stopVoice();text.value=value.slice(0,40000);showSources();resetRun();status.textContent='Opened '+file.name+' on this device. Review dates and proof links; importing does not verify the claims.';}catch(e){if(attempt===generation)status.textContent=e.message;}finally{input.value='';}};
 const download=document.getElementById('jarvis-report-download');
 if(download)download.onclick=()=>{
   if(!text.value.trim()){status.textContent='Open or paste a report first.';return;}
@@ -90,7 +90,33 @@ if(download)download.onclick=()=>{
   const link=document.createElement('a');link.href=url;link.download='bonga-bhengu-jarvis-'+new Date().toISOString().slice(0,10)+'.md';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
   status.textContent='Download requested. Your copy includes the edits currently in this report; the saved cloud report remains unchanged.';
 };
-document.getElementById('jarvis-report-read').onclick=()=>{if(!window.speechSynthesis){status.textContent='Voice readout is unavailable in this browser.';return;}if(!text.value.trim()){status.textContent='Open or paste a report first.';return;}window.speechSynthesis.cancel();const speech=new SpeechSynthesisUtterance(text.value.slice(0,16000));speech.lang='en-ZA';speech.onerror=()=>status.textContent='Voice playback failed. Try this page in your browser.';window.speechSynthesis.speak(speech);status.textContent='Reading this report. Voice reads up to 16,000 characters.';};document.getElementById('jarvis-report-stop').onclick=()=>window.speechSynthesis?.cancel();document.getElementById('jarvis-report-task').onclick=()=>{const selected=text.value.slice(text.selectionStart,text.selectionEnd).trim();if(!selected){status.textContent='Select a finding in the report before preparing a task.';text.focus();return;}prepareTask('opportunities','Review morning report finding','Check source, date, market and relevance before acting.\n\n'+selected);};const delivery=document.getElementById('jarvis-cloud-delivery-status'),refreshDelivery=document.getElementById('jarvis-cloud-delivery-refresh');
+let voiceGeneration=0;
+const stopVoice=()=>{voiceGeneration++;window.speechSynthesis?.cancel();};
+const speakBrief=(value,label)=>{
+  if(!window.speechSynthesis){status.textContent='Voice readout is unavailable in this browser.';return;}
+  if(!value.trim()){status.textContent='Open a report first.';return;}
+  stopVoice();const attempt=voiceGeneration,chunks=value.slice(0,16000).match(/[\s\S]{1,1400}/g)||[];let index=0;
+  const next=()=>{
+    if(attempt!==voiceGeneration)return;
+    if(index>=chunks.length){status.textContent=label+' finished.';return;}
+    const speech=new SpeechSynthesisUtterance(chunks[index++]);speech.lang='en-ZA';
+    const voices=window.speechSynthesis.getVoices?.()||[];speech.voice=voices.find(v=>v.lang==='en-ZA')||voices.find(v=>v.lang.startsWith('en'))||null;
+    speech.onend=next;speech.onerror=event=>{if(attempt===voiceGeneration&&event.error!=='canceled'&&event.error!=='interrupted')status.textContent='Voice playback failed. Try your browser voice settings.';};
+    window.speechSynthesis.speak(speech);status.textContent='Reading '+label.toLowerCase()+' — part '+index+' of '+chunks.length+'.';
+  };next();
+};
+document.getElementById('jarvis-report-read').onclick=()=>speakBrief(text.value,'Full report');
+document.getElementById('jarvis-report-stop').onclick=()=>{stopVoice();status.textContent='Voice stopped.';};
+const readMorning=document.getElementById('jarvis-read-morning-brief');
+if(readMorning)readMorning.onclick=()=>{
+  if(!text.value.startsWith('# Bonga Bhengu morning fashion and social report')){status.textContent='Open a morning fashion report first.';return;}
+  const collection=(text.value.match(/## Collection status\s+([\s\S]*?)(?=\n## |$)/)?.[1]||'Collection status unavailable.').replace(/^- /gm,'');
+  const actions=(text.value.match(/## Jarvis recommendations[^\n]*\n([\s\S]*?)(?=\n## Next steps|$)/)?.[1]||'No AI recommendations are available. Review the sources manually.');
+  const clean=value=>value.replace(/https?:\/\/\S+/g,'source link in dashboard').replace(/[*#`]/g,'');
+  speakBrief('Bonga Bhengu morning briefing. Public evidence and AI proposals for your review. Source coverage. '+clean(collection)+' Proposed actions. '+clean(actions)+' Check the linked evidence before acting.','Morning briefing');
+};
+const stopMorning=document.getElementById('jarvis-stop-morning-brief');if(stopMorning)stopMorning.onclick=()=>{stopVoice();status.textContent='Voice stopped.';};
+document.getElementById('jarvis-report-task').onclick=()=>{const selected=text.value.slice(text.selectionStart,text.selectionEnd).trim();if(!selected){status.textContent='Select a finding in the report before preparing a task.';text.focus();return;}prepareTask('opportunities','Review morning report finding','Check source, date, market and relevance before acting.\n\n'+selected);};const delivery=document.getElementById('jarvis-cloud-delivery-status'),refreshDelivery=document.getElementById('jarvis-cloud-delivery-refresh');
 const refreshCloudStatus=async()=>{
   if(!delivery||refreshDelivery?.disabled)return;if(refreshDelivery)refreshDelivery.disabled=true;delivery.textContent='Checking last morning report delivery…';
   try{
@@ -105,4 +131,4 @@ const refreshCloudStatus=async()=>{
 };
 if(refreshDelivery)refreshDelivery.onclick=refreshCloudStatus;
 refreshCloudStatus();
-window.addEventListener('pagehide',()=>window.speechSynthesis?.cancel());})();
+window.addEventListener('pagehide',stopVoice);})();
