@@ -22,12 +22,6 @@
       "migrations_dir": "drizzle"
     }
   ],
-  "r2_buckets": [
-    {
-      "binding": "MEDIA",
-      "bucket_name": "bonga-bhengu-media"
-    }
-  ],
   "vars": {
     "OPENAI_MODEL": "gpt-5-mini",
     "JARVIS_OWNER_EMAIL": "donlegendwear@gmail.com",
