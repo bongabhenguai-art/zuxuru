@@ -24,7 +24,19 @@ const showDigest=()=>{
   if(recommendations){
     const section=value.match(/## Jarvis recommendations[^\n]*\n([\s\S]*?)(?=\n## Next steps|$)/)?.[1];
     recommendations.textContent=section?.trim()||'No AI recommendations in this report. Review the source links and prepare your own task.';
+    const editor=document.getElementById('jarvis-recommendation-brief'),button=document.getElementById('jarvis-recommendation-task');
+    if(editor)editor.value=(section?.trim()||'').slice(0,700);
+    if(button)button.disabled=!section?.trim();
+    const note=document.getElementById('jarvis-recommendation-note');if(note)note.textContent=section?.trim().length>700?'This editable brief contains the first 700 characters. Review the full recommendations above and choose the action you want.':'Edit the proposed action before preparing your task. Recommendations are drafts, not verified instructions.';
+
   }
+};
+const recommendationTask=document.getElementById('jarvis-recommendation-task');
+if(recommendationTask)recommendationTask.onclick=()=>{
+  const brief=document.getElementById('jarvis-recommendation-brief').value.trim(),area=document.getElementById('jarvis-recommendation-area').value,title=document.getElementById('jarvis-recommendation-title').value.trim();
+  if(!brief||!title){status.textContent='Enter a task title and a recommendation to review.';return;}
+  const run=document.getElementById('jarvis-report-run'),source=run&&!run.hidden&&/^https:\/\/github\.com\/bongabhenguai-art\/zuxuru\/actions\/runs\/\d+$/.test(run.href)?'\nReport run: '+run.href:'';
+  prepareTask(area,title,'Verify the cited evidence and relevance before acting.\n\n'+brief.slice(0,700)+source);
 };
 const showSources=()=>{
   showDigest();
