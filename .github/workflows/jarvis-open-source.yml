@@ -56,3 +56,5 @@ jobs:
           retention-days: 1
       - name: Send report to Bonga Bhengu dashboard
         run: python bonga-platform/jarvis/send_cloud_report.py
+
+# Verify dashboard delivery diagnostics.
