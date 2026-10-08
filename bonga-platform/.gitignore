@@ -3,3 +3,5 @@ node_modules/
 infra/muxshed/.env
 
 reports/
+
+.cloudflare-build/

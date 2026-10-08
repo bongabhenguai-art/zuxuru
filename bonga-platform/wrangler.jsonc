@@ -1,0 +1,12 @@
+{
+  "name": "zuxuru",
+  "main": ".cloudflare-build/worker.mjs",
+  "compatibility_date": "2026-10-08",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "build": {"command": "node scripts/build-cloudflare.mjs"},
+  "assets": {"directory": ".cloudflare-build/public", "binding": "ASSETS", "run_worker_first": true},
+  "d1_databases": [{"binding": "DB", "database_name": "bonga-bhengu-db", "database_id": "26d20681-319d-45f4-abf4-4e962574dc54", "migrations_dir": "drizzle"}],
+  "r2_buckets": [{"binding": "MEDIA", "bucket_name": "bonga-bhengu-media"}],
+  "vars": {"OPENAI_MODEL": "gpt-5-mini", "JARVIS_OWNER_EMAIL": "donlegendwear@gmail.com"}
+}
