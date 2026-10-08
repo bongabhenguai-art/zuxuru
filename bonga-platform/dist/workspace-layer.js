@@ -14,7 +14,7 @@
     });
   });
   select(0);
-  root.addEventListener('click',event=>{
+  document.addEventListener('click',event=>{
     const trigger=event.target.closest('[data-workspace-brief]');if(!trigger)return;
     const goal=document.getElementById('brief-goal');goal.value=trigger.dataset.workspaceBrief.slice(0,2000);
   });
