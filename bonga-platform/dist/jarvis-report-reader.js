@@ -1,4 +1,13 @@
 (()=>{const input=document.getElementById('jarvis-report-file');if(!input)return;const text=document.getElementById('jarvis-report-text'),status=document.getElementById('jarvis-report-status');let generation=0;const sourceList=document.getElementById('jarvis-report-sources'),sourceCount=document.getElementById('jarvis-report-source-count');
+const prepareTask=(area,title,deliverable)=>{
+  const form=document.getElementById('designer-task-form');
+  if(!form){status.textContent='Daily work is unavailable. Refresh the dashboard.';return;}
+  if(['title','deliverable','due'].some(k=>form.elements.namedItem(k).value)&&!confirm('Replace the unsaved task brief?'))return;
+  delete form.dataset.sourceOrderId;form.elements.namedItem('area').value=area;
+  form.elements.namedItem('title').value=title.slice(0,200);form.elements.namedItem('deliverable').value=deliverable.slice(0,1000);form.elements.namedItem('due').value='';
+  location.hash='my-work';form.scrollIntoView({behavior:'auto'});form.elements.namedItem('title').focus();
+  const note=document.getElementById('designer-work-status');if(note)note.textContent='Review this evidence-based draft, choose a due date, then Add to my work. Marketing and branding tasks can open in Studio after saving.';
+};
 const showSources=()=>{
   if(!sourceList)return;sourceList.replaceChildren();let title='',count=0;const seen=new Set();
   for(const line of text.value.split('\n')){
@@ -8,7 +17,17 @@ const showSources=()=>{
       const url=new URL(line.slice(8).trim());
       if(url.protocol!=='https:'||url.username||url.password||seen.has(url.href)||count>=30)continue;
       seen.add(url.href);const item=document.createElement('li'),link=document.createElement('a');
-      link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';link.textContent=(title||'Open source')+' · '+url.hostname;item.append(link);sourceList.append(item);count++;
+      link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';link.textContent=(title||'Open source')+' · '+url.hostname;item.append(link);
+      const area=document.createElement('select');area.setAttribute('aria-label','Work area for '+(title||'this source'));
+      for(const [value,label] of [['marketing','Marketing & social'],['branding','Brand identity'],['products','Fashion product discovery'],['visibility','Visibility & SEO'],['opportunities','Opportunity review']]){const option=document.createElement('option');option.value=value;option.textContent=label;area.append(option);}
+      area.value='marketing';const sourceTitle=title||'Public fashion source',sourceUrl=url.href;
+      const task=document.createElement('button');task.type='button';task.textContent='Prepare task';
+      task.onclick=()=>{
+        if(sourceUrl.length>750){status.textContent='This source URL is too long for a task brief. Open the source and use its direct article link in daily work.';return;}
+        const next={marketing:'Draft a campaign or social post after checking this evidence against our customer and collection.',branding:'Review how this evidence could improve Bonga Bhengu brand positioning.',products:'Investigate a design or product idea. Confirm demand, costing and sourcing before production.',visibility:'Review a relevant visibility or SEO opportunity; confirm the search intent and current website.',opportunities:'Check whether this opportunity is relevant and supported.'}[area.value]||'Review this evidence.';
+        prepareTask(area.value,'Review: '+sourceTitle.replace(/^E\d+: /,''),'Source: '+sourceUrl+'\n\n'+next+'\nVerify the source and date before acting. No publishing or customer outreach has been performed.');
+      };
+      item.append(area,task);sourceList.append(item);count++;
     }catch{}
   }
   if(sourceCount)sourceCount.textContent=count?count+' source links from this report. Check each source before acting.':'No source links in this report yet.';
@@ -40,4 +59,4 @@ if(download)download.onclick=()=>{
   const link=document.createElement('a');link.href=url;link.download='bonga-bhengu-jarvis-'+new Date().toISOString().slice(0,10)+'.md';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
   status.textContent='Download requested. Your copy includes the edits currently in this report; the saved cloud report remains unchanged.';
 };
-document.getElementById('jarvis-report-read').onclick=()=>{if(!window.speechSynthesis){status.textContent='Voice readout is unavailable in this browser.';return;}if(!text.value.trim()){status.textContent='Open or paste a report first.';return;}window.speechSynthesis.cancel();const speech=new SpeechSynthesisUtterance(text.value.slice(0,16000));speech.lang='en-ZA';speech.onerror=()=>status.textContent='Voice playback failed. Try this page in your browser.';window.speechSynthesis.speak(speech);status.textContent='Reading this report. Voice reads up to 16,000 characters.';};document.getElementById('jarvis-report-stop').onclick=()=>window.speechSynthesis?.cancel();document.getElementById('jarvis-report-task').onclick=()=>{const selected=text.value.slice(text.selectionStart,text.selectionEnd).trim();if(!selected){status.textContent='Select a finding in the report before preparing a task.';text.focus();return;}const f=document.getElementById('designer-task-form');if(['title','deliverable','due'].some(k=>f.elements.namedItem(k).value)&&!confirm('Replace the unsaved task brief?'))return;delete f.dataset.sourceOrderId;f.elements.namedItem('area').value='opportunities';f.elements.namedItem('title').value='Review morning report finding';f.elements.namedItem('deliverable').value=('Check source, date, market and relevance before acting.\n\n'+selected).slice(0,1000);f.elements.namedItem('due').value='';location.hash='my-work';f.scrollIntoView({behavior:'auto'});f.elements.namedItem('title').focus();};window.addEventListener('pagehide',()=>window.speechSynthesis?.cancel());})();
+document.getElementById('jarvis-report-read').onclick=()=>{if(!window.speechSynthesis){status.textContent='Voice readout is unavailable in this browser.';return;}if(!text.value.trim()){status.textContent='Open or paste a report first.';return;}window.speechSynthesis.cancel();const speech=new SpeechSynthesisUtterance(text.value.slice(0,16000));speech.lang='en-ZA';speech.onerror=()=>status.textContent='Voice playback failed. Try this page in your browser.';window.speechSynthesis.speak(speech);status.textContent='Reading this report. Voice reads up to 16,000 characters.';};document.getElementById('jarvis-report-stop').onclick=()=>window.speechSynthesis?.cancel();document.getElementById('jarvis-report-task').onclick=()=>{const selected=text.value.slice(text.selectionStart,text.selectionEnd).trim();if(!selected){status.textContent='Select a finding in the report before preparing a task.';text.focus();return;}prepareTask('opportunities','Review morning report finding','Check source, date, market and relevance before acting.\n\n'+selected);};window.addEventListener('pagehide',()=>window.speechSynthesis?.cancel());})();
