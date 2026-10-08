@@ -209,3 +209,9 @@ body.cyber-fashion #bonga-execute-matrix #bonga-tier-content{animation:bonga-lux
 /* Guarantee native hidden semantics survive the fashion grid/card display rules. */
 .cyber-fashion .collection-card[hidden],.cyber-fashion #brief-form[hidden],.cyber-fashion #brief-result[hidden]{display:none!important}
 .cyber-fashion .collection-enquire:focus-visible,.cyber-fashion .bonga-look-preview:focus-visible,.cyber-fashion [data-collection-filter]:focus-visible{outline:2px solid #E4CB99;outline-offset:3px}
+
+/* Real public enquiry form controls. */
+.cyber-fashion .brief-consent{display:flex;align-items:flex-start;gap:10px;line-height:1.5;margin:12px 0;color:#E4D8BF}
+.cyber-fashion .brief-consent input{flex:0 0 auto;width:18px;height:18px;accent-color:#C8A96B;margin:2px 0 0}
+.cyber-fashion .bonga-honeypot{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+.cyber-fashion #brief-form button:disabled{opacity:.6;cursor:wait}
