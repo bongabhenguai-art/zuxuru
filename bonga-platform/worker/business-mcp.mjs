@@ -29,7 +29,9 @@ export async function businessMcp(request,env){
     return result({revision:row.revision,updatedAt:row.updated_at,tasks:work.tasks||[],workspaceExists:true,url:origin+'/fashion-service.html#my-work'});
   }));
   server.registerTool('bonga_list_studio_jobs',{title:'Read my Creative Studio queue',description:'Read saved creative jobs in the same embedded Studio used by the dashboard. No camera access, recording or publication.',inputSchema:{},annotations:read},safe(async()=>{
-    const response=await studioJobs(internal('/api/studio/jobs'),env),data=await response.json();return result(data,!response.ok);
+    const response=await studioJobs(internal('/api/studio/jobs'),env),data=await response.json();
+    if(response.ok)data.jobs=data.jobs.map(job=>({...job,url:origin+'/digital-studio.html?job='+encodeURIComponent(job.id)}));
+    return result(data,!response.ok);
   }));
   server.registerTool('bonga_update_task',{title:'Save my task progress',description:'Update one existing dashboard task using the workspace revision from bonga_list_work. Save only progress the owner explicitly requested. Review and completion require an actual result note; a generated draft is not proof of execution. No publishing or customer contact.',inputSchema:{id:z.string().min(1).max(200),revision:z.number().int().positive(),status:z.enum(['Proposed','In progress','Review','Completed']),note:z.string().max(3000),confirm:z.literal(true)},annotations:{readOnlyHint:false,destructiveHint:false,idempotentHint:false,openWorldHint:false}},safe(async args=>{
     const headers=new Headers(internal('/api/designer/tasks','POST').headers);headers.set('content-type','application/json');
