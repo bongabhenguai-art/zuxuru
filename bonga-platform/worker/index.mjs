@@ -1,4 +1,5 @@
 import {jarvisKey,jarvisConnection} from './jarvis-connection.mjs';
+import {jarvisTest} from './jarvis-test.mjs';
 import {jarvisRole} from './jarvis-team.mjs';
 import {studioMultistream} from './studio-multistream.mjs';
 import {businessMcp} from './business-mcp.mjs';
@@ -50,6 +51,7 @@ export default {
     }
     if(['/assets/omni-modules.json','/assets/JARVIS-AI-GitHub-Kit.zip','/assets/Bonga-Visibility-Kit.zip'].includes(url.pathname)&&!owner(request,env))return new Response('Owner access required',{status:403});
     if(url.pathname==='/api/jarvis/connection')return jarvisConnection(request,env);
+    if(url.pathname==='/api/jarvis/test')return jarvisTest(request,env);
     if(url.pathname==='/api/jarvis/status'){let configured=false;if(owner(request,env)){try{configured=!!await jarvisKey(env);}catch{}}return json({signed_in:!!request.headers.get('oai-authenticated-user-id'),owner:owner(request,env),configured,ready:owner(request,env)&&configured});}
     if(url.pathname==='/api/jarvis/chat'){
       if(request.method!=='POST') return json({error:'Method not allowed'},405);
