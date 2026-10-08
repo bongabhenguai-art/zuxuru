@@ -1,4 +1,5 @@
 import {businessMcp} from './business-mcp.mjs';
+import {designerTasks} from './designer-tasks.mjs';
 import {studioAnalytics,summarizeStudio} from './studio-analytics.mjs';
 import {studioJobs,routeStudioTasks} from './studio-jobs.mjs';
 import {systemEngine} from './system-engine.mjs';
@@ -22,6 +23,7 @@ export default {
   async fetch(request,env){
     const url=new URL(request.url);
     if(url.pathname==='/mcp')return businessMcp(request,env);
+    if(url.pathname==='/api/designer/tasks')return designerTasks(request,env);
     if(url.pathname==='/api/system/run')return systemEngine(request,env);
     if(url.pathname==='/api/studio/analytics')return studioAnalytics(request,env);
     if(url.pathname==='/api/studio/jobs')return studioJobs(request,env);
