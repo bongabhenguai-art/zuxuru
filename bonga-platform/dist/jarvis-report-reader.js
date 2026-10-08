@@ -8,7 +8,26 @@ const prepareTask=(area,title,deliverable)=>{
   location.hash='my-work';form.scrollIntoView({behavior:'auto'});form.elements.namedItem('title').focus();
   const note=document.getElementById('designer-work-status');if(note)note.textContent='Review this evidence-based draft, choose a due date, then Add to my work. Marketing and branding tasks can open in Studio after saving.';
 };
+const digest=document.getElementById('jarvis-report-digest'),coverage=document.getElementById('jarvis-report-coverage'),recommendations=document.getElementById('jarvis-report-recommendations');
+const showDigest=()=>{
+  if(!digest)return;
+  const value=text.value,isMorning=value.startsWith('# Bonga Bhengu morning fashion and social report');
+  digest.hidden=!isMorning;if(!isMorning)return;
+  if(coverage){
+    coverage.replaceChildren();
+    const section=value.match(/## Collection status\s+([\s\S]*?)(?=\n## |$)/)?.[1]||'';
+    for(const line of section.split('\n').filter(line=>line.startsWith('- ')).slice(0,20)){
+      const item=document.createElement('li');item.textContent=line.slice(2);coverage.append(item);
+    }
+    if(!coverage.children.length){const item=document.createElement('li');item.textContent='Collection status not included in this report.';coverage.append(item);}
+  }
+  if(recommendations){
+    const section=value.match(/## Jarvis recommendations[^\n]*\n([\s\S]*?)(?=\n## Next steps|$)/)?.[1];
+    recommendations.textContent=section?.trim()||'No AI recommendations in this report. Review the source links and prepare your own task.';
+  }
+};
 const showSources=()=>{
+  showDigest();
   if(!sourceList)return;sourceList.replaceChildren();let title='',count=0;const seen=new Set();
   for(const line of text.value.split('\n')){
     if(/^E\d+: /.test(line))title=line.trim();
