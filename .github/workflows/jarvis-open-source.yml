@@ -3,8 +3,16 @@ on:
   push:
     branches: [main]
     paths: [.github/workflows/jarvis-open-source.yml]
+  schedule:
+    - cron: '0 5 * * *' # Approximately 07:00 South Africa, daily
   workflow_dispatch:
     inputs:
+      report:
+        description: Report to prepare
+        type: choice
+        options: [task, morning]
+        default: task
+        required: true
       execution:
         description: Where Jarvis runs
         type: choice
@@ -45,7 +53,11 @@ jobs:
           exit 1
       - name: Download bounded model
         run: ollama pull qwen3:1.7b
+      - name: Collect morning fashion and social evidence
+        if: github.event_name == 'schedule' || github.event_name == 'push' || inputs.report == 'morning'
+        run: python bonga-platform/jarvis/morning_report.py --output jarvis-local-report.md
       - name: Produce reviewed task draft
+        if: github.event_name == 'workflow_dispatch' && inputs.report != 'morning'
         env:
           JARVIS_TASK: ${{ inputs.task }}
         run: python bonga-platform/jarvis/local_runner.py --output jarvis-local-report.md
