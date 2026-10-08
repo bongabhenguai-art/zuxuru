@@ -1,3 +1,4 @@
+import {jarvisRole} from './jarvis-team.mjs';
 import {studioMultistream} from './studio-multistream.mjs';
 import {businessMcp} from './business-mcp.mjs';
 import {designerTasks} from './designer-tasks.mjs';
@@ -57,7 +58,7 @@ export default {
       let body;try{const text=await request.text();if(text.length>16000)return json({error:'Request too long.'},413);body=JSON.parse(text);}catch{return json({error:'Invalid request.'},400);}
       if(typeof body.prompt!=='string'||!body.prompt.trim()||body.prompt.length>3000)return json({error:'Enter a request of up to 3,000 characters.'},400);
       const context=Array.isArray(body.tasks)?body.tasks.slice(0,12).filter(t=>modules.includes(t.module)).map(t=>({module:t.module,title:String(t.title||'').slice(0,180),deliverable:String(t.deliverable||'').slice(0,500),done:!!t.done})):[];
-      const payload={model:env.OPENAI_MODEL||'gpt-5-mini',instructions,input:JSON.stringify({request:body.prompt,mode:body.mode,tasks:context,date:new Date().toISOString().slice(0,10)}),max_output_tokens:3000,store:false};
+      const role=jarvisRole(body.role);const payload={model:env.OPENAI_MODEL||'gpt-5-mini',instructions:instructions+'\nSpecialist role: '+role.name+'. '+role.brief,input:JSON.stringify({request:body.prompt,mode:body.mode,tasks:context,date:new Date().toISOString().slice(0,10)}),max_output_tokens:3000,store:false};
       if(body.mode==='research')payload.tools=[{type:'web_search'}];
       let response,data;try{response=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{authorization:'Bearer '+env.OPENAI_API_KEY,'content-type':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(60000)});data=await response.json();}catch{return json({error:'AI service did not respond. Try again shortly.'},504);}
       if(!response.ok)return json({error:response.status===401?'AI authorization failed. The connection needs attention.':response.status===429?'AI usage limit reached. Try later or check the account allowance.':'AI service unavailable. Try again shortly.'},response.status===429?429:502);
