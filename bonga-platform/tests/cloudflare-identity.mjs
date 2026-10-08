@@ -20,3 +20,9 @@ assert.equal(await verifiedIdentity(request(expired),env,verify),null);
 assert.equal(trustedRequest(request(valid),null).headers.get('oai-authenticated-user-id'),null);
 assert.equal(trustedRequest(request(valid),{id:'verified-id',email:'verified@example.com'}).headers.get('oai-authenticated-user-email'),'verified@example.com');
 console.log('Cloudflare signed identity, expiry, issuer, audience, tamper and header-spoof checks passed.');
+
+const cookieRequest=t=>new Request('https://app.example.com/api/designer/workspace',{headers:{cookie:'other=1; CF_Authorization='+t}});
+assert.deepEqual(await verifiedIdentity(cookieRequest(valid),env,verify),{id:'cloudflare:owner-123',email:'owner@example.com'});
+assert.equal(await verifiedIdentity(cookieRequest(expired),env,verify),null);
+assert.equal(await verifiedIdentity(cookieRequest('forged'),env,verify),null);
+console.log('Same-origin API cookie signatures and expiry checks passed.');

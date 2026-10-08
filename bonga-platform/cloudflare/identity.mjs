@@ -3,7 +3,8 @@ const keys=new Map();
 export async function verifiedIdentity(request,env,verify=jwtVerify){
   const issuer=env.CF_ACCESS_ISSUER,audience=env.CF_ACCESS_AUD;
   if(!/^https:\/\/[a-z0-9-]+\.cloudflareaccess\.com$/.test(issuer||'')||!audience)return null;
-  const token=request.headers.get('cf-access-jwt-assertion');if(!token)return null;
+  const cookie=(request.headers.get('cookie')||'').split(';').map(x=>x.trim()).find(x=>x.startsWith('CF_Authorization='));
+  const token=request.headers.get('cf-access-jwt-assertion')||cookie?.slice('CF_Authorization='.length);if(!token)return null;
   try{
     if(!keys.has(issuer))keys.set(issuer,createRemoteJWKSet(new URL(issuer+'/cdn-cgi/access/certs')));
     const {payload}=await verify(token,keys.get(issuer),{issuer,audience,algorithms:['RS256'],requiredClaims:['exp','iat','sub','email']});
