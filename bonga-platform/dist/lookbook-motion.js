@@ -82,15 +82,29 @@
     close.addEventListener('click',hide);
     dialog.addEventListener('click',event=>{if(event.target===dialog)hide();});
     dialog.addEventListener('close',()=>{image.removeAttribute('src');if(returnFocus?.isConnected)returnFocus.focus();});
-    enquiry.addEventListener('click',()=>{const action=activeCard?.querySelector('.collection-enquire');hide();if(action)action.click();});
+    enquiry.addEventListener('click',()=>{
+      const action=activeCard?.querySelector('.collection-enquire');
+      hide();
+      if(action){action.click();const form=document.querySelector('#brief-form');if(form&&!form.hidden){const first=form.querySelector('input:not([type=hidden]),textarea,select');first?.focus({preventScroll:true});}}
+    });
     for(const card of cards){
       const art=card.querySelector('figure img');if(!art)continue;
       const open=document.createElement('button');open.type='button';open.className='bonga-look-preview';open.textContent='View design details';
       open.addEventListener('click',()=>{returnFocus=open;displayCard(card);if(typeof dialog.showModal==='function')dialog.showModal();});
       const info=card.querySelector('.collection-card-info');if(info)info.append(open);
     }
+    // Restore the correct filter for shared design URLs instead of forcing a hidden card visible.
     const requested=new URLSearchParams(location.search).get('design');
-    if(requested){const found=cards.find(card=>card.querySelector('.collection-enquire')?.dataset.design===requested);if(found){found.hidden=false;const opener=found.querySelector('.bonga-look-preview');opener?.click();}}
+    if(requested){
+      const found=cards.find(card=>card.querySelector('.collection-enquire')?.dataset.design===requested);
+      if(found){
+        const category=found.dataset.collection;
+        const matchingFilter=[...document.querySelectorAll('[data-collection-filter]')].find(button=>button.dataset.collectionFilter===category);
+        if(found.hidden&&matchingFilter)matchingFilter.click();
+        const opener=found.querySelector('.bonga-look-preview');
+        if(opener&&!found.hidden)opener.click();
+      }
+    }
   }
   const video=document.getElementById('workspace-ad-video'),button=document.getElementById('workspace-ad-toggle');if(!video||!button)return;
   let visible=false,manualPaused=reduced.matches,autoPausing=false;const pauseAuto=()=>{if(!video.paused){autoPausing=true;video.pause();}};
