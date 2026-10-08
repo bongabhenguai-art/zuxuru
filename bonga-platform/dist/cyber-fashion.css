@@ -1,0 +1,33 @@
+/* Bonga Bhengu — shared tech-fashion presentation layer. */
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400;font-display:swap;src:url('/assets/fonts/space-grotesk-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:700;font-display:swap;src:url('/assets/fonts/space-grotesk-latin-700-normal.woff2') format('woff2')}
+:root{--cyber-black:#0A0A0C;--cyber-white:#F7FAFF;--cyber-cyan:#00FFFF;--cyber-pink:#FF007F;--cyber-line:rgba(0,255,255,.22)}
+body.cyber-fashion{background:var(--cyber-black);color:var(--cyber-white);font-family:'Space Grotesk',Arial,sans-serif}
+.cyber-fashion :is(h1,h2,h3,h4,button,input,select,textarea,.button){font-family:'Space Grotesk',Arial,sans-serif}
+.cyber-fashion :is(h1,h2,h3){color:var(--cyber-white)}
+.cyber-fashion img,.cyber-fashion video,.cyber-fashion canvas,.cyber-fashion .hero-art{border-radius:0!important}
+.cyber-fashion :is(.hero,.collections,.services,.story,.contact,.ai-studio,.app-entry,.service-packages,footer){background:var(--cyber-black)}
+.cyber-fashion :is(.header,body>header){background:#0A0A0CF2;border-bottom:1px solid var(--cyber-line)}
+.cyber-fashion :is(.section,.app-entry,.service-packages,.fashion-ribbon){border-color:var(--cyber-line)}
+.cyber-fashion .hero h1 em{color:var(--cyber-cyan);background:none;text-shadow:0 0 24px #00FFFF30}
+.cyber-fashion :is(.app-entry-grid a,.package-grid article,.studio-offers article,.record,.camera-card,.studio-media-card){background:#0A0A0C;border:1px solid var(--cyber-line);border-radius:0}
+.cyber-fashion :is(.button.primary,.gold-button,.package-grid button){background:var(--cyber-cyan);color:#0A0A0C;border:1px solid var(--cyber-cyan);border-radius:0;box-shadow:0 0 18px #00FFFF18}
+.cyber-fashion :is(a,button,input,select,textarea):focus-visible{outline:2px solid var(--cyber-pink);outline-offset:4px}
+.cyber-fashion :is(.app-entry-grid a,.package-grid article,.camera-card,.studio-media-card):hover{border-color:var(--cyber-cyan)}
+.cyber-fashion .digital-banner{background:#0A0A0C;border-bottom:1px solid var(--cyber-pink)}
+.cyber-fashion .digital-banner a{border-radius:0;background:var(--cyber-cyan);color:#0A0A0C}
+.cyber-fashion .studio-main{background:var(--cyber-black)}
+.cyber-fashion #creative-job-panel{background:var(--cyber-black);border:1px solid var(--cyber-line);border-radius:0}
+.cyber-fashion .operation-grid button{box-shadow:none;border:1px solid var(--cyber-line);background:#111116;border-radius:0}
+.virtual-atelier{position:relative;isolation:isolate;overflow:hidden;background:var(--cyber-black);border-block:1px solid var(--cyber-line);padding:clamp(32px,6vw,88px) clamp(18px,4vw,56px);margin-bottom:32px}
+.virtual-atelier .atelier-grid{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;background:linear-gradient(90deg,#00FFFF0D 1px,transparent 1px),linear-gradient(#00FFFF0D 1px,transparent 1px);background-size:56px 56px;animation:atelier-drift 24s linear infinite;opacity:.75}
+.virtual-atelier::after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,#0A0A0C08,#0A0A0CBF)}
+.virtual-atelier .atelier-label{font-size:.75rem;letter-spacing:.18em;color:var(--cyber-cyan);margin:0 0 24px;text-transform:uppercase}
+.cyber-fashion .virtual-atelier .atelier-title{font-size:clamp(26px,4.7vw,64px);font-weight:700;line-height:1.08;letter-spacing:-.035em;max-width:1050px;margin:0 0 24px;color:var(--cyber-white);text-shadow:0 0 18px #00FFFF35,0 0 40px #FF007F18}
+.atelier-title span{display:block;color:var(--cyber-cyan);font-size:.65em;letter-spacing:.02em;margin-top:12px}
+.virtual-atelier .atelier-description{max-width:650px;line-height:1.6;color:#D1D9E2;margin-bottom:24px}
+.atelier-title:hover{animation:atelier-glitch .22s steps(2,end) 1}
+@keyframes atelier-drift{to{background-position:56px 56px,-56px 56px}}
+@keyframes atelier-glitch{0%,100%{transform:translate(0);text-shadow:0 0 18px #00FFFF35}25%{transform:translate(1px,-1px);text-shadow:-2px 0 #FF007F,2px 0 #00FFFF}50%{transform:translate(-1px,0);text-shadow:2px 0 #FF007F,-2px 0 #00FFFF}75%{transform:translate(1px,1px);text-shadow:-1px 0 #00FFFF}}
+@media(prefers-reduced-motion:reduce){.virtual-atelier .atelier-grid,.atelier-title:hover{animation:none}}
+@media(max-width:600px){.virtual-atelier .atelier-title{font-size:clamp(24px,7vw,38px)}.virtual-atelier{padding:32px 18px}.virtual-atelier .atelier-label{letter-spacing:.1em}}
