@@ -143,3 +143,12 @@ assert.equal(JSON.parse(sqlite.prepare('SELECT payload FROM studio_campaigns WHE
 assert.equal((await studioJobs(studioReq({action:'stage',id:mediaReviewJob,revision:guardRevision++,stage:'Approved'}),{DB})).status,200);
 assert.equal((await studioCampaigns(campaignReviewRequest(true),{DB})).status,200);
 console.log('PASS linked campaign approval requires current Studio approval and retains its source job when an editor omits the link.');
+
+const changeSource=queueSource.split('async function change(body')[1].split('window.openStudioJob=')[0];
+const progressPosts=[];const progressLoads=[];const progressContext={current:{id:'new-job',revision:99},window:{},$:()=>({}),api:async body=>{progressPosts.push(body);return {};},load:async id=>progressLoads.push(id)};progressContext.window.top=progressContext.window;
+vm.runInNewContext('async function change(body'+changeSource,progressContext);
+await progressContext.change({action:'edit',title:'Original title'},{id:'original-job',revision:7});
+assert.equal(progressPosts[0].id,'original-job');assert.equal(progressPosts[0].revision,7);assert.equal(progressLoads[0],'new-job');
+await progressContext.change({action:'measure',views:1},{id:'measurement-job',revision:8});
+assert.equal(progressPosts[1].id,'measurement-job');assert.equal(progressPosts[1].revision,8);
+console.log('PASS delayed edits and results keep their original job and revision without changing the current selection.');
