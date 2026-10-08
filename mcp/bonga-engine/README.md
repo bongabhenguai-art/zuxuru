@@ -4,6 +4,10 @@ This behind-the-scenes service uses the official MIT-licensed [Model Context Pro
 
 Tools read the existing eight work areas, prepare module handoffs, calculate garment quotes and run fixed application checks. Routing is deterministic keyword matching. Plans and quotes are drafts, not saved customer records. It does not post, message, deploy, order stock, process payment, read production databases, or accept invented authentication headers.
 
+The daily-task tools reuse `jarvis/omni_router.py` and save three assignments per day in a local SQLite store. Dates default to Africa/Johannesburg. Repeated preparation keeps existing progress. The workflow is planned → in_progress → review → done, with notes required for review and completion. Stale updates are rejected by revision; exact retries are idempotent. Completed tasks can be reopened into in_progress. These are manual completion records, not evidence that an AI performed the task.
+
+Task data defaults to `~/.local/share/bonga-engine/tasks.sqlite3`, outside the repository. Set `BONGA_DATA_DIR` to a private operator-owned directory if needed. Use one store per owner/business; do not share this stdio service between unrelated customers. Local task records are not automatically synchronized into the hosted dashboard. Do not commit the task database or place it in the GitHub checkout. CI uses temporary test data and removes it after successful tests.
+
 From the repository root, with Python 3.10+ and Node 24:
 
 ```sh

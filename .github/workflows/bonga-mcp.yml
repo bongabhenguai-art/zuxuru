@@ -1,9 +1,9 @@
 name: Bonga open-source MCP
 on:
   push:
-    paths: ['mcp/bonga-engine/**', 'bonga-platform/dist/assets/omni-modules.json', 'bonga-platform/tests/**', '.github/workflows/bonga-mcp.yml']
+    paths: ['mcp/bonga-engine/**', 'jarvis/omni_router.py', 'bonga-platform/dist/assets/omni-modules.json', 'bonga-platform/tests/**', '.github/workflows/bonga-mcp.yml']
   pull_request:
-    paths: ['mcp/bonga-engine/**', 'bonga-platform/dist/assets/omni-modules.json', 'bonga-platform/tests/**', '.github/workflows/bonga-mcp.yml']
+    paths: ['mcp/bonga-engine/**', 'jarvis/omni_router.py', 'bonga-platform/dist/assets/omni-modules.json', 'bonga-platform/tests/**', '.github/workflows/bonga-mcp.yml']
 permissions:
   contents: read
 jobs:

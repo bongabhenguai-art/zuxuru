@@ -2,6 +2,11 @@
 import asyncio
 import json
 import os
+import importlib.util
+import sqlite3
+from datetime import datetime, date
+from zoneinfo import ZoneInfo
+from contextlib import contextmanager
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from pathlib import Path
 from typing import Any
@@ -13,6 +18,95 @@ from mcp.types import ToolAnnotations
 ROOT = Path(os.environ.get("BONGA_REPO_ROOT", Path(__file__).resolve().parents[2])).resolve()
 mcp = MCPServer("Bonga Bhengu repository engine")
 READ_ONLY = ToolAnnotations(read_only_hint=True, open_world_hint=False)
+LOCAL_WRITE = ToolAnnotations(read_only_hint=False, destructive_hint=False, idempotent_hint=True, open_world_hint=False)
+DATA = Path(os.environ.get("BONGA_DATA_DIR", Path.home() / ".local/share/bonga-engine")).resolve()
+
+
+@contextmanager
+def task_database():
+    DATA.mkdir(parents=True, exist_ok=True, mode=0o700)
+    connection = sqlite3.connect(DATA / "tasks.sqlite3", timeout=10)
+    connection.row_factory = sqlite3.Row
+    try:
+        connection.execute("CREATE TABLE IF NOT EXISTS tasks (id TEXT PRIMARY KEY, day TEXT NOT NULL, payload TEXT NOT NULL, state TEXT NOT NULL DEFAULT 'planned', revision INTEGER NOT NULL DEFAULT 1, note TEXT NOT NULL DEFAULT '', updated_at TEXT NOT NULL)")
+        with connection:
+            yield connection
+    finally:
+        connection.close()
+
+
+def task_row(row):
+    return {**json.loads(row["payload"]), "state": row["state"], "revision": row["revision"],
+            "note": row["note"], "updated_at": row["updated_at"], "done": row["state"] == "done"}
+
+
+def checked_day(value):
+    value = value or datetime.now(ZoneInfo("Africa/Johannesburg")).date().isoformat()
+    try:
+        if date.fromisoformat(value).isoformat() != value:
+            raise ValueError()
+    except ValueError:
+        raise ToolError("Use a calendar date in YYYY-MM-DD format.")
+    return value
+
+
+@mcp.tool(annotations=LOCAL_WRITE, structured_output=True)
+def prepare_daily_tasks(day: str = "") -> dict[str, Any]:
+    """Save the existing Jarvis daily rotation locally, without replacing progress on repeated runs."""
+    day = checked_day(day)
+    path = ROOT / "jarvis/omni_router.py"
+    if not path.is_file():
+        raise ToolError("The existing Jarvis module is missing from this checkout.")
+    spec = importlib.util.spec_from_file_location("bonga_existing_router", path)
+    router = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(router)
+    assignments = router.daily_tasks(day, {"modules": modules()})
+    timestamp = datetime.now(ZoneInfo("Africa/Johannesburg")).isoformat()
+    with task_database() as db:
+        for task in assignments:
+            db.execute("INSERT OR IGNORE INTO tasks (id, day, payload, updated_at) VALUES (?, ?, ?, ?)",
+                       (task["id"], day, json.dumps(task), timestamp))
+        rows = db.execute("SELECT * FROM tasks WHERE day=? ORDER BY id", (day,)).fetchall()
+    return {"day": day, "tasks": [task_row(row) for row in rows], "storage": "local MCP task store, separate from hosted dashboard", "automatic_execution": False}
+
+
+@mcp.tool(annotations=READ_ONLY, structured_output=True)
+def list_daily_tasks(day: str = "") -> dict[str, Any]:
+    """Read saved daily assignments and progress from the local MCP task store."""
+    day = checked_day(day)
+    if not (DATA / "tasks.sqlite3").is_file():
+        return {"day": day, "tasks": []}
+    with task_database() as db:
+        rows = db.execute("SELECT * FROM tasks WHERE day=? ORDER BY id", (day,)).fetchall()
+    return {"day": day, "tasks": [task_row(row) for row in rows]}
+
+
+@mcp.tool(annotations=LOCAL_WRITE, structured_output=True)
+def update_task_progress(task_id: str, expected_revision: int, state: str, note: str) -> dict[str, Any]:
+    """Save manual task progress with revision protection; completion requires a review note."""
+    transitions = {"planned": {"in_progress"}, "in_progress": {"planned", "review"},
+                   "review": {"in_progress", "done"}, "done": {"in_progress"}}
+    if state not in transitions or not task_id or len(task_id) > 200 or len(note) > 3000:
+        raise ToolError("Use a valid task ID, state and note of at most 3000 characters.")
+    if state in {"review", "done"} and not note.strip():
+        raise ToolError("Add a deliverable or review note before review or completion.")
+    with task_database() as db:
+        row = db.execute("SELECT * FROM tasks WHERE id=?", (task_id,)).fetchone()
+        if not row:
+            raise ToolError("Task not found. Prepare daily tasks first.")
+        if row["revision"] != expected_revision:
+            # Safe retry of an already-applied exact change.
+            if row["revision"] == expected_revision + 1 and row["state"] == state and row["note"] == note:
+                return {"task": task_row(row), "already_applied": True}
+            raise ToolError("Task changed. Read the latest revision before updating.")
+        if state not in transitions[row["state"]]:
+            raise ToolError("Follow planned → in_progress → review → done; reopen a completed task into in_progress.")
+        changed = db.execute("UPDATE tasks SET state=?, note=?, revision=revision+1, updated_at=? WHERE id=? AND revision=?",
+                             (state, note, datetime.now(ZoneInfo("Africa/Johannesburg")).isoformat(), task_id, expected_revision))
+        if changed.rowcount != 1:
+            raise ToolError("Task changed. Read the latest revision before updating.")
+        updated = db.execute("SELECT * FROM tasks WHERE id=?", (task_id,)).fetchone()
+    return {"task": task_row(updated), "already_applied": False}
 
 
 def modules():
