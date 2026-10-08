@@ -215,3 +215,15 @@ body.cyber-fashion #bonga-execute-matrix #bonga-tier-content{animation:bonga-lux
 .cyber-fashion .brief-consent input{flex:0 0 auto;width:18px;height:18px;accent-color:#C8A96B;margin:2px 0 0}
 .cyber-fashion .bonga-honeypot{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
 .cyber-fashion #brief-form button:disabled{opacity:.6;cursor:wait}
+
+/* Existing owner workspace: live customer enquiry inbox. */
+.cyber-fashion .bonga-owner-inbox{max-width:1200px;margin:48px auto;padding:clamp(20px,4vw,42px);background:#11151A;border:1px solid rgba(200,169,107,.3);border-radius:10px;color:#F6F3EC}
+.cyber-fashion .bonga-inbox-heading{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+.cyber-fashion .bonga-inbox-heading h2{color:#F6F3EC;font:400 clamp(27px,3vw,40px)/1.2 Georgia,serif}
+.cyber-fashion .bonga-inbox-heading p{color:#B9BEC5}
+.cyber-fashion [data-enquiry-refresh]{padding:12px 18px;background:#C8A96B;color:#090B0E;border:1px solid #C8A96B;border-radius:4px;cursor:pointer}
+.cyber-fashion [data-enquiry-refresh]:disabled{opacity:.5;cursor:wait}
+.cyber-fashion .bonga-inbox-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px;margin-top:24px}
+.cyber-fashion .bonga-inbox-item{min-width:0;padding:20px;background:#090B0E;border:1px solid rgba(200,169,107,.24);border-radius:6px;overflow-wrap:anywhere}
+.cyber-fashion .bonga-inbox-item h3{color:#E4CB99;margin:0 0 8px}
+.cyber-fashion .bonga-inbox-item :is(p,time,small){display:block;color:#B9BEC5;line-height:1.6}
