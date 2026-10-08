@@ -19,6 +19,7 @@ on:
         default: Prepare three tasks to rebuild Bonga Bhengu fashion visibility.
 permissions:
   contents: read
+  id-token: write
 concurrency:
   group: jarvis-open-source-task
   cancel-in-progress: false
@@ -53,3 +54,5 @@ jobs:
           name: jarvis-local-report
           path: jarvis-local-report.md
           retention-days: 1
+      - name: Send report to Bonga Bhengu dashboard
+        run: python bonga-platform/jarvis/send_cloud_report.py
