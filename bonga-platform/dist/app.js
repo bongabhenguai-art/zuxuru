@@ -36,16 +36,31 @@ const status = document.querySelector('#brief-status');
 let currentBrief = '';
 function editBrief(focus = false) { form.hidden = false; result.hidden = true; status.textContent = ''; if(focus) document.querySelector('#brief-name').focus(); }
 document.addEventListener('click', event => { const trigger = event.target.closest('[data-service]'); if(!trigger) return; document.querySelector('#brief-service').value = trigger.dataset.service; editBrief(); if(trigger.tagName === 'BUTTON') document.querySelector('#contact').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'}); });
-form.addEventListener('submit', event => {
+form.addEventListener('submit', async event => {
   event.preventDefault();
-  const name = document.querySelector('#brief-name').value.trim();
-  const goal = document.querySelector('#brief-goal').value.trim();
-  if(!name || !goal) { status.textContent = 'Please add your name and a few words about your idea.'; return; }
-  currentBrief = 'PROJECT BRIEF FOR BONGA BHENGU\n\nName / brand: ' + name + '\nCreative direction: ' + document.querySelector('#brief-service').value + '\n\nWhat I want to create or improve:\n' + goal + '\n\nPrepared on: ' + new Date().toLocaleDateString('en-ZA') + '\n\nPlease contact Bonga to discuss scope, timing and a quote.';
-  document.querySelector('#brief-text').textContent = currentBrief;
-  document.querySelector('#email-brief').href = 'mailto:bongabhengu@yahoo.com?subject=' + encodeURIComponent('Project brief — ' + name) + '&body=' + encodeURIComponent(currentBrief);
-  document.querySelector('#whatsapp-brief').href = 'https://wa.me/?text=' + encodeURIComponent(currentBrief);
-  form.hidden = true; result.hidden = false; status.textContent = 'Your brief is ready, but it has not been sent. Select Open email draft and send the email, or share it yourself using the options below.'; document.querySelector('#brief-text').focus();
+  const name=document.querySelector('#brief-name').value.trim();
+  const contact=document.querySelector('#brief-contact').value.trim();
+  const service=document.querySelector('#brief-service').value;
+  const goal=document.querySelector('#brief-goal').value.trim();
+  const consent=document.querySelector('#brief-consent').checked;
+  if(!name||!contact||!goal||!consent){status.textContent='Please complete your name, contact details, project description and consent.';return;}
+  currentBrief='PROJECT BRIEF FOR BONGA BHENGU\\n\\nName / brand: '+name+'\\nContact: '+contact+'\\nCreative direction: '+service+'\\n\\nWhat I want to create or improve:\\n'+goal+'\\n\\nPrepared on: '+new Date().toLocaleDateString('en-ZA');
+  document.querySelector('#brief-text').textContent=currentBrief;
+  document.querySelector('#email-brief').href='mailto:bongabhengu@yahoo.com?subject='+encodeURIComponent('Project brief — '+name)+'&body='+encodeURIComponent(currentBrief);
+  document.querySelector('#whatsapp-brief').href='https://wa.me/?text='+encodeURIComponent(currentBrief);
+  const submit=form.querySelector('[type=submit]');submit.disabled=true;status.textContent='Submitting your enquiry securely…';
+  try{
+    const response=await fetch('/api/public/enquiries',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name,contact,service,goal,consent,website:document.querySelector('#brief-website').value})});
+    const data=await response.json();
+    if(!response.ok||!data.received)throw Error(data.error||'Enquiry could not be saved.');
+    form.hidden=true;result.hidden=false;
+    status.textContent='Your enquiry has been saved successfully. Reference: '+data.reference+'. The website owner can review it. No email notification is promised.';
+    document.querySelector('#brief-text').focus();
+  }catch(error){
+    form.hidden=true;result.hidden=false;
+    status.textContent='Online submission was not confirmed: '+error.message+' Use Open email draft and send it yourself, or copy your brief.';
+    document.querySelector('#brief-text').focus();
+  }finally{submit.disabled=false;}
 });
 document.querySelector('#edit-brief').addEventListener('click',()=>editBrief(true));
 document.querySelector('#copy-brief').addEventListener('click',async()=>{ try { await navigator.clipboard.writeText(currentBrief); status.textContent='Brief copied. You can paste it into your message.'; } catch { const selection = window.getSelection(); const range = document.createRange(); range.selectNodeContents(document.querySelector('#brief-text')); selection.removeAllRanges(); selection.addRange(range); status.textContent='Your browser could not copy automatically. The brief is selected; use Copy.'; } });
