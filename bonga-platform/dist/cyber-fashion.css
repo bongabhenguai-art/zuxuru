@@ -246,3 +246,18 @@ body.cyber-fashion #bonga-execute-matrix #bonga-tier-content{animation:bonga-lux
 .cyber-fashion .bonga-deal .button{align-self:flex-start}
 .cyber-fashion .bonga-deals-note{color:#B9BEC5;font-size:.9rem}
 @media(max-width:900px){.cyber-fashion .bonga-deal-grid{grid-template-columns:1fr}}
+
+.cyber-fashion .bonga-subscription-layout{display:grid;grid-template-columns:minmax(230px,.8fr) minmax(0,1.2fr);gap:20px;margin:26px 0}
+.cyber-fashion .bonga-subscription-options{display:grid;gap:12px;align-content:start}
+.cyber-fashion .bonga-subscription-options button{display:grid;gap:6px;text-align:left;padding:22px;border:1px solid #57505b;background:#111419;color:#F6F3EC;cursor:pointer}
+.cyber-fashion .bonga-subscription-options button[aria-pressed=true]{border-color:#C8A96B;box-shadow:inset 3px 0 #C8A96B}
+.cyber-fashion .bonga-subscription-options button span{color:#B9BEC5}
+.cyber-fashion .bonga-subscription-selection{padding:clamp(20px,3vw,34px);background:#101317;border:1px solid #57505b}
+.cyber-fashion .bonga-subscription-selection fieldset{border:0;padding:0;margin:18px 0}
+.cyber-fashion .bonga-subscription-selection legend{margin-bottom:12px;color:#E4CB99}
+.cyber-fashion .bonga-subscription-selection label{display:block;border-top:1px solid #45434b;padding:15px 0;color:#F6F3EC;cursor:pointer}
+.cyber-fashion .bonga-subscription-selection label small{display:block;margin-left:26px;color:#B9BEC5}
+.cyber-fashion .bonga-subscription-selection input{accent-color:#C8A96B;margin-right:10px}
+.cyber-fashion .bonga-subscription-price{color:#E4CB99}
+.cyber-fashion .bonga-subscription-selection button:disabled{opacity:.5;cursor:not-allowed}
+@media(max-width:760px){.cyber-fashion .bonga-subscription-layout{grid-template-columns:1fr}}
