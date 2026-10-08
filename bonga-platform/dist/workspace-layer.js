@@ -3,7 +3,7 @@
   const tabs=[...root.querySelectorAll('[role="tab"]')],panels=[...root.querySelectorAll('[role="tabpanel"]')];
   function select(index,focus=false){
     tabs.forEach((tab,i)=>{tab.setAttribute('aria-selected',String(i===index));tab.tabIndex=i===index?0:-1;});
-    panels.forEach((panel,i)=>panel.hidden=i!==index);
+    panels.forEach((panel,i)=>panel.hidden=i>index);
     if(focus)tabs[index].focus();
   }
   tabs.forEach((tab,index)=>{
