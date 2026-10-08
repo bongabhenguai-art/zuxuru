@@ -200,3 +200,8 @@ body.cyber-fashion #bonga-execute-matrix #bonga-tier-content{animation:bonga-lux
 .bonga-look-navigation button:disabled{opacity:.35;cursor:not-allowed}
 .bonga-look-count{font-variant-numeric:tabular-nums;color:#B9BEC5;font-size:12px;letter-spacing:.14em}
 @media(max-width:650px){.bonga-look-navigation{gap:8px}.bonga-look-navigation button{padding:9px!important;font-size:11px}}
+
+/* Shareable luxury lookbook preview links. */
+.bonga-look-dialog .bonga-look-share{display:inline-block;margin:14px 0 0;padding:10px 14px;background:transparent;color:#D6B77B;border:1px solid rgba(200,169,107,.55);font-size:12px;letter-spacing:.04em;cursor:pointer}
+.bonga-look-dialog .bonga-look-share:hover{background:rgba(200,169,107,.12)}
+.bonga-share-status{display:block;overflow-wrap:anywhere;margin-top:10px;color:#B9BEC5;font-size:12px;line-height:1.5}
