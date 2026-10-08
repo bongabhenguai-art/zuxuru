@@ -205,3 +205,7 @@ body.cyber-fashion #bonga-execute-matrix #bonga-tier-content{animation:bonga-lux
 .bonga-look-dialog .bonga-look-share{display:inline-block;margin:14px 0 0;padding:10px 14px;background:transparent;color:#D6B77B;border:1px solid rgba(200,169,107,.55);font-size:12px;letter-spacing:.04em;cursor:pointer}
 .bonga-look-dialog .bonga-look-share:hover{background:rgba(200,169,107,.12)}
 .bonga-share-status{display:block;overflow-wrap:anywhere;margin-top:10px;color:#B9BEC5;font-size:12px;line-height:1.5}
+
+/* Guarantee native hidden semantics survive the fashion grid/card display rules. */
+.cyber-fashion .collection-card[hidden],.cyber-fashion #brief-form[hidden],.cyber-fashion #brief-result[hidden]{display:none!important}
+.cyber-fashion .collection-enquire:focus-visible,.cyber-fashion .bonga-look-preview:focus-visible,.cyber-fashion [data-collection-filter]:focus-visible{outline:2px solid #E4CB99;outline-offset:3px}
