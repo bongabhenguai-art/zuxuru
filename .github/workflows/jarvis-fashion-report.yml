@@ -1,0 +1,30 @@
+name: Jarvis Fashion Morning Report
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '13 6 * * *'
+permissions:
+  contents: read
+concurrency:
+  group: jarvis-fashion-report
+  cancel-in-progress: false
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare sourced report
+        working-directory: bonga-platform
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-5-mini
+        run: node scripts/jarvis/morning-report.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: jarvis-fashion-morning-report
+          path: bonga-platform/reports/morning-report.md
+          retention-days: 7
