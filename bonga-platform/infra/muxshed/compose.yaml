@@ -1,0 +1,14 @@
+services:
+  muxshed:
+    image: ghcr.io/muxshed/muxshed:latest
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"
+      - "1935:1935"
+      - "9000:9000/udp"
+    environment:
+      MUXSHED_API_KEY: ${MUXSHED_API_KEY:?Set a strong private API key in .env}
+    volumes:
+      - muxshed-config:/config
+volumes:
+  muxshed-config:

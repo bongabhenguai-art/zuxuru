@@ -1,6 +1,3 @@
 node_modules/
-dist/server/
-.sites-runtime/
-.env
-.env.*
-*.sqlite
+
+infra/muxshed/.env

@@ -1,3 +1,4 @@
+import {studioMultistream} from './studio-multistream.mjs';
 import {businessMcp} from './business-mcp.mjs';
 import {designerTasks} from './designer-tasks.mjs';
 import {studioAnalytics,summarizeStudio} from './studio-analytics.mjs';
@@ -22,6 +23,7 @@ const instructions = `You are Jarvis, Bonga Bhengu's fashion career and business
 export default {
   async fetch(request,env){
     const url=new URL(request.url);
+    if(url.pathname==='/api/studio/multistream')return studioMultistream(request,env);
     if(url.pathname==='/mcp')return businessMcp(request,env);
     if(url.pathname==='/api/designer/tasks')return designerTasks(request,env);
     if(url.pathname==='/api/system/run')return systemEngine(request,env);
