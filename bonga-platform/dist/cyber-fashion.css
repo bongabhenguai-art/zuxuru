@@ -192,3 +192,11 @@ body.cyber-fashion #bonga-execute-matrix #bonga-tier-content{animation:bonga-lux
 .bonga-look-dialog :is(button):focus-visible{outline:2px solid #E4CB99;outline-offset:3px}
 @media(max-width:650px){.bonga-look-dialog-inner{grid-template-columns:1fr}.bonga-look-image{max-height:46dvh}}
 @media(prefers-reduced-motion:reduce){.bonga-look-dialog[open]{animation:none!important}.bonga-look-dialog::backdrop{backdrop-filter:none}}
+
+/* Editorial gallery controls, using the existing design-preview dialog. */
+.bonga-look-navigation{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin:22px 0}
+.bonga-look-navigation button{border:1px solid rgba(200,169,107,.55)!important;background:transparent!important;color:#E4CB99!important;padding:10px 12px!important;font-size:12px;cursor:pointer}
+.bonga-look-navigation button:hover:not(:disabled){background:rgba(200,169,107,.12)!important}
+.bonga-look-navigation button:disabled{opacity:.35;cursor:not-allowed}
+.bonga-look-count{font-variant-numeric:tabular-nums;color:#B9BEC5;font-size:12px;letter-spacing:.14em}
+@media(max-width:650px){.bonga-look-navigation{gap:8px}.bonga-look-navigation button{padding:9px!important;font-size:11px}}
