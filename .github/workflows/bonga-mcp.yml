@@ -1,0 +1,22 @@
+name: Bonga open-source MCP
+on:
+  push:
+    paths: ['mcp/bonga-engine/**', 'bonga-platform/dist/assets/omni-modules.json', 'bonga-platform/tests/**', '.github/workflows/bonga-mcp.yml']
+  pull_request:
+    paths: ['mcp/bonga-engine/**', 'bonga-platform/dist/assets/omni-modules.json', 'bonga-platform/tests/**', '.github/workflows/bonga-mcp.yml']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: python -m pip install -r mcp/bonga-engine/requirements.txt
+      - run: python mcp/bonga-engine/test_server.py
