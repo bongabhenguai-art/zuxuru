@@ -44,6 +44,7 @@ form.addEventListener('submit', event => {
   currentBrief = 'PROJECT BRIEF FOR BONGA BHENGU\n\nName / brand: ' + name + '\nCreative direction: ' + document.querySelector('#brief-service').value + '\n\nWhat I want to create or improve:\n' + goal + '\n\nPrepared on: ' + new Date().toLocaleDateString('en-ZA') + '\n\nPlease contact Bonga to discuss scope, timing and a quote.';
   document.querySelector('#brief-text').textContent = currentBrief;
   document.querySelector('#email-brief').href = 'mailto:bongabhengu@yahoo.com?subject=' + encodeURIComponent('Project brief — ' + name) + '&body=' + encodeURIComponent(currentBrief);
+  document.querySelector('#whatsapp-brief').href = 'https://wa.me/?text=' + encodeURIComponent(currentBrief);
   form.hidden = true; result.hidden = false; status.textContent = 'Your brief is ready. Copy or download it to share with Bonga.'; document.querySelector('#brief-text').focus();
 });
 document.querySelector('#edit-brief').addEventListener('click',()=>editBrief(true));

@@ -203,3 +203,10 @@ imageEditorElements['image-edit-close'].onclick();imageEditorListeners['media-ed
 await imageEditorElements['image-edit-save'].onclick();assert.equal(imageEditorElements['image-edit-dialog'].open,true);assert.equal(imageEditorElements['image-edit-save'].textContent,'Retry job attachment');assert.equal(imageEditorElements['image-edit-rotate'].disabled,true);
 await imageEditorElements['image-edit-save'].onclick();assert.equal(editedUploads,1);assert.equal(editedExports,1);assert.equal(editedAttachments.length,2);assert(editedAttachments.every(x=>x.id==='edited-copy'&&x.jobId==='original-job'));assert.equal(imageEditorElements['image-edit-dialog'].open,false);
 console.log('PASS image attachment retry reuses one exported/uploaded copy and retains the original creative job.');
+const serviceTabs=Array.from({length:3},()=>({listeners:{},attributes:{},setAttribute(k,v){this.attributes[k]=v;},addEventListener(k,fn){this.listeners[k]=fn;},focus(){this.focused=true;}})),servicePanels=Array.from({length:3},()=>({hidden:false})),workspaceGoal={value:''},workspaceListeners={};
+const workspaceContext={document:{getElementById:id=>id==='workspace-layer'?{querySelectorAll:selector=>selector==='[role="tab"]'?serviceTabs:servicePanels,addEventListener:(k,fn)=>workspaceListeners[k]=fn}:workspaceGoal}};
+vm.runInNewContext(fs.readFileSync(new URL('../dist/workspace-layer.js',import.meta.url),'utf8'),workspaceContext);
+assert.deepEqual(servicePanels.map(p=>p.hidden),[false,true,true]);serviceTabs[2].listeners.click();assert.deepEqual(servicePanels.map(p=>p.hidden),[true,true,false]);assert.equal(serviceTabs[2].attributes['aria-selected'],'true');
+serviceTabs[2].listeners.keydown({key:'ArrowRight',preventDefault(){}});assert.deepEqual(servicePanels.map(p=>p.hidden),[false,true,true]);assert.equal(serviceTabs[0].focused,true);
+workspaceListeners.click({target:{closest:()=>({dataset:{workspaceBrief:'Rental enquiry'}})}});assert.equal(workspaceGoal.value,'Rental enquiry');
+console.log('PASS integrated workspace service tiers: exclusive panels, keyboard navigation, accessible selection and existing brief form handoff.');
