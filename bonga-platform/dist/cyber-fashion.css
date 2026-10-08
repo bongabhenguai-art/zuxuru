@@ -227,3 +227,10 @@ body.cyber-fashion #bonga-execute-matrix #bonga-tier-content{animation:bonga-lux
 .cyber-fashion .bonga-inbox-item{min-width:0;padding:20px;background:#090B0E;border:1px solid rgba(200,169,107,.24);border-radius:6px;overflow-wrap:anywhere}
 .cyber-fashion .bonga-inbox-item h3{color:#E4CB99;margin:0 0 8px}
 .cyber-fashion .bonga-inbox-item :is(p,time,small){display:block;color:#B9BEC5;line-height:1.6}
+
+.cyber-fashion .bonga-inbox-controls{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.cyber-fashion .bonga-inbox-controls label{color:#E4CB99;font-size:12px}
+.cyber-fashion .bonga-inbox-controls input{min-width:180px;max-width:100%;padding:11px 12px;border:1px solid rgba(200,169,107,.5);border-radius:4px;background:#090B0E;color:#F6F3EC}
+.cyber-fashion .bonga-inbox-controls button{padding:11px 14px;border:1px solid #C8A96B;border-radius:4px;background:#C8A96B;color:#090B0E;cursor:pointer}
+.cyber-fashion .bonga-inbox-controls button:disabled{opacity:.45;cursor:not-allowed}
+.cyber-fashion .bonga-inbox-controls :is(button,input):focus-visible{outline:2px solid #E4CB99;outline-offset:3px}
