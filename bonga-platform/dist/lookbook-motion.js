@@ -50,24 +50,32 @@
     const heading=document.createElement('h2');heading.id='bonga-look-title';
     const description=document.createElement('p');
     const enquiry=document.createElement('button');enquiry.type='button';enquiry.textContent='Enquire about this design →';
+    const share=document.createElement('button');share.type='button';share.className='bonga-look-share';share.textContent='Copy design link';
+    const shareStatus=document.createElement('span');shareStatus.className='bonga-share-status';shareStatus.setAttribute('role','status');shareStatus.setAttribute('aria-live','polite');
     const nav=document.createElement('div');nav.className='bonga-look-navigation';
     const previous=document.createElement('button');previous.type='button';previous.textContent='← Previous design';
     const count=document.createElement('span');count.className='bonga-look-count';count.setAttribute('aria-live','polite');
     const next=document.createElement('button');next.type='button';next.textContent='Next design →';
     nav.append(previous,count,next);
-    detail.append(eyebrow,heading,description,nav,enquiry);inner.append(image,detail);dialog.append(close,inner);
+    detail.append(eyebrow,heading,description,nav,enquiry,share,shareStatus);inner.append(image,detail);dialog.append(close,inner);
     dialog.setAttribute('aria-labelledby',heading.id);document.body.append(dialog);
     let activeCard=null,returnFocus=null;
     const visibleCards=()=>cards.filter(card=>!card.hidden&&getComputedStyle(card).display!=='none'&&getComputedStyle(card).visibility!=='hidden');
     const displayCard=card=>{
       const art=card?.querySelector('figure img');if(!art)return;
-      activeCard=card;image.src=art.currentSrc||art.src;image.alt=art.alt||'Fashion concept';
+      activeCard=card;shareStatus.textContent='';image.src=art.currentSrc||art.src;image.alt=art.alt||'Fashion concept';
       heading.textContent=card.querySelector('h3')?.textContent||'Fashion concept';
       description.textContent=card.querySelector('.collection-card-info p')?.textContent||'Concept artwork';
       const shown=visibleCards(),position=shown.indexOf(card);count.textContent=position>=0?(position+1)+' / '+shown.length:'';
       previous.disabled=shown.length<2;next.disabled=shown.length<2;
     };
     const navigate=step=>{const shown=visibleCards();if(shown.length<2)return;const i=shown.indexOf(activeCard);displayCard(shown[(Math.max(i,0)+step+shown.length)%shown.length]);};
+    share.addEventListener('click',async()=>{
+      const design=activeCard?.querySelector('.collection-enquire')?.dataset.design;
+      if(!design)return;
+      const link=new URL(location.href);link.searchParams.set('design',design);link.hash='collections';
+      try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(link.href);shareStatus.textContent='Design link copied';}else{shareStatus.textContent='Copy this link: '+link.href;}}catch{shareStatus.textContent='Copy this link: '+link.href;}
+    });
     previous.addEventListener('click',()=>navigate(-1));next.addEventListener('click',()=>navigate(1));
     dialog.addEventListener('keydown',event=>{if(event.altKey||event.ctrlKey||event.metaKey||event.target instanceof HTMLInputElement)return;if(event.key==='ArrowLeft'){event.preventDefault();navigate(-1);}if(event.key==='ArrowRight'){event.preventDefault();navigate(1);}});
     const hide=()=>{if(dialog.open)dialog.close();};
@@ -81,6 +89,8 @@
       open.addEventListener('click',()=>{returnFocus=open;displayCard(card);if(typeof dialog.showModal==='function')dialog.showModal();});
       const info=card.querySelector('.collection-card-info');if(info)info.append(open);
     }
+    const requested=new URLSearchParams(location.search).get('design');
+    if(requested){const found=cards.find(card=>card.querySelector('.collection-enquire')?.dataset.design===requested);if(found){found.hidden=false;const opener=found.querySelector('.bonga-look-preview');opener?.click();}}
   }
   const video=document.getElementById('workspace-ad-video'),button=document.getElementById('workspace-ad-toggle');if(!video||!button)return;
   let visible=false,manualPaused=reduced.matches,autoPausing=false;const pauseAuto=()=>{if(!video.paused){autoPausing=true;video.pause();}};
