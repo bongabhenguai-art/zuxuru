@@ -5,7 +5,7 @@ async function openTaskStudio(task){
  const jobId=task.sourceStudioJobId||'task-'+task.id;
  const get=async()=>{const r=await fetch('/api/studio/jobs?archived=1&selected='+encodeURIComponent(jobId));const d=await r.json();if(!r.ok)throw Error(d.error||'Studio queue unavailable.');return d.jobs.find(j=>j.id===jobId);};
  let job=await get();
- if(!job){if(task.sourceStudioJobId)throw Error('The original Studio job is unavailable. No other job was opened.');if(!window.designerCloudReady?.())throw Error('Wait for Cloud saved before sending this task to Studio.');const r=await fetch('/api/studio/jobs',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'route'})});const d=await r.json();if(!r.ok)throw Error(d.error);job=await get();if(!job)throw Error('This task was not routed. Only open marketing and branding tasks can create a Studio job.');}
+ if(!job){if(task.sourceStudioJobId)throw Error('The original Studio job is unavailable. No other job was opened.');if(!window.designerCloudReady?.())throw Error('Wait for Cloud saved before sending this task to Studio.');const r=await fetch('/api/studio/jobs',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'route',taskId:task.id})});const d=await r.json();if(!r.ok)throw Error(d.error);job=await get();if(!job)throw Error('This task was not routed. Only open marketing and branding tasks can create a Studio job.');}
  const frame=$('studio-dashboard-frame');if(!frame)throw Error('Open Creative Studio from the dashboard navigation.');
  location.hash='digital-studio';
  const deadline=Date.now()+15000;
