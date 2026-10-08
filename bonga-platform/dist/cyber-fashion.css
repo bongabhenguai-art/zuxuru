@@ -143,3 +143,16 @@ body.cyber-fashion:not(.designer-dashboard) .virtual-atelier::after{background:l
 body.cyber-fashion:not(.designer-dashboard) .operation-grid button{background:#171A20;color:#F6F3EC;border-color:rgba(200,169,107,.35)}
 body.cyber-fashion:not(.designer-dashboard) .operation-grid button:hover{background:#27251F;border-color:#C8A96B}
 @media(prefers-reduced-motion:reduce){body.cyber-fashion:not(.designer-dashboard) *{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Luxury motion system: subtle, performant, accessible. */
+@keyframes bonga-lux-reveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bonga-lux-line{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes bonga-lux-glow{0%,100%{opacity:.35}50%{opacity:.7}}
+body.cyber-fashion :is(.dashboard-overview,.virtual-atelier,.hero){animation:bonga-lux-reveal .7s cubic-bezier(.2,.7,.2,1) both}
+body.cyber-fashion :is(.dashboard-metrics article,.dashboard-actions a,.package-grid article,.studio-offers article,.camera-card){transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+@media(hover:hover){body.cyber-fashion :is(.dashboard-metrics article,.dashboard-actions a,.package-grid article,.studio-offers article,.camera-card):hover{transform:translateY(-3px);border-color:rgba(200,169,107,.55);box-shadow:0 12px 28px rgba(0,0,0,.24)}}
+body.cyber-fashion :is(.virtual-atelier .atelier-label,.eyebrow){position:relative}
+body.cyber-fashion .virtual-atelier .atelier-label::after{content:'';display:block;width:68px;height:1px;margin-top:12px;background:#C8A96B;transform-origin:left;animation:bonga-lux-line .85s ease-out both}
+body.cyber-fashion :is(button,.button,.gold-button){transition:background-color .2s ease,border-color .2s ease,color .2s ease,box-shadow .2s ease}
+body.cyber-fashion #bonga-execute-matrix #bonga-tier-content{animation:bonga-lux-reveal .3s ease-out both}
+@media(prefers-reduced-motion:reduce){body.cyber-fashion :is(.dashboard-overview,.virtual-atelier,.hero,.virtual-atelier .atelier-label::after,#bonga-execute-matrix #bonga-tier-content){animation:none!important}body.cyber-fashion :is(.dashboard-metrics article,.dashboard-actions a,.package-grid article,.studio-offers article,.camera-card):hover{transform:none!important}}
