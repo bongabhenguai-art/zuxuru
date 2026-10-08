@@ -1,3 +1,4 @@
+import {publicEnquiries} from './public-enquiries.mjs';
 import {jarvisKey,jarvisConnection} from './jarvis-connection.mjs';
 import {jarvisTest} from './jarvis-test.mjs';
 import {jarvisRole} from './jarvis-team.mjs';
@@ -26,6 +27,7 @@ const instructions = `You are Jarvis, Bonga Bhengu's fashion career and business
 export default {
   async fetch(request,env){
     const url=new URL(request.url);
+    if(url.pathname==='/api/public/enquiries')return publicEnquiries(request,env);
     if(url.pathname==='/api/studio/multistream'||url.pathname.startsWith('/api/studio/multistream/whip'))return studioMultistream(request,env);
     if(url.pathname==='/mcp')return businessMcp(request,env);
     if(url.pathname==='/api/designer/tasks')return designerTasks(request,env);
