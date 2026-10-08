@@ -234,3 +234,15 @@ body.cyber-fashion #bonga-execute-matrix #bonga-tier-content{animation:bonga-lux
 .cyber-fashion .bonga-inbox-controls button{padding:11px 14px;border:1px solid #C8A96B;border-radius:4px;background:#C8A96B;color:#090B0E;cursor:pointer}
 .cyber-fashion .bonga-inbox-controls button:disabled{opacity:.45;cursor:not-allowed}
 .cyber-fashion .bonga-inbox-controls :is(button,input):focus-visible{outline:2px solid #E4CB99;outline-offset:3px}
+
+/* Three quote-based Bonga Bhengu creative service deals. */
+.cyber-fashion .bonga-deals{padding-block:clamp(56px,7vw,96px)}
+.cyber-fashion .bonga-deal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:30px 0}
+.cyber-fashion .bonga-deal{display:flex;flex-direction:column;gap:14px;padding:clamp(22px,3vw,34px);border:1px solid rgba(200,169,107,.35);background:linear-gradient(160deg,#171B20,#090B0E);border-radius:8px;color:#F6F3EC}
+.cyber-fashion .bonga-deal h3{font:400 clamp(24px,2.5vw,32px)/1.18 Georgia,serif;color:#F6F3EC;margin:0}
+.cyber-fashion .bonga-deal p{color:#B9BEC5;line-height:1.6}
+.cyber-fashion .bonga-deal ul{padding-left:20px;color:#E4D8BF;line-height:1.8;flex:1}
+.cyber-fashion .bonga-deal .bonga-deal-price{font-weight:700;color:#E4CB99}
+.cyber-fashion .bonga-deal .button{align-self:flex-start}
+.cyber-fashion .bonga-deals-note{color:#B9BEC5;font-size:.9rem}
+@media(max-width:900px){.cyber-fashion .bonga-deal-grid{grid-template-columns:1fr}}
