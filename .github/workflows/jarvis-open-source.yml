@@ -2,6 +2,14 @@ name: Jarvis Open Source Task
 on:
   workflow_dispatch:
     inputs:
+      execution:
+        description: Where Jarvis runs
+        type: choice
+        options:
+          - cloud
+          - local
+        default: cloud
+        required: true
       task:
         description: Fashion business task for Jarvis (no private customer data)
         required: true
@@ -13,15 +21,17 @@ concurrency:
   cancel-in-progress: false
 jobs:
   draft:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.execution == 'local' && fromJSON('["self-hosted","Windows","jarvis"]') || 'ubuntu-latest' }}
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
       - name: Install local open source inference
+        if: inputs.execution == 'cloud'
         run: curl -fsSL https://ollama.com/install.sh -o /tmp/install-ollama.sh && sh /tmp/install-ollama.sh
       - name: Start local model service
+        if: inputs.execution == 'cloud'
         run: |
           ollama serve > /tmp/ollama.log 2>&1 &
           for attempt in $(seq 1 30); do
@@ -34,7 +44,7 @@ jobs:
       - name: Produce reviewed task draft
         env:
           JARVIS_TASK: ${{ inputs.task }}
-        run: python3 bonga-platform/jarvis/local_runner.py --output jarvis-local-report.md
+        run: python bonga-platform/jarvis/local_runner.py --output jarvis-local-report.md
       - uses: actions/upload-artifact@v4
         with:
           name: jarvis-local-report
