@@ -28,6 +28,14 @@ jobs:
         run: node tests/digital-studio.mjs
       - name: Verify fashion task proposals
         run: node tests/designer-engine.mjs
+      - name: Verify Jarvis fashion intelligence and customer workflow
+        run: |
+          node tests/jarvis-team.mjs
+          node tests/fashion-planner.mjs
+          node tests/fashion-closer.mjs
+          node tests/work-agenda.mjs
+          node tests/studio-multistream.mjs
+          node tests/studio-uplink.mjs
       - name: Build complete hosted application
         run: node scripts/build-ai.mjs
       - name: Verify bundled remote MCP on Worker restrictions
