@@ -1,8 +1,8 @@
+import {packageCatalog as plans} from '@/lib/chatbliz-packages';
 import {identity,list,save,clean} from '@/lib/zuxuru';
 export const dynamic='force-dynamic';
-const plans=[{id:'starter',name:'Starter',monthlyZar:199,features:['Business profile','Brand asset library','Website and store briefs','AI assistant task board']},{id:'growth',name:'Growth',monthlyZar:499,features:['Starter features','Marketing and sales plans','Content briefs','Tenant workspace']},{id:'partner',name:'Business Partner',monthlyZar:999,features:['Growth features','Negotiation and coaching workflows','Priority planning','App and store launch checklists']}];
 export async function GET(){
- try{const u=await identity();const [brands,studio,tenants]=await Promise.all([list(u.userId,'chatbliz_brand'),list(u.userId,'chatbliz_studio_asset'),list(u.userId,'chatbliz_tenant')]);return Response.json({brands,studio,tenants,plans,prices:'Proposed ZAR monthly prices; billing not enabled'},{headers:{'Cache-Control':'private, no-store'}})}
+ try{const u=await identity();const [brands,studio,tenants]=await Promise.all([list(u.userId,'chatbliz_brand'),list(u.userId,'chatbliz_studio_asset'),list(u.userId,'chatbliz_tenant')]);return Response.json({brands,studio,tenants,plans,prices:'Owner-defined ZAR monthly prices; billing and entitlements not yet enabled'},{headers:{'Cache-Control':'private, no-store'}})}
  catch(e){return Response.json({error:(e as Error).message},{status:401})}
 }
 export async function POST(req:Request){
