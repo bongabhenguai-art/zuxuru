@@ -10,6 +10,7 @@ export const packageCatalog = [
  {id:'partner',name:'Studio Partner',monthlyZar:899,profileLimit:8,teamMultiplier:4,studioCredits:10,
   team:['Sales Assistant','Legal Information Assistant','Mentor','Business Adviser','Business Coach','Executive Assistant','Studio Assistant'],
   features:['Everything in Coach & Executive','Eight business profiles','Double Growth assistant capacity','Studio access with 10 monthly usage credits (provisional)','Brand story and media production workflow']}
+ ,{id:'enterprise',name:'Enterprise',monthlyZar:null,priceOnRequest:true,indicativeMonthlyMinZar:2000,indicativeMonthlyMaxZar:1000000,profileLimit:null,teamMultiplier:null,studioCredits:null,team:['Unlimited AI assistant roles — subject to contract and fair-use capacity','Dedicated Business Partner','Sales','Legal Information','Mentor','Coach','Executive','Studio'],features:['Everything in Studio Partner','Custom enterprise pricing','Unlimited configured assistant roles','Custom business profiles and workflows','Dedicated onboarding and governance','Studio, website, app and store orchestration','Custom integrations and operational support','Usage, compute and service-level limits agreed in contract']}
 ] as const;
 export const addonCatalog = [
  {id:'studio_image',name:'Studio image production',unit:'per image',proposedZar:49,requiresProvider:true},
