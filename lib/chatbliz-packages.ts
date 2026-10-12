@@ -7,9 +7,9 @@ export const packageCatalog = [
  {id:'growth',name:'Coach & Executive',monthlyZar:499,profileLimit:2,teamMultiplier:2,studioCredits:0,
   team:['Sales Assistant','Legal Information Assistant','Mentor','Business Adviser','Business Coach','Executive Assistant'],
   features:['Everything in Adviser','Two business profiles','Double assistant capacity','Business coach','Executive support team','Workflow scheduling and operations monitoring']},
- {id:'partner',name:'Studio Partner',monthlyZar:899,profileLimit:4,teamMultiplier:4,studioCredits:10,
+ {id:'partner',name:'Studio Partner',monthlyZar:899,profileLimit:8,teamMultiplier:4,studioCredits:10,
   team:['Sales Assistant','Legal Information Assistant','Mentor','Business Adviser','Business Coach','Executive Assistant','Studio Assistant'],
-  features:['Everything in Coach & Executive','Four business profiles','Double Growth assistant capacity','Studio access with 10 monthly usage credits (provisional)','Brand story and media production workflow']}
+  features:['Everything in Coach & Executive','Eight business profiles','Double Growth assistant capacity','Studio access with 10 monthly usage credits (provisional)','Brand story and media production workflow']}
 ] as const;
 export const addonCatalog = [
  {id:'studio_image',name:'Studio image production',unit:'per image',proposedZar:49,requiresProvider:true},
