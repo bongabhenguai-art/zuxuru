@@ -1,8 +1,15 @@
-// Chatbliz tenant package catalog. Proposed prices; no payment or entitlement enforcement yet.
+// Chatbliz Business Partner subscription configuration — prices specified by product owner.
+// Payment collection, usage metering and entitlement enforcement must be connected separately.
 export const packageCatalog = [
- {id:'starter',name:'Starter',monthlyZar:199,features:['Business profile','Brand asset library','Website and store briefs','AI assistant task board'],studioCredits:0},
- {id:'growth',name:'Growth',monthlyZar:499,features:['Starter features','Marketing and sales plans','Content briefs','Tenant workspace'],studioCredits:5},
- {id:'partner',name:'Business Partner',monthlyZar:999,features:['Growth features','Negotiation and coaching workflows','Priority planning','App and store launch checklists'],studioCredits:15}
+ {id:'starter',name:'Adviser',monthlyZar:299,profileLimit:1,teamMultiplier:1,studioCredits:0,
+  team:['Sales Assistant','Legal Information Assistant','Mentor','Business Adviser'],
+  features:['One business profile','One Business Partner dashboard','My Brand to Website/App to Studio workflow planning','Tasks and reminders dashboard','Sales assistant','Legal information guidance (not legal representation)','Mentor and adviser team']},
+ {id:'growth',name:'Coach & Executive',monthlyZar:499,profileLimit:2,teamMultiplier:2,studioCredits:0,
+  team:['Sales Assistant','Legal Information Assistant','Mentor','Business Adviser','Business Coach','Executive Assistant'],
+  features:['Everything in Adviser','Two business profiles','Double assistant capacity','Business coach','Executive support team','Workflow scheduling and operations monitoring']},
+ {id:'partner',name:'Studio Partner',monthlyZar:899,profileLimit:4,teamMultiplier:4,studioCredits:10,
+  team:['Sales Assistant','Legal Information Assistant','Mentor','Business Adviser','Business Coach','Executive Assistant','Studio Assistant'],
+  features:['Everything in Coach & Executive','Four business profiles','Double Growth assistant capacity','Studio access with 10 monthly usage credits (provisional)','Brand story and media production workflow']}
 ] as const;
 export const addonCatalog = [
  {id:'studio_image',name:'Studio image production',unit:'per image',proposedZar:49,requiresProvider:true},
