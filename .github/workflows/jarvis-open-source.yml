@@ -61,11 +61,22 @@ jobs:
         env:
           JARVIS_TASK: ${{ inputs.task }}
         run: python bonga-platform/jarvis/local_runner.py --output jarvis-local-report.md
+      - name: Show readable report on GitHub
+        run: |
+          python - <<'PY'
+          import os, pathlib
+          report = pathlib.Path('jarvis-local-report.md').read_text(encoding='utf-8')
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as summary:
+              summary.write('## Your Jarvis report\n\nPublic-source draft for owner review. Dashboard delivery is checked separately.\n\n')
+              # Quote untrusted source text; do not render source HTML or images.
+              summary.write('\n'.join('> ' + line.replace('<', '&lt;').replace('>', '&gt;') for line in report.splitlines()))
+              summary.write('\n')
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: jarvis-local-report
           path: jarvis-local-report.md
-          retention-days: 1
+          retention-days: 7
       - name: Send report to Bonga Bhengu dashboard
         run: python bonga-platform/jarvis/send_cloud_report.py
 
